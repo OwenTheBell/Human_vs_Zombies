@@ -107,9 +107,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Brains.cs" />
+    <Compile Include="Controls\HumanBrains.cs" />
+    <Compile Include="Controls\SimpleAIBrains.cs" />
+    <Compile Include="GameElements\GameScreen.cs" />
+    <Compile Include="GameElements\ScreenStack.cs" />
+    <Compile Include="HvZClasses\HvZWorld.cs" />
+    <Compile Include="HvZClasses\Entity.cs" />
+    <Compile Include="HvZClasses\Items\Item.cs" />
+    <Compile Include="HvZClasses\Mobs\Mob.cs" />
+    <Compile Include="HvZClasses\Mobs\Player.cs" />
+    <Compile Include="HvZClasses\Mobs\Projectile.cs" />
+    <Compile Include="HvZClasses\Mobs\Zombie.cs" />
+    <Compile Include="HvZClasses\Walls\Wall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="GameWorld.cs" />
+    <Compile Include="GameElements\GameWorld.cs" />
+    <Compile Include="Screens\HvZScreen.cs" />
+    <Compile Include="Screens\MainScreen.cs" />
+    <Compile Include="Screens\PauseScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
