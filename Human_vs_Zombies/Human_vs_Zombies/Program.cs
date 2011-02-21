@@ -1,4 +1,5 @@
 using System;
+using Human_vs_Zombies.GameElements;
 
 namespace Human_vs_Zombies
 {
@@ -10,7 +11,7 @@ namespace Human_vs_Zombies
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (GameWorld game = new GameWorld())
             {
                 game.Run();
             }
