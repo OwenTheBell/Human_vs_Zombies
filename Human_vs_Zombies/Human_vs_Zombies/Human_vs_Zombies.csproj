@@ -108,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Brains.cs" />
+    <Compile Include="Controls\BrainsPacket.cs" />
+    <Compile Include="Controls\ActionType.cs" />
+    <Compile Include="Controls\Controller.cs" />
     <Compile Include="Controls\HumanBrains.cs" />
     <Compile Include="Controls\SimpleAIBrains.cs" />
     <Compile Include="GameElements\GameScreen.cs" />

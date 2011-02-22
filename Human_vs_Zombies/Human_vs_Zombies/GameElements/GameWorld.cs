@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Human_vs_Zombies.Controls;
 
 namespace Human_vs_Zombies.GameElements
 {
@@ -18,6 +19,8 @@ namespace Human_vs_Zombies.GameElements
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        public static Controller controller { get; private set; }
 
         public GameWorld()
         {
