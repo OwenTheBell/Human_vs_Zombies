@@ -19,6 +19,10 @@ namespace Human_vs_Zombies.Controls
         public Player player {get; set;}
 
         public HvZWorld hvzWorld { get; set; }
+
+        public Vector2 shoot;
+
+        public Vector2 walk;
         
         public HumanBrains(HvZWorld hvzWorld, Player player)
         {
@@ -28,9 +32,24 @@ namespace Human_vs_Zombies.Controls
 
         public void Update()
         {
-            this.player.GoTo(new Vector2(this.player.GetPosition().X - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
+            walk = (new Vector2(this.player.GetPosition().X - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
                 this.player.GetPosition().Y - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveVertical)));
+            if ((GameWorld.controller.ContainsFloat(ActionType.LookVertical) + GameWorld.controller.ContainsFloat(ActionType.LookHorizontal)) > .5)
+            {
+                shoot = new Vector2(GameWorld.controller.ContainsFloat(ActionType.LookVertical), GameWorld.controller.ContainsFloat(ActionType.LookHorizontal));
+            }
+
         }
 
+        public Vector2 GetShoot()
+        {
+            return shoot;
+        }
+
+        public Vector2 GetWalk()
+        {
+            return walk;
+        }
+       
     }
 }

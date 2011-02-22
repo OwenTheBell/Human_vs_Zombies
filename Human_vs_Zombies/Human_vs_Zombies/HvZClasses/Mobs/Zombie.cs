@@ -43,10 +43,5 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         {
             this.position = this.target;
         }
-
-        public void GoTo(Vector2 target)
-        {
-            this.target = target;
-        }
     }
 }
