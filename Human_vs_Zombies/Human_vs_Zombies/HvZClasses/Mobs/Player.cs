@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Human_vs_Zombies.Controls;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
@@ -18,8 +19,11 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public HvZWorld hvzWorld;
 
+        private Brains brains;
+
         public Player(HvZWorld hvzWorld, Vector2 initialPosition)
         {
+            this.brains = new HumanBrains(hvzWorld, this);
             this.target = initialPosition;
             this.hvzWorld = hvzWorld;
             this.position = initialPosition;
@@ -41,6 +45,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public void Update()
         {
+            this.position = this.target;
         }
     }
 }
