@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Human_vs_Zombies.Controls;
 using Human_vs_Zombies.Screens;
+using Human_vs_Zombies.Rendering;
+using Human_vs_Zombies.Mathematics;
 
 namespace Human_vs_Zombies.GameElements
 {
@@ -18,15 +20,16 @@ namespace Human_vs_Zombies.GameElements
     /// </summary>
     public class GameWorld : Game
     {
-        public static GraphicsDeviceManager graphics;
+        public static GraphicsDevice graphics;
         public static SpriteBatch spriteBatch;
         public static ScreenStack screens;
+        public static ContentManager content;
 
         public static Controller controller { get; private set; }
 
         public GameWorld()
         {
-            graphics = new GraphicsDeviceManager(this);
+            //graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             screens = new ScreenStack();
             controller = new Controller(PlayerIndex.One);
@@ -51,6 +54,14 @@ namespace Human_vs_Zombies.GameElements
         /// </summary>
         protected override void LoadContent()
         {
+            content = Content;
+            graphics = GraphicsDevice;
+
+            graphics.PresentationParameters.BackBufferWidth
+                = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PresentationParameters.BackBufferHeight
+                = (int)(0.5625f * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width);
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 

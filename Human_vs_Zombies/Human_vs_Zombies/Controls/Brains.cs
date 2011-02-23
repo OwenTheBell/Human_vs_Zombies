@@ -24,9 +24,9 @@ namespace Human_vs_Zombies.Controls
         Player player { get; set; }
 
         /// <summary>
-        /// Gets or sets the pong world.
+        /// Gets or sets the Human_vs_Zombies world.
         /// </summary>
-        /// <value>The pong world.</value>
+        /// <value>The Human_vs_Zombies world.</value>
         HvZWorld hvzWorld { get; set; }
     }
 }
