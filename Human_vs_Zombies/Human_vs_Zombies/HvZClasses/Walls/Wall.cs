@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Human_vs_Zombies.HvZClasses.Walls
 {
-    class Wall:Entity
+    public class Wall:Entity
     {
     }
 }

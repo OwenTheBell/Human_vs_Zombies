@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
-    class Mob:Entity
+    public class Mob:Entity
     {
     }
 }

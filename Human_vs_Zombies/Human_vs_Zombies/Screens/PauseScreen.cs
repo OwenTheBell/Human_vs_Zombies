@@ -6,7 +6,7 @@ using Human_vs_Zombies.GameElements;
 
 namespace Human_vs_Zombies.Screens
 {
-    class PauseScreen:GameScreen
+    public class PauseScreen:GameScreen
     {
     }
 }

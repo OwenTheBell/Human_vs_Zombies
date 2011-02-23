@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 namespace Human_vs_Zombies.Controls
 {
 
-    class SimpleAIBrains : Brains
+    public class SimpleAIBrains : Brains
     {
         public Player player { get; set; }
 

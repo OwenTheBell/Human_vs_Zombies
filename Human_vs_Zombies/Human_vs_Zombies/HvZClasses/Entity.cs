@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Human_vs_Zombies.HvZClasses
 {
-    class Entity
+    public class Entity
     {
         
     }

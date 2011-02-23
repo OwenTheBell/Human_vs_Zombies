@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Human_vs_Zombies.GameElements
 {
-    class GameScreen
+    public class GameScreen
     {
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="GameScreen"/> is disposed.
@@ -21,12 +21,12 @@ namespace Human_vs_Zombies.GameElements
         /// <value>The random number generator.</value>
         public Random random { get; private set; }
 
-/// <summary>
+        /// <summary>
         /// Gets a value indicating whether [fading out].
         /// If a screen is fading out, the screen under it on the stack 
         /// will get updated. Otherwise, the screen under it on the stack
         /// will not get updated.
-        /// </summary>        
+        /// </summary>
         /// <value><c>true</c> if [fading out]; otherwise, <c>false</c>.</value>
         public bool FadingOut { get; private set; }
 

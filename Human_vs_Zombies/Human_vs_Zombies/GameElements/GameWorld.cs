@@ -9,13 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Human_vs_Zombies.Controls;
+using Human_vs_Zombies.Screens;
 
 namespace Human_vs_Zombies.GameElements
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class GameWorld : Microsoft.Xna.Framework.Game
+    public class GameWorld : Game
     {
         public static GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
@@ -53,6 +54,8 @@ namespace Human_vs_Zombies.GameElements
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            screens.Play(new HvZScreen());
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -79,6 +82,9 @@ namespace Human_vs_Zombies.GameElements
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+
+            controller.Update();
+            screens.Update();
         }
 
         /// <summary>
@@ -87,7 +93,9 @@ namespace Human_vs_Zombies.GameElements
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
+
+            screens.Draw();
 
             // TODO: Add your drawing code here
 

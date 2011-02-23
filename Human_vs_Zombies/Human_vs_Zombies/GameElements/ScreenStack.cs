@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Human_vs_Zombies.GameElements
 {
-    class ScreenStack : List<GameScreen>
+    public class ScreenStack : List<GameScreen>
     {
         /// <summary>
         /// Gets a value indicating whether the game is paused.

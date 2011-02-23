@@ -5,7 +5,6 @@ using System.Text;
 using Human_vs_Zombies.HvZClasses;
 using Human_vs_Zombies.GameElements;
 using Human_vs_Zombies.Controls;
-using Human_vs_Zombies.HvZClasses.Mobs.Player;
 using Human_vs_Zombies.HvZClasses.Mobs;
 using Microsoft.Xna.Framework;
 
@@ -13,7 +12,7 @@ using Microsoft.Xna.Framework;
 namespace Human_vs_Zombies.Controls
 {
 
-    class HumanBrains:Brains
+    public class HumanBrains:Brains
     {
 
         public Player player {get; set;}

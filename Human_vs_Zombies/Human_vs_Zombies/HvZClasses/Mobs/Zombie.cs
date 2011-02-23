@@ -9,7 +9,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 {
 
 
-    class Zombie:Mob
+    public class Zombie:Mob
     {
 
         public const float radius = 100;

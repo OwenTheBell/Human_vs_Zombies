@@ -7,7 +7,7 @@ using Human_vs_Zombies.Controls;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
-    class Player:Mob
+    public class Player:Mob
     {
         public const float radius = 100;
 
