@@ -15,40 +15,41 @@ namespace Human_vs_Zombies.Controls
     public class HumanBrains:Brains
     {
 
-        public Player player {get; set;}
+        private Player m_Player;
 
-        public HvZWorld hvzWorld { get; set; }
+        private HvZWorld m_HvZWorld;
 
-        public Vector2 shoot;
+        private Vector2 m_Shoot;
 
-        public Vector2 walk;
+        private Vector2 m_Walk;
         
         public HumanBrains(HvZWorld hvzWorld, Player player)
         {
-            this.hvzWorld = hvzWorld;
-            this.player = player;
+            this.m_HvZWorld = hvzWorld;
+            this.m_Player = player;
+            m_Shoot = new Vector2();
+            m_Walk = new Vector2();
         }
 
-        public void Update()
+        public override void update(float dTime)
         {
-            walk = (new Vector2(this.player.GetPosition().X - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
-                this.player.GetPosition().Y - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveVertical)));
+            m_Walk = (new Vector2(this.m_Player.getPosition().X - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
+                this.m_Player.getPosition().Y - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveVertical)));
             if ((GameWorld.controller.ContainsFloat(ActionType.LookVertical) + GameWorld.controller.ContainsFloat(ActionType.LookHorizontal)) > .5)
             {
-                shoot = new Vector2(GameWorld.controller.ContainsFloat(ActionType.LookVertical), GameWorld.controller.ContainsFloat(ActionType.LookHorizontal));
+                m_Shoot = new Vector2(GameWorld.controller.ContainsFloat(ActionType.LookVertical), GameWorld.controller.ContainsFloat(ActionType.LookHorizontal));
             }
 
         }
 
-        public Vector2 GetShoot()
+        public override Vector2 getWalk()
         {
-            return shoot;
+            return m_Walk;
         }
 
-        public Vector2 GetWalk()
+        public override Vector2 getShoot()
         {
-            return walk;
-        }
-       
+            return m_Shoot;
+        }   
     }
 }

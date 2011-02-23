@@ -8,6 +8,16 @@ namespace Human_vs_Zombies.HvZClasses
 {
     public class HvZWorld
     {
-        public Player player;
+        private Player m_Player;
+
+        public HvZWorld(Player player)
+        {
+            m_Player = player;
+        }
+
+        public Player getPlayer()
+        {
+            return m_Player;
+        }
     }
 }

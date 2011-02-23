@@ -12,40 +12,40 @@ namespace Human_vs_Zombies.Controls
 
     public class SimpleAIBrains : Brains
     {
-        public Player player { get; set; }
+        private Player m_Player;
 
-        public HvZWorld hvzWorld { get; set; }
+        private HvZWorld m_HvZWorld;
 
-        public Zombie zombie { get; set; }
+        private Zombie m_Zombie;
 
-        public Vector2 shoot;
+        private Vector2 m_Shoot;
 
-        public Vector2 walk;
+        private Vector2 m_Walk;
 
         public SimpleAIBrains(HvZWorld hvzWorld, Player player, Zombie zombie)
         {
-            this.player = player;
-            this.hvzWorld = hvzWorld;
-            this.zombie = zombie;
+            this.m_Player = player;
+            this.m_HvZWorld = hvzWorld;
+            this.m_Zombie = zombie;
+            this.m_Shoot = new Vector2();
+            this.m_Walk = new Vector2();
         }
 
-        public void Update()
+        public override void update(float dTime)
         {
-            Vector2 path = new Vector2(player.position.X - zombie.position.X, player.position.Y - zombie.position.Y);
-            this.walk = new Vector2((float)(path.X / Math.Sqrt(Math.Pow(path.X, 2) + Math.Pow(path.Y, 2))), (float)(path.Y / Math.Pow(path.X, 2) + Math.Pow(path.Y, 2)));
-            this.shoot = new Vector2(0, 0);
+            Vector2 path = new Vector2(m_Player.getPosition().X - m_Zombie.getPosition().X, m_Player.getPosition().Y - m_Zombie.getPosition().Y);
+            this.m_Walk = new Vector2((float)(path.X / Math.Sqrt(Math.Pow(path.X, 2) + Math.Pow(path.Y, 2))), (float)(path.Y / Math.Pow(path.X, 2) + Math.Pow(path.Y, 2)));
+            this.m_Shoot = new Vector2(0, 0);
         }
 
-        public Vector2 GetShoot()
+        public override Vector2 getWalk()
         {
-            return shoot;
+            return m_Walk;
         }
 
-        public Vector2 GetWalk()
+        public override Vector2 getShoot()
         {
-            return walk;
+            return m_Shoot;
         }
-
-
     }
 }
