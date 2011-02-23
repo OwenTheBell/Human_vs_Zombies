@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Human_vs_Zombies.HvZClasses.Mobs;
 
 namespace Human_vs_Zombies.HvZClasses
 {
     public class HvZWorld
     {
+        public Player player;
     }
 }

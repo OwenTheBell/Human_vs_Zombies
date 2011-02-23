@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Human_vs_Zombies.HvZClasses;
 using Human_vs_Zombies.HvZClasses.Mobs;
+using Microsoft.Xna.Framework;
 
 namespace Human_vs_Zombies.Controls
 {
@@ -16,6 +17,14 @@ namespace Human_vs_Zombies.Controls
         /// Updates this instance.
         /// </summary>
         void Update();
+
+        Vector2 GetShoot();
+
+        Vector2 GetWalk();
+        
+        public Vector2 shoot;
+
+        public Vector2 walk;
 
         /// <summary>
         /// Gets or sets the player.
