@@ -17,8 +17,9 @@ namespace Human_vs_Zombies.GameElements
     /// </summary>
     public class GameWorld : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static GraphicsDeviceManager graphics;
+        public static SpriteBatch spriteBatch;
+        public static ScreenStack screens;
 
         public static Controller controller { get; private set; }
 
@@ -26,6 +27,8 @@ namespace Human_vs_Zombies.GameElements
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            screens = new ScreenStack();
+            controller = new Controller(PlayerIndex.One);
         }
 
         /// <summary>
