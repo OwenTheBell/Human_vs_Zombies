@@ -7,45 +7,45 @@ using Human_vs_Zombies.Controls;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
-    public class Player:Mob
+    public class Player : Mob
     {
-        public const float radius = 100;
+        private Vector2 m_Target;
 
-        Vector2 target;
 
-        public Vector2 position;
+        private Brains m_Brains;
 
-        public Vector2 velocity;
-
-        public HvZWorld hvzWorld;
-
-        private Brains brains;
-
-        public Player(HvZWorld hvzWorld, Vector2 initialPosition)
+        public Player(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity, Brains brains)
+            : base(hvzWorld, position, rotation, radius, velocity)
         {
-            this.brains = new HumanBrains(hvzWorld, this);
-            this.target = initialPosition;
-            this.hvzWorld = hvzWorld;
-            this.position = initialPosition;
-            this.velocity.X = 0;
-            this.velocity.Y = 0;
+            this.setBrains(new HumanBrains(hvzWorld, this));
+            
         }
 
-
-        public Vector2 GetPosition()
+        public Brains getBrains()
         {
-            return position;
+            return m_Brains;
         }
 
-        public void GoTo(Vector2 target)
+        public void setBrains(Brains brains)
         {
-            this.target = target;
+            m_Brains = brains;
         }
 
-
-        public void Update()
+        public Vector2 getTarget()
         {
-            this.position = this.target;
+            return m_Target;
         }
+
+        public void setTarget(Vector2 target)
+        {
+            this.m_Target = target;
+        }
+
+        public override void update(float dTime)
+        {
+            base.update(dTime);
+        }
+
+        public override void draw() {}
     }
 }

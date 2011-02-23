@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Human_vs_Zombies.HvZClasses.Walls
 {
     public class Wall:Entity
     {
+        public Wall(HvZWorld hvzWorld, Vector2 position, float rotation, float radius)
+            : base(hvzWorld, position, rotation, radius)
+        {
+        }
+        public override void update(float dTime) { }
+        public override void draw() { }
     }
 }

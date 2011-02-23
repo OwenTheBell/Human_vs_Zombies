@@ -9,33 +9,17 @@ using Microsoft.Xna.Framework;
 namespace Human_vs_Zombies.Controls
 {
     /// <summary>
-    /// The interface for controlling a player.
+    /// The class for controlling a player or zombie.
     /// </summary>
-    public interface Brains
+    public abstract class Brains
     {
         /// <summary>
         /// Updates this instance.
         /// </summary>
-        void Update();
+        public abstract void update( float dTime);
 
-        Vector2 GetShoot();
+        public abstract Vector2 getShoot();
 
-        Vector2 GetWalk();
-        
-        public Vector2 shoot;
-
-        public Vector2 walk;
-
-        /// <summary>
-        /// Gets or sets the player.
-        /// </summary>
-        /// <value>The player.</value>
-        Player player { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Human_vs_Zombies world.
-        /// </summary>
-        /// <value>The Human_vs_Zombies world.</value>
-        HvZWorld hvzWorld { get; set; }
+        public abstract Vector2 getWalk();
     }
 }

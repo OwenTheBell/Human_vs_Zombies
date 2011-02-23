@@ -9,39 +9,42 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 {
 
 
-    public class Zombie:Mob
+    public class Zombie : Mob
     {
+        private Vector2 m_Target;
 
-        public const float radius = 100;
+        private Brains m_Brains;
 
-        public Vector2 target;
-
-        public Vector2 position;
-
-        public Vector2 velocity;
-
-        public Vector2 dir;
-
-        public HvZWorld hvzWorld;
-
-        public Player player;
-
-        private Brains brains;
-
-        public Zombie(HvZWorld hvzWorld, Vector2 initialPosition, Player player)
+        public Zombie(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity, Brains brains)
+            : base(hvzWorld, position, rotation, radius, velocity)
         {
-            this.brains = new SimpleAIBrains(hvzWorld, player, this);
-            this.hvzWorld = hvzWorld;
-            this.position = initialPosition;
-            this.velocity.X = 0;
-            this.velocity.Y = 0;
-            this.player = player;
-            this.target = player.GetPosition();
+            this.setBrains(new SimpleAIBrains(hvzWorld, hvzWorld.getPlayer(), this));
         }
 
-        public void Update()
+        public Brains getBrains()
         {
-            this.position = this.target;
+            return m_Brains;
         }
+
+        public void setBrains(Brains brains)
+        {
+            m_Brains = brains;
+        }
+
+        public Vector2 getTarget()
+        {
+            return m_Target;
+        }
+
+        public void setTarget(Vector2 target)
+        {
+            this.m_Target = target;
+        }
+        public override void update(float dTime)
+        {
+            base.update(dTime);
+        }
+
+        public override void draw() { }
     }
 }
