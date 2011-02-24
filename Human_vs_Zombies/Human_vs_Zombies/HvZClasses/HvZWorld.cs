@@ -15,7 +15,7 @@ namespace Human_vs_Zombies.HvZClasses
 
         public HvZWorld()
         {
-            m_Player = new Player(this, Vector2.Zero, 0f, 0f, Vector2.Zero);
+            m_Player = new Player(this, new Vector2(100f, 100f), 0f, 0f, Vector2.Zero);
         }
 
         public Player getPlayer()
