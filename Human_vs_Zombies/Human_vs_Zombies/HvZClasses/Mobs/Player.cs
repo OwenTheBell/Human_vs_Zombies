@@ -17,35 +17,35 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         public Player(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity, Brains brains)
             : base(hvzWorld, position, rotation, radius, velocity)
         {
-            this.setBrains(new HumanBrains(hvzWorld, this));
+            this.SetBrains(new HumanBrains(hvzWorld, this));
             
         }
 
-        public Brains getBrains()
+        public Brains GetBrains()
         {
             return m_Brains;
         }
 
-        public void setBrains(Brains brains)
+        public void SetBrains(Brains brains)
         {
             m_Brains = brains;
         }
 
-        public Vector2 getTarget()
+        public Vector2 GetTarget()
         {
             return m_Target;
         }
 
-        public void setTarget(Vector2 target)
+        public void SetTarget(Vector2 target)
         {
             this.m_Target = target;
         }
 
-        public override void update(float dTime)
+        public override void Update(float dTime)
         {
-            base.update(dTime);
+            base.Update(dTime);
         }
 
-        public override void draw() {}
+        public override void Draw() {}
     }
 }

@@ -33,7 +33,7 @@ namespace Human_vs_Zombies.Controls
 
         public override void update(float dTime)
         {
-            Vector2 path = new Vector2(m_Player.getPosition().X - m_Zombie.getPosition().X, m_Player.getPosition().Y - m_Zombie.getPosition().Y);
+            Vector2 path = new Vector2(m_Player.GetPosition().X - m_Zombie.GetPosition().X, m_Player.GetPosition().Y - m_Zombie.GetPosition().Y);
             this.m_Walk = new Vector2((float)(path.X / Math.Sqrt(Math.Pow(path.X, 2) + Math.Pow(path.Y, 2))), (float)(path.Y / Math.Pow(path.X, 2) + Math.Pow(path.Y, 2)));
             this.m_Shoot = new Vector2(0, 0);
         }

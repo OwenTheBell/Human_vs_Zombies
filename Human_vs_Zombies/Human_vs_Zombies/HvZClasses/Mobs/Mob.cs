@@ -10,25 +10,38 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
     {
         private Vector2 m_Velocity;
 
-        public Mob(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity)
+        private float m_maxVelocity;
+
+        public Mob(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity, float maxVelocity)
             : base(hvzWorld, position, rotation, radius)
         {
-            this.setVelocity(velocity);
+            this.SetVelocity(velocity);
+            this.SetMax(maxVelocity);
         }
 
-        public Vector2 getVelocity()
+        public Vector2 GetVelocity()
         {
             return m_Velocity;
         }
 
-        public void setVelocity(Vector2 velocity)
+        public void SetVelocity(Vector2 velocity)
         {
             this.m_Velocity = velocity;
         }
 
-        public override void update(float dTime)
+        public void SetMax(float maxVelocity)
         {
-            this.setPosition(this.getPosition() + this.getVelocity() * dTime);
+            this.m_maxVelocity = maxVelocity;
+        }
+
+        public float GetMax()
+        {
+            return this.m_maxVelocity;
+        }
+
+        public override void Update(float dTime)
+        {
+            this.SetPosition(this.GetPosition() + this.GetVelocity() * dTime);
         }
     }
 }

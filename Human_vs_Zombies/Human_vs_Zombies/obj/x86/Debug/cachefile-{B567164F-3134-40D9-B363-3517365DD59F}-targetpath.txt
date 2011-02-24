@@ -1,0 +1,3 @@
+Content\Art\TempDart.xnb
+Content\Art\TempHuman.xnb
+Content\Art\TempZombie.xnb
