@@ -20,7 +20,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         public Zombie(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity, Brains brains)
             : base(hvzWorld, position, rotation, radius, velocity, maxVelocity)
         {
-            this.SetBrains(new SimpleAIBrains(hvzWorld));
+            this.SetBrains(brains);
         }
 
         public Brains GetBrains()
@@ -56,7 +56,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
             this.m_Brains.update(dTime, this.GetPosition());
 
-            this.SetVelocity(m_Brains.GetWalk());
+            this.SetVelocity(m_Brains.GetWalk() * this.GetMaxVel());
             this.SetRotation(m_Brains.getShoot());
 
             base.Update(dTime);
@@ -69,7 +69,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                    this.GetPosition(),
                    null,
                    Color.White,
-                   0f,
+                   (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
                    new Vector2(30f),
                    1f,
                    SpriteEffects.None,

@@ -26,19 +26,14 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public void SetVelocity(Vector2 velocity)
         {
-            if (velocity == Vector2.Zero)
-            {
-                this.m_Velocity = velocity;
-                return;
-            }
-            Vector2 unitVelocity = velocity;
-            unitVelocity.Normalize();
-            if (velocity.LengthSquared() <= (m_maxVelocity * unitVelocity).LengthSquared())
+            if (velocity.LengthSquared() <= (m_maxVelocity * m_maxVelocity))
             {
                 this.m_Velocity = velocity;
             }
             else
             {
+                Vector2 unitVelocity = velocity;
+                unitVelocity.Normalize();
                 this.m_Velocity = m_maxVelocity * unitVelocity;
             }
         }
@@ -48,7 +43,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.m_maxVelocity = maxVelocity;
         }
 
-        public float GetMax()
+        public float GetMaxVel()
         {
             return this.m_maxVelocity;
         }

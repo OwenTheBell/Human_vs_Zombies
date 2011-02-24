@@ -28,8 +28,8 @@ namespace Human_vs_Zombies.Controls
         public override void update(float dTime, Vector2 position)
         {
             Vector2 path = m_HvZWorld.GetPlayer().GetPosition() - position;
+            path.Normalize();
             this.m_Walk = path;
-            this.m_Walk.Normalize();
             this.m_Shoot = this.m_Walk;
         }
 

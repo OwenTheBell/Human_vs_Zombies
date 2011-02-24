@@ -22,7 +22,7 @@ namespace Human_vs_Zombies.HvZClasses
 
         public HvZWorld()
         {
-            m_Player = new Player(this, new Vector2(100f, 100f), new Vector2(1f,0f), 30f, new Vector2(1f,0f), .1f, 500f);
+            m_Player = new Player(this, new Vector2(100f, 100f), new Vector2(1f,0f), 32f, new Vector2(1f,0f), .1f, 500f);
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
             this.m_ColMatrix = null;
@@ -157,7 +157,7 @@ namespace Human_vs_Zombies.HvZClasses
         {
             Random gen = new Random();
             Vector2 position = new Vector2(gen.Next((int)GameWorld.screenDimensions.X-30), gen.Next((int)GameWorld.screenDimensions.Y-30));
-            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 0f, Vector2.Zero, 300f, new SimpleAIBrains(this));
+            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new SimpleAIBrains(this));
             m_Entities.Add(m_Zombie.GetID(), m_Zombie);
         }
     }
