@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Human_vs_Zombies.Controls;
+using Human_vs_Zombies.Rendering;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
@@ -14,7 +16,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private Brains m_Brains;
 
-        public Player(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity, Brains brains)
+        public Player(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity)
             : base(hvzWorld, position, rotation, radius, velocity)
         {
             this.setBrains(new HumanBrains(hvzWorld, this));
@@ -46,6 +48,18 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             base.update(dTime);
         }
 
-        public override void draw() {}
+        public void Draw() 
+        {
+            Drawer.Draw(
+                TextureStatic.Get("Human"),
+                Vector2.Zero,
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                Vector2.Zero,
+                SpriteEffects.None,
+                0.9f);
+        }
     }
 }

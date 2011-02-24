@@ -34,7 +34,7 @@ namespace Human_vs_Zombies.Rendering
         /// </summary>
         public static void Initiallize()
         {
-            font = GameWorld.content.Load<SpriteFont>(@"Fonts\defaultFont");
+            font = GameWorld.content.Load<SpriteFont>(@"Fonts\HvZ");
             FullScreenRectangle = new Rectangle(0, 0, 1920, 1080);
         }
 
@@ -247,6 +247,7 @@ namespace Human_vs_Zombies.Rendering
         {
             if (GameWorld.spriteBatch != null)
             {
+                // check if the font is null first...
                 GameWorld.spriteBatch.DrawString(
                     font, 
                     text, 

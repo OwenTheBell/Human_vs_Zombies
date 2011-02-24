@@ -104,6 +104,6 @@ namespace Human_vs_Zombies.HvZClasses
         /// <summary>
         /// Draws this Entity.
         /// </summary>
-        public abstract void draw();
+        public abstract void Draw();
     }
 }
