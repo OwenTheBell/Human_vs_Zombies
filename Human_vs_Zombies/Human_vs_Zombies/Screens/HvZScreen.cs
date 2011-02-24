@@ -12,17 +12,26 @@ namespace Human_vs_Zombies.Screens
 {
     public class HvZScreen:GameScreen
     {
-
+        private int m_LastUpdate;
         private HvZWorld zombieWorld;
 
         public HvZScreen()
         {
             this.zombieWorld = new HvZWorld();
+            m_LastUpdate = System.Environment.TickCount;
         }
 
         public override void Update()
         {
-            //zombieWorld.Update(0f);
+            int time = System.Environment.TickCount;
+            float dTime = (time - m_LastUpdate) / 1000f;
+
+            if (dTime > 1f / 60f)
+            {
+                zombieWorld.Update(dTime);
+                m_LastUpdate = time;
+            }
+            
 
             base.Update();
         }
