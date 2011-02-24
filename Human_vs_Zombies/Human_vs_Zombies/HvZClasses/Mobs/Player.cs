@@ -77,7 +77,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             //Only fire the gun if the player is aiming and if the weapon can be fired
             if ((m_Brains.getShoot().Y != 0 || m_Brains.getShoot().X != 0) && m_WeaponTimer == 0)
             {
-                this.m_HvZWorld.addEntity(new Projectile(this.m_HvZWorld, this.GetPosition(), this.GetRotation(), 10f, this.GetRotation() * this.m_WeaponSpeed));
+                this.m_HvZWorld.AddEntity(new Projectile(this.m_HvZWorld, this.GetPosition(), this.GetRotation(), 10f, this.GetRotation() * this.m_WeaponSpeed));
             }
             else
             {
