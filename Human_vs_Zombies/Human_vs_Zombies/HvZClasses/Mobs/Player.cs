@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         private Brains m_Brains;
 
         public Player(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity)
-            : base(hvzWorld, position, rotation, radius, velocity)
+            : base(hvzWorld, position, rotation, radius, velocity, 10f)
         {
             this.SetBrains(new HumanBrains(hvzWorld, this));
             
@@ -53,7 +53,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             base.Update(dTime);
         }
 
-        public void Draw() 
+        public override void Draw() 
         {
             Drawer.Draw(
                 TextureStatic.Get("Human"),
