@@ -86,7 +86,7 @@ namespace Human_vs_Zombies.HvZClasses
             {
                 List<Entity> ret = new List<Entity>();
                 m_ColMatrix.TryGetValue(entity.GetID(), out ret);
-                return ret;
+                return (ret != null ? ret : new List<Entity>());
             }
         }
 
@@ -106,9 +106,9 @@ namespace Human_vs_Zombies.HvZClasses
         {
             this.CheckCols();
 
-            foreach (Entity e in m_Entities.Values)
+            for (int i = 0; i < m_Entities.Values.Count - 1; i++)
             {
-                e.Update(dTime);
+                m_Entities.Values.ElementAt(i).Update(dTime);
             }
 
             this.KillDeadEntities();
