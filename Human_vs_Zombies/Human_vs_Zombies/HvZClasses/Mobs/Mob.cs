@@ -12,7 +12,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private float m_maxVelocity;
 
-        public Mob(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity, float maxVelocity)
+        public Mob(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity)
             : base(hvzWorld, position, rotation, radius)
         {
             this.SetVelocity(velocity);

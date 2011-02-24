@@ -11,11 +11,14 @@ namespace Human_vs_Zombies.HvZClasses
     /// </summary>
     public abstract class Entity
     {
+        protected static ulong s_ID = 0;
+
         private Vector2 m_Position;
-        private float m_Rotation;
+        private Vector2 m_Rotation;
         private float m_Radius;
         public HvZWorld m_HvZWorld;
         private bool m_isDead;
+        private ulong m_ID;
 
         /// <summary>
         /// Constructs a new Entity.
@@ -24,13 +27,15 @@ namespace Human_vs_Zombies.HvZClasses
         /// <param name="position">Position of the Entity, in pixels.</param>
         /// <param name="rotation">Rotation of the Entity, in radians (right-hand).</param>
         /// <param name="radius">Size of the Entity, in pixels.</param>
-        public Entity(HvZWorld hvzWorld, Vector2 position, float rotation, float radius)
+        public Entity(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius)
         {
             this.m_HvZWorld = hvzWorld;
             this.SetPosition(position);
             this.SetRotation(rotation);
             this.SetRadius(radius);
             this.SetDead(false);
+
+            m_ID = s_ID++;
         }
 
         /// <summary>
@@ -64,7 +69,7 @@ namespace Human_vs_Zombies.HvZClasses
         /// The rotation of this.
         /// </summary>
         /// <returns>Rotation in radians, counterclockwise from positive x axis</returns>
-        public float GetRotation()
+        public Vector2 GetRotation()
         {
             return this.m_Rotation;
         }
@@ -73,10 +78,10 @@ namespace Human_vs_Zombies.HvZClasses
         /// Set the rotation of this.
         /// </summary>
         /// <param name="rotation">Rotation in radians. Right hand rule.</param>
-        public void SetRotation(float rotation)
+        public void SetRotation(Vector2 rotation)
         {
             //the rotation in radians
-            this.m_Rotation = rotation % (2.0f * (float)Math.PI);
+            this.m_Rotation = rotation;
         }
 
         /// <summary>
@@ -105,6 +110,11 @@ namespace Human_vs_Zombies.HvZClasses
         public bool GetDead()
         {
             return this.m_isDead;
+        }
+
+        public ulong GetID()
+        {
+            return m_ID;
         }
 
         /// <summary>

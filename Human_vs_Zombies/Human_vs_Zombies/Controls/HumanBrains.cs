@@ -27,24 +27,26 @@ namespace Human_vs_Zombies.Controls
         {
             this.m_HvZWorld = hvzWorld;
             this.m_Player = player;
-            m_Shoot = new Vector2();
-            m_Walk = new Vector2();
+            this.m_Shoot = new Vector2();
+            this.m_Walk = new Vector2();
         }
 
         public override void update(float dTime)
         {
-            m_Walk = (new Vector2(this.m_Player.GetPosition().X - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
-                this.m_Player.GetPosition().Y - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveVertical)));
-            if ((GameWorld.controller.ContainsFloat(ActionType.LookVertical) + GameWorld.controller.ContainsFloat(ActionType.LookHorizontal)) > .5)
-            {
-                m_Shoot = new Vector2(GameWorld.controller.ContainsFloat(ActionType.LookVertical), GameWorld.controller.ContainsFloat(ActionType.LookHorizontal));
-            }
+            this.m_Walk = (
+                new Vector2(this.m_Player.GetPosition().X - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
+                this.m_Player.GetPosition().Y - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveVertical))
+                );
+            this.m_Shoot = new Vector2(GameWorld.controller.ContainsFloat(ActionType.LookVertical), GameWorld.controller.ContainsFloat(ActionType.LookHorizontal));
+            float length = (float) Math.Sqrt(Math.Pow(this.m_Shoot.X, 2) + Math.Pow(this.m_Shoot.Y, 2));
+            this.m_Shoot.X = this.m_Shoot.X / length;
+            this.m_Shoot.Y = this.m_Shoot.Y / length;
 
         }
 
         public override Vector2 GetWalk()
         {
-            return m_Walk;
+            return this.m_Walk;
         }
 
         public override Vector2 getShoot()
