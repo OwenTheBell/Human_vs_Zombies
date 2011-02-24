@@ -16,7 +16,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             : base(hvzWorld, position, rotation, radius)
         {
             this.SetVelocity(velocity);
-            t;
+            this.SetMax(maxVelocity);
         }
 
         public Vector2 GetVelocity()
