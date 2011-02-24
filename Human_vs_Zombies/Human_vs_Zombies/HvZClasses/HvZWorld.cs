@@ -23,6 +23,7 @@ namespace Human_vs_Zombies.HvZClasses
         {
             m_Player = new Player(this, new Vector2(100f, 100f), Vector2.Zero, 0f, Vector2.Zero, 5, 5);
             this.m_Entities = new SortedDictionary<ulong, Entity>();
+            this.AddEntity(this.m_Player);
             this.m_ColMatrix = null;
         }
 
@@ -129,6 +130,7 @@ namespace Human_vs_Zombies.HvZClasses
                 Vector2.Zero,
                 SpriteEffects.None,
                 0f);
+
             foreach (Entity e in m_Entities.Values)
             {
                 e.Draw();

@@ -20,6 +20,13 @@ namespace Human_vs_Zombies.Screens
             this.zombieWorld = new HvZWorld();
         }
 
+        public override void Update()
+        {
+            zombieWorld.Update(0f);
+
+            base.Update();
+        }
+
         public override void Draw()
         {
             base.Draw();
