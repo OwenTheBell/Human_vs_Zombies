@@ -70,7 +70,8 @@ namespace Human_vs_Zombies.GameElements
             TextureStatic.Load("Zombie", @"Art\TempZombie");
             TextureStatic.Load("Human", @"Art\TempHuman");
 
-
+            Drawer.Initiallize();
+            
             screens.Play(new HvZScreen());
 
             // TODO: use this.Content to load your game content here
@@ -110,7 +111,7 @@ namespace Human_vs_Zombies.GameElements
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.AliceBlue);
+            GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 

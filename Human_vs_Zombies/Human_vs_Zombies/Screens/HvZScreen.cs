@@ -22,18 +22,6 @@ namespace Human_vs_Zombies.Screens
 
         public override void Draw()
         {
-            /*
-            Drawer.Draw(
-                TextureStatic.Get("background"),
-                Drawer.FullScreenRectangle,
-                null,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                0f
-                );
-             */
             base.Draw();
 
             this.zombieWorld.Draw();

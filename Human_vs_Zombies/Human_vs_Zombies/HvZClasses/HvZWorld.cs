@@ -5,6 +5,8 @@ using System.Text;
 using Human_vs_Zombies.HvZClasses.Mobs;
 using Microsoft.Xna.Framework;
 using System.Collections;
+using Human_vs_Zombies.Rendering;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Human_vs_Zombies.HvZClasses
 {
@@ -30,6 +32,16 @@ namespace Human_vs_Zombies.HvZClasses
 
         public void Draw()
         {
+            Drawer.Draw(
+                TextureStatic.Get("background"),
+                Drawer.FullScreenRectangle,
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.None,
+                0f);
+
             this.m_Player.Draw();
         }
     }

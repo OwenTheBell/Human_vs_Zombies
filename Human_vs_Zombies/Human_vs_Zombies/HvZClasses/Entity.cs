@@ -20,6 +20,10 @@ namespace Human_vs_Zombies.HvZClasses
         private bool m_isDead;
         private ulong m_ID;
 
+        private float m_Radius;
+        public HvZWorld m_HvZWorld;
+        private bool m_isDead;
+
         /// <summary>
         /// Constructs a new Entity.
         /// </summary>
@@ -36,6 +40,8 @@ namespace Human_vs_Zombies.HvZClasses
             this.SetDead(false);
 
             m_ID = s_ID++;
+            this.SetRadius(radius);
+            this.SetDead(false);
         }
 
         /// <summary>
@@ -115,6 +121,16 @@ namespace Human_vs_Zombies.HvZClasses
         public ulong GetID()
         {
             return m_ID;
+        }
+
+        public void SetDead(bool isDead)
+        {
+            this.m_isDead = isDead;
+        }
+
+        public bool GetDead()
+        {
+            return this.m_isDead;
         }
 
         /// <summary>
