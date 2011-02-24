@@ -26,16 +26,16 @@ namespace Human_vs_Zombies.HvZClasses
         public Entity(HvZWorld hvzWorld, Vector2 position, float rotation, float radius)
         {
             this.m_HvZWorld = hvzWorld;
-            this.setPosition(position);
-            this.setRotation(rotation);
-            this.setRadius(radius);
+            this.SetPosition(position);
+            this.SetRotation(rotation);
+            this.SetRadius(radius);
         }
 
         /// <summary>
         /// The environment of this.
         /// </summary>
         /// <returns>The world.</returns>
-        public HvZWorld getWorld()
+        public HvZWorld GetWorld()
         {
             return this.m_HvZWorld;
         }
@@ -44,7 +44,7 @@ namespace Human_vs_Zombies.HvZClasses
         /// The position of this.
         /// </summary>
         /// <returns>Vector for position, in pixels</returns>
-        public Vector2 getPosition()
+        public Vector2 GetPosition()
         {
             return this.m_Position;
         }
@@ -53,7 +53,7 @@ namespace Human_vs_Zombies.HvZClasses
         /// Set the position of this.
         /// </summary>
         /// <param name="position">Vector for position, in pixels</param>
-        public void setPosition(Vector2 position)
+        public void SetPosition(Vector2 position)
         {
             this.m_Position = position;
         }
@@ -62,7 +62,7 @@ namespace Human_vs_Zombies.HvZClasses
         /// The rotation of this.
         /// </summary>
         /// <returns>Rotation in radians, counterclockwise from positive x axis</returns>
-        public float getRotation()
+        public float GetRotation()
         {
             return this.m_Rotation;
         }
@@ -71,7 +71,7 @@ namespace Human_vs_Zombies.HvZClasses
         /// Set the rotation of this.
         /// </summary>
         /// <param name="rotation">Rotation in radians. Right hand rule.</param>
-        public void setRotation(float rotation)
+        public void SetRotation(float rotation)
         {
             //the rotation in radians
             this.m_Rotation = rotation % (2.0f * (float)Math.PI);
@@ -81,7 +81,7 @@ namespace Human_vs_Zombies.HvZClasses
         /// The radius of this, in pixels. Used for collision and drawing.
         /// </summary>
         /// <returns>Radius in pixels.</returns>
-        public float getRadius()
+        public float GetRadius()
         {
             return this.m_Radius;
         }
@@ -90,7 +90,7 @@ namespace Human_vs_Zombies.HvZClasses
         /// Set the radius.
         /// </summary>
         /// <param name="radius">Radius in pixels.</param>
-        public void setRadius(float radius)
+        public void SetRadius(float radius)
         {
             this.m_Radius = radius;
         }
@@ -99,11 +99,11 @@ namespace Human_vs_Zombies.HvZClasses
         /// Updates this Entity over an interval in time.
         /// </summary>
         /// <param name="dTime">Interval of elapsed time, in seconds.</param>
-        public abstract void update(float dTime);
+        public abstract void Update(float dTime);
 
         /// <summary>
         /// Draws this Entity.
         /// </summary>
-        public abstract void draw();
+        public abstract void Draw();
     }
 }

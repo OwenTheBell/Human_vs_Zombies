@@ -33,8 +33,8 @@ namespace Human_vs_Zombies.Controls
 
         public override void update(float dTime)
         {
-            m_Walk = (new Vector2(this.m_Player.getPosition().X - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
-                this.m_Player.getPosition().Y - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveVertical)));
+            m_Walk = (new Vector2(this.m_Player.GetPosition().X - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
+                this.m_Player.GetPosition().Y - 10 * GameWorld.controller.ContainsFloat(ActionType.MoveVertical)));
             if ((GameWorld.controller.ContainsFloat(ActionType.LookVertical) + GameWorld.controller.ContainsFloat(ActionType.LookHorizontal)) > .5)
             {
                 m_Shoot = new Vector2(GameWorld.controller.ContainsFloat(ActionType.LookVertical), GameWorld.controller.ContainsFloat(ActionType.LookHorizontal));

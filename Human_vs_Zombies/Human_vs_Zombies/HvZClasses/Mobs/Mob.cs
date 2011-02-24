@@ -13,22 +13,22 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         public Mob(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity)
             : base(hvzWorld, position, rotation, radius)
         {
-            this.setVelocity(velocity);
+            this.SetVelocity(velocity);
         }
 
-        public Vector2 getVelocity()
+        public Vector2 GetVelocity()
         {
             return m_Velocity;
         }
 
-        public void setVelocity(Vector2 velocity)
+        public void SetVelocity(Vector2 velocity)
         {
             this.m_Velocity = velocity;
         }
 
-        public override void update(float dTime)
+        public override void Update(float dTime)
         {
-            this.setPosition(this.getPosition() + this.getVelocity() * dTime);
+            this.SetPosition(this.GetPosition() + this.GetVelocity() * dTime);
         }
     }
 }
