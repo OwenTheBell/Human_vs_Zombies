@@ -11,11 +11,14 @@ namespace Human_vs_Zombies.HvZClasses
     /// </summary>
     public abstract class Entity
     {
+        protected static ulong s_ID = 0;
+
         private Vector2 m_Position;
         private float m_Rotation;
         private float m_Radius;
         public HvZWorld m_HvZWorld;
         private bool m_isDead;
+        private ulong m_ID;
 
         /// <summary>
         /// Constructs a new Entity.
@@ -31,6 +34,8 @@ namespace Human_vs_Zombies.HvZClasses
             this.SetRotation(rotation);
             this.SetRadius(radius);
             this.SetDead(false);
+
+            m_ID = s_ID++;
         }
 
         /// <summary>
@@ -105,6 +110,11 @@ namespace Human_vs_Zombies.HvZClasses
         public bool GetDead()
         {
             return this.m_isDead;
+        }
+
+        public ulong GetID()
+        {
+            return m_ID;
         }
 
         /// <summary>
