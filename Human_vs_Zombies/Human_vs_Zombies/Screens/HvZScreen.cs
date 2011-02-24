@@ -22,7 +22,7 @@ namespace Human_vs_Zombies.Screens
 
         public override void Update()
         {
-            zombieWorld.Update(0f);
+            //zombieWorld.Update(0f);
 
             base.Update();
         }
