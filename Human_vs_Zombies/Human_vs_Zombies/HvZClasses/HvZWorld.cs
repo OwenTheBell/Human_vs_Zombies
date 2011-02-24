@@ -128,7 +128,7 @@ namespace Human_vs_Zombies.HvZClasses
 
             for (int i = 0; i < m_Entities.Values.Count; i++)
             {
-                m_Entities.Values.ElementAt(i).Update(dTime);
+                    m_Entities.Values.ElementAt(i).Update(dTime);
             }
 
             this.KillDeadEntities();
@@ -160,7 +160,15 @@ namespace Human_vs_Zombies.HvZClasses
         public void SpawnZombie()
         {
             Random gen = new Random();
-            Vector2 position = new Vector2(gen.Next((int)GameWorld.screenDimensions.X-30), gen.Next((int)GameWorld.screenDimensions.Y-30));
+            Vector2 playerPostion = m_Player.GetPosition();
+            int spawnDistance = 100;
+            Vector2 position= new Vector2(gen.Next((int)GameWorld.screenDimensions.X - 30), gen.Next((int)GameWorld.screenDimensions.Y - 30));
+            //ensure that the zombie does not spawn to close to the player
+            if (position.X - spawnDistance > playerPostion.X) position.X -= spawnDistance;
+            else if (position.X + spawnDistance < playerPostion.X) position.X += spawnDistance;
+            if (position.Y - spawnDistance > playerPostion.Y) position.Y -= spawnDistance;
+            else if (position.Y + spawnDistance < playerPostion.Y) position.Y += spawnDistance;
+            
             Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new SimpleAIBrains(this));
             m_Entities.Add(m_Zombie.GetID(), m_Zombie);
         }
