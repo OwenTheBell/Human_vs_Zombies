@@ -22,7 +22,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, int weaponTimer, int weaponSpeed)
             : base(hvzWorld, position, rotation, radius, velocity, 10f)
         {
-            this.SetBrains(new HumanBrains(hvzWorld, this));
+            this.SetBrains(new HumanBrains(hvzWorld));
             this.SetWeaponTimer(weaponTimer);
             this.SetWeaponSpeed(weaponSpeed);
         }
@@ -79,7 +79,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 }
             }
 
-            this.m_Brains.update(dTime);
+            this.m_Brains.update(dTime, this.GetPosition());
 
             this.SetVelocity(m_Brains.GetWalk());
             this.SetRotation(m_Brains.getShoot());

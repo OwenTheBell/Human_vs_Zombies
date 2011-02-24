@@ -16,7 +16,7 @@ namespace Human_vs_Zombies.Controls
         /// <summary>
         /// Updates this instance.
         /// </summary>
-        public abstract void update( float dTime);
+        public abstract void update( float dTime, Vector2 position);
 
         public abstract Vector2 getShoot();
 

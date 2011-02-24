@@ -8,7 +8,7 @@ namespace Human_vs_Zombies.HvZClasses.Walls
 {
     public class Wall:Entity
     {
-        public Wall(HvZWorld hvzWorld, Vector2 position, float rotation, float radius)
+        public Wall(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius)
             : base(hvzWorld, position, rotation, radius)
         {
         }

@@ -8,7 +8,7 @@ namespace Human_vs_Zombies.HvZClasses.Items
 {
     public class Item:Entity
     {
-        public Item(HvZWorld hvzWorld, Vector2 position, float rotation, float radius)
+        public Item(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius)
             : base(hvzWorld, position, rotation, radius)
         {
         }

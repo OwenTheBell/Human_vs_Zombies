@@ -8,7 +8,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 {
     public class Projectile : Mob
     {
-        public static const float LIFE = 0.5f;
+        public const float LIFE = 0.5f;
 
         private float m_Life;
 
