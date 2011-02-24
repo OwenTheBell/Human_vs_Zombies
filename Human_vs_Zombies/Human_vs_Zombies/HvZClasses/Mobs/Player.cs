@@ -13,17 +13,20 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
     {
         private Vector2 m_Target;
 
-        private int m_WeaponTimer;
+        private float m_WeaponTimer;
 
-        private int m_WeaponSpeed;
+        private float m_TimerCurrent;
+
+        private float m_WeaponSpeed;
 
         private Brains m_Brains;
 
-        public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, int weaponTimer, int weaponSpeed)
+        public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float weaponTimer, float weaponSpeed)
             : base(hvzWorld, position, rotation, radius, velocity, 10f)
         {
             this.SetBrains(new HumanBrains(hvzWorld));
             this.SetWeaponTimer(weaponTimer);
+            m_TimerCurrent = 0;
             this.SetWeaponSpeed(weaponSpeed);
         }
 
@@ -47,22 +50,22 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.m_Target = target;
         }
 
-        public void SetWeaponTimer(int weaponTimer)
+        public void SetWeaponTimer(float weaponTimer)
         {
             this.m_WeaponTimer = weaponTimer;
         }
 
-        public int GetWeaponTimer()
+        public float GetWeaponTimer()
         {
             return this.m_WeaponTimer;
         }
 
-        public void SetWeaponSpeed(int weaponSpeed)
+        public void SetWeaponSpeed(float weaponSpeed)
         {
             this.m_WeaponSpeed = weaponSpeed;
         }
 
-        public int GetWeaponSpeed()
+        public float GetWeaponSpeed()
         {
             return this.m_WeaponSpeed;
         }
@@ -92,14 +95,13 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 this.SetRotation(this.GetVelocity() / this.GetVelocity().Length());
             }
             //Only fire the gun if the player is aiming and if the weapon can be fired
-            if ((m_Brains.getShoot().Y != 0 || m_Brains.getShoot().X != 0) && m_WeaponTimer == 0)
+            if ((m_Brains.getShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0)
             {
-                this.m_HvZWorld.AddEntity(new Projectile(this.m_HvZWorld, this.GetPosition(), this.GetRotation(), 10f, this.GetRotation() * this.m_WeaponSpeed));
+                this.m_HvZWorld.AddEntity(new Projectile(this.m_HvZWorld, this.GetPosition(), this.GetRotation(), 1f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
+                m_TimerCurrent = m_WeaponTimer;
             }
-            else
-            {
-                this.m_WeaponTimer--;
-            }
+
+            this.m_TimerCurrent -= dTime;
 
             base.Update(dTime);
         }

@@ -77,11 +77,11 @@ namespace Human_vs_Zombies.HvZClasses
         /// <summary>
         /// Set the rotation of this.
         /// </summary>
-        /// <param name="rotation">Rotation in radians. Right hand rule.</param>
+        /// <param name="rotation">Rotation vector.</param>
         public void SetRotation(Vector2 rotation)
         {
-            //the rotation in radians
             this.m_Rotation = rotation;
+            this.m_Rotation.Normalize();
         }
 
         /// <summary>

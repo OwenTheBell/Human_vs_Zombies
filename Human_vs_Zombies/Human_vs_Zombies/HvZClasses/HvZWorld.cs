@@ -21,7 +21,7 @@ namespace Human_vs_Zombies.HvZClasses
 
         public HvZWorld()
         {
-            m_Player = new Player(this, new Vector2(100f, 100f), new Vector2(1f,0f), 0f, new Vector2(1f,0f), 5, 5);
+            m_Player = new Player(this, new Vector2(100f, 100f), new Vector2(1f,0f), 30f, new Vector2(1f,0f), .1f, 500f);
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
             this.m_ColMatrix = null;

@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Human_vs_Zombies.Rendering;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
     public class Projectile : Mob
     {
-        public const float LIFE = 0.5f;
+        public const float LIFE = .5f;
 
         private float m_Life;
 
         public Projectile(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity)
-            : base(hvzWorld, position, rotation, radius, velocity, 10f)
+            : base(hvzWorld, position, rotation, radius, velocity, velocity.Length())
         {
             m_Life = LIFE;
         }
@@ -39,6 +41,18 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             base.Update(dTime);
         }
 
-        public override void Draw() { }
+        public override void Draw()
+        {
+            Drawer.Draw(
+                TextureStatic.Get("Dart"),
+                this.GetPosition(),
+                null,
+                Color.White,
+                (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
+                new Vector2(0f),
+                1f,
+                SpriteEffects.None,
+                0.9f);
+        }
     }
 }
