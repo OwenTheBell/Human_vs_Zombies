@@ -27,8 +27,9 @@ namespace Human_vs_Zombies.Controls
 
         public override void update(float dTime, Vector2 position)
         {
-            Vector2 path = new Vector2(m_HvZWorld.GetPlayer().GetPosition().X - position.X, m_HvZWorld.GetPlayer().GetPosition().Y - position.Y);
-            this.m_Walk = new Vector2((float)(path.X / Math.Sqrt(Math.Pow(path.X, 2) + Math.Pow(path.Y, 2))), (float)(path.Y / Math.Pow(path.X, 2) + Math.Pow(path.Y, 2)));
+            Vector2 path = m_HvZWorld.GetPlayer().GetPosition() - position;
+            this.m_Walk = path;
+            this.m_Walk.Normalize();
             this.m_Shoot = this.m_Walk;
         }
 
