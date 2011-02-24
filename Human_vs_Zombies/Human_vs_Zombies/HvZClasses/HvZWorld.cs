@@ -139,7 +139,7 @@ namespace Human_vs_Zombies.HvZClasses
         {
             Random gen = new Random();
             Vector2 position = new Vector2(gen.Next((int)GameWorld.screenDimensions.X-30), gen.Next((int)GameWorld.screenDimensions.Y-30));
-            Zombie m_Zombie = new Zombie(this, position, 0f, 0f, Vector2.Zero, 10f, new SimpleAIBrains(this));
+            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 0f, Vector2.Zero, 10f, new SimpleAIBrains(this));
             m_Entities.Add(m_Zombie.GetID(), m_Zombie);
         }
     }
