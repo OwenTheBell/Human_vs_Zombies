@@ -69,7 +69,16 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Update(float dTime)
         {
-            //no collision handling at this time
+            List<Entity> cols = GetWorld().Collisions(this);
+
+            foreach (Entity c in cols)
+            {
+                if (c is Zombie)
+                {
+                    this.SetDead(true);
+                }
+            }
+
             this.m_Brains.update(dTime);
 
             this.SetVelocity(m_Brains.GetWalk());
