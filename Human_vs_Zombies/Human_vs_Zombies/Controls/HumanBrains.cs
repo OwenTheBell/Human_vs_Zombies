@@ -33,10 +33,8 @@ namespace Human_vs_Zombies.Controls
             this.m_Walk = 
                 new Vector2(300 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
                 -300 * GameWorld.controller.ContainsFloat(ActionType.MoveVertical));
-            this.m_Shoot = new Vector2(GameWorld.controller.ContainsFloat(ActionType.LookVertical), GameWorld.controller.ContainsFloat(ActionType.LookHorizontal));
-            float length = (float) Math.Sqrt(Math.Pow(this.m_Shoot.X, 2) + Math.Pow(this.m_Shoot.Y, 2));
-            this.m_Shoot.X = this.m_Shoot.X / length;
-            this.m_Shoot.Y = this.m_Shoot.Y / length;
+            this.m_Shoot = new Vector2(GameWorld.controller.ContainsFloat(ActionType.LookHorizontal), -GameWorld.controller.ContainsFloat(ActionType.LookVertical));
+            this.m_Shoot.Normalize();
 
         }
 

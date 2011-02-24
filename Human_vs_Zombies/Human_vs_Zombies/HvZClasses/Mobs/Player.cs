@@ -82,7 +82,15 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.m_Brains.update(dTime, this.GetPosition());
 
             this.SetVelocity(m_Brains.GetWalk());
-            this.SetRotation(m_Brains.getShoot());
+
+            if (m_Brains.getShoot().LengthSquared() > 0f)
+            {
+                this.SetRotation(m_Brains.getShoot());
+            }
+            else if(this.GetVelocity().LengthSquared() > 0f)
+            {
+                this.SetRotation(this.GetVelocity() / this.GetVelocity().Length());
+            }
             //Only fire the gun if the player is aiming and if the weapon can be fired
             if ((m_Brains.getShoot().Y != 0 || m_Brains.getShoot().X != 0) && m_WeaponTimer == 0)
             {
@@ -103,7 +111,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 this.GetPosition(),
                 null,
                 Color.White,
-                0f,
+                (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
                 new Vector2(30f),
                 1f,
                 SpriteEffects.None,
