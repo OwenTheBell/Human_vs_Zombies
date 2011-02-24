@@ -44,7 +44,7 @@ namespace Human_vs_Zombies.HvZClasses
 
                     if ((one.GetPosition() - two.GetPosition()).LengthSquared() <= Math.Pow((one.GetRadius() + two.GetRadius()), 2))
                     {
-                        if (m_ColMatrix.ContainsKey(one.GetID()))
+                        if (!m_ColMatrix.ContainsKey(one.GetID()))
                         {
                             List<Entity> cols = new List<Entity>();
                             cols.Add(two);
@@ -57,7 +57,7 @@ namespace Human_vs_Zombies.HvZClasses
                             cols.Add(two);
                         }
 
-                        if (m_ColMatrix.ContainsKey(two.GetID()))
+                        if (!m_ColMatrix.ContainsKey(two.GetID()))
                         {
                             List<Entity> cols = new List<Entity>();
                             cols.Add(one);
@@ -93,12 +93,18 @@ namespace Human_vs_Zombies.HvZClasses
         private void KillDeadEntities()
         {
             m_ColUpdated = false;
+
+            List<Entity> dieNow = new List<Entity>();
             foreach(Entity e in m_Entities.Values)
             {
                 if (e.GetDead())
                 {
-                    m_Entities.Remove(e.GetID());
+                    dieNow.Add(e);
                 }
+            }
+            foreach (Entity e in dieNow)
+            {
+                m_Entities.Remove(e.GetID());
             }
         }
 
@@ -106,7 +112,7 @@ namespace Human_vs_Zombies.HvZClasses
         {
             this.CheckCols();
 
-            for (int i = 0; i < m_Entities.Values.Count - 1; i++)
+            for (int i = 0; i < m_Entities.Values.Count; i++)
             {
                 m_Entities.Values.ElementAt(i).Update(dTime);
             }

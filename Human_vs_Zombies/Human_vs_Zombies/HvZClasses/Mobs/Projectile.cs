@@ -20,9 +20,19 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Update(float dTime)
         {
-            if (m_Life < 0 || this.GetWorld().Collisions(this).Count > 0)
+            if (m_Life <= 0)
             {
                 this.SetDead(true);
+            }
+
+            List<Entity> cols = GetWorld().Collisions(this);
+
+            foreach (Entity c in cols)
+            {
+                if (c is Zombie)
+                {
+                    this.SetDead(true);
+                }
             }
 
             m_Life -= dTime;
