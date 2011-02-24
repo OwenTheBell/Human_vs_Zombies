@@ -13,7 +13,7 @@ namespace Human_vs_Zombies.HvZClasses
     public class HvZWorld
     {
         private Player m_Player;
-        private ArrayList m_Entities;
+        private SortedDictionary<ulong, Entity> m_Entities;
 
         public HvZWorld()
         {
@@ -28,6 +28,11 @@ namespace Human_vs_Zombies.HvZClasses
         public void Update(float dTime)
         {
 
+        }
+
+        public void addEntity(Entity entity)
+        {
+            this.m_Entities.Add(entity.GetID(), entity);
         }
 
         public void Draw()
