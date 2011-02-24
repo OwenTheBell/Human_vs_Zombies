@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Human_vs_Zombies.Controls;
+using Human_vs_Zombies.Rendering;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
@@ -52,12 +54,26 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 }
             }
 
+            this.m_Brains.update(dTime, this.GetPosition());
+
             this.SetVelocity(m_Brains.GetWalk());
             this.SetRotation(m_Brains.getShoot());
 
             base.Update(dTime);
         }
 
-        public override void Draw() { }
+        public override void Draw() 
+        {
+            Drawer.Draw(
+                   TextureStatic.Get("Zombie"),
+                   this.GetPosition(),
+                   null,
+                   Color.White,
+                   0f,
+                   new Vector2(30f),
+                   1f,
+                   SpriteEffects.None,
+                   0.9f);
+        }
     }
 }

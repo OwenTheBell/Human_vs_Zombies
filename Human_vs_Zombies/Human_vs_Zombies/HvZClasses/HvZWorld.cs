@@ -18,6 +18,7 @@ namespace Human_vs_Zombies.HvZClasses
         private SortedDictionary<ulong, Entity> m_Entities; // <ID of entity, The Entity>
         private SortedDictionary<ulong, List<Entity>> m_ColMatrix;
         private bool m_ColUpdated;
+        private float zombieTimer, zombieCountdown; // How often zombies will spawn.
 
         public HvZWorld()
         {
@@ -25,6 +26,8 @@ namespace Human_vs_Zombies.HvZClasses
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
             this.m_ColMatrix = null;
+            zombieTimer = 3; // Spawn a zombie every 3 seconds
+            zombieCountdown = zombieTimer;
         }
 
         public Player GetPlayer()
@@ -112,6 +115,13 @@ namespace Human_vs_Zombies.HvZClasses
         {
             this.CheckCols();
 
+            zombieCountdown -= dTime;
+            if (zombieCountdown <= 0)
+            {
+                this.SpawnZombie();
+                zombieCountdown = zombieTimer;
+            }
+
             for (int i = 0; i < m_Entities.Values.Count; i++)
             {
                 m_Entities.Values.ElementAt(i).Update(dTime);
@@ -147,7 +157,7 @@ namespace Human_vs_Zombies.HvZClasses
         {
             Random gen = new Random();
             Vector2 position = new Vector2(gen.Next((int)GameWorld.screenDimensions.X-30), gen.Next((int)GameWorld.screenDimensions.Y-30));
-            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 0f, Vector2.Zero, 10f, new SimpleAIBrains(this));
+            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 0f, Vector2.Zero, 300f, new SimpleAIBrains(this));
             m_Entities.Add(m_Zombie.GetID(), m_Zombie);
         }
     }

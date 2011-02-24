@@ -15,8 +15,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         public Mob(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity)
             : base(hvzWorld, position, rotation, radius)
         {
-            this.SetVelocity(velocity);
             this.SetMax(maxVelocity);
+            this.SetVelocity(velocity);
         }
 
         public Vector2 GetVelocity()
@@ -26,7 +26,21 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public void SetVelocity(Vector2 velocity)
         {
-            this.m_Velocity = velocity;
+            if (velocity == Vector2.Zero)
+            {
+                this.m_Velocity = velocity;
+                return;
+            }
+            Vector2 unitVelocity = velocity;
+            unitVelocity.Normalize();
+            if (velocity.LengthSquared() <= (m_maxVelocity * unitVelocity).LengthSquared())
+            {
+                this.m_Velocity = velocity;
+            }
+            else
+            {
+                this.m_Velocity = m_maxVelocity * unitVelocity;
+            }
         }
 
         public void SetMax(float maxVelocity)
