@@ -57,12 +57,12 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         {
             Drawer.Draw(
                 TextureStatic.Get("Human"),
-                Vector2.Zero,
+                this.GetPosition(),
                 null,
                 Color.White,
                 0f,
-                Vector2.Zero,
-                Vector2.Zero,
+                new Vector2(30f),
+                1f,
                 SpriteEffects.None,
                 0.9f);
         }
