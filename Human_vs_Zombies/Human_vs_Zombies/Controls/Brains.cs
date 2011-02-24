@@ -20,6 +20,6 @@ namespace Human_vs_Zombies.Controls
 
         public abstract Vector2 getShoot();
 
-        public abstract Vector2 getWalk();
+        public abstract Vector2 GetWalk();
     }
 }
