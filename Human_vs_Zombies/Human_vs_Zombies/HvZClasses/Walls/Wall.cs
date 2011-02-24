@@ -12,7 +12,7 @@ namespace Human_vs_Zombies.HvZClasses.Walls
             : base(hvzWorld, position, rotation, radius)
         {
         }
-        public override void update(float dTime) { }
-        public override void draw() { }
+        public override void Update(float dTime) { }
+        public override void Draw() { }
     }
 }

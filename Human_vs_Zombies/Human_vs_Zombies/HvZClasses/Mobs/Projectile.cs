@@ -12,6 +12,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             : base(hvzWorld, position, rotation, radius, velocity)
         {
         }
-        public override void draw() { }
+        public override void Draw() { }
     }
 }
