@@ -42,7 +42,7 @@ namespace Human_vs_Zombies.Controls
 
         }
 
-        public override Vector2 getWalk()
+        public override Vector2 GetWalk()
         {
             return m_Walk;
         }

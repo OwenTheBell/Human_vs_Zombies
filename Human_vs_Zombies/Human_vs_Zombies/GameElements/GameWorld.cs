@@ -65,7 +65,7 @@ namespace Human_vs_Zombies.GameElements
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //TextureStatic.Load("background", @"Art\background");
+            TextureStatic.Load("background", @"Art\background");
             TextureStatic.Load("Dart", @"Art\TempDart");
             TextureStatic.Load("Zombie", @"Art\TempZombie");
             TextureStatic.Load("Human", @"Art\TempHuman");
@@ -110,22 +110,11 @@ namespace Human_vs_Zombies.GameElements
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.AliceBlue);
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
             screens.Draw();
-
-            Drawer.Draw(
-                TextureStatic.Get("background"),
-                Drawer.FullScreenRectangle,
-                null,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                0f
-                );
 
             spriteBatch.End();
 
