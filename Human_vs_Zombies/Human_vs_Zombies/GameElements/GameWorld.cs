@@ -22,6 +22,7 @@ namespace Human_vs_Zombies.GameElements
     {
         public static GraphicsDevice graphics;
         public static SpriteBatch spriteBatch;
+        public static Vector2 screenDimensions;
         public static ScreenStack screens;
         public static ContentManager content;
 
@@ -61,7 +62,7 @@ namespace Human_vs_Zombies.GameElements
                 = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             graphics.PresentationParameters.BackBufferHeight
                 = (int)(0.5625f * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width);
-
+            GameWorld.screenDimensions = new Vector2(graphics.PresentationParameters.BackBufferWidth, graphics.PresentationParameters.BackBufferHeight);
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
