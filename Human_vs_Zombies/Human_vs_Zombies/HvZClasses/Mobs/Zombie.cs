@@ -15,8 +15,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private Brains m_Brains;
 
-        public Zombie(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity, Brains brains)
-            : base(hvzWorld, position, rotation, radius, velocity)
+        public Zombie(HvZWorld hvzWorld, Vector2 position, float rotation, float radius, Vector2 velocity, float maxVelocity, Brains brains)
+            : base(hvzWorld, position, rotation, radius, velocity, maxVelocity)
         {
             this.SetBrains(new SimpleAIBrains(hvzWorld, hvzWorld.getPlayer(), this));
         }
@@ -42,6 +42,11 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         }
         public override void Update(float dTime)
         {
+            //no collision handling at this time
+
+            this.SetVelocity(m_Brains.GetWalk());
+            this.SetRotation((float)Math.Atan2(m_Brains.getShoot().Y, m_Brains.getShoot().X));
+
             base.Update(dTime);
         }
 

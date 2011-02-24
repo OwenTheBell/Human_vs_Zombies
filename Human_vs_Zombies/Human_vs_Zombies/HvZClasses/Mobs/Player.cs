@@ -45,6 +45,11 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Update(float dTime)
         {
+            //no collision handling at this time
+
+            this.SetVelocity(m_Brains.GetWalk());
+            this.SetRotation((float)Math.Atan2(m_Brains.getShoot().Y, m_Brains.getShoot().X));
+
             base.Update(dTime);
         }
 
