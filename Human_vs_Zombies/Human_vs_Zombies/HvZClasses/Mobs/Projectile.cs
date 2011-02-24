@@ -49,7 +49,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 null,
                 Color.White,
                 (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
-                new Vector2(0f),
+                new Vector2(9f),
                 1f,
                 SpriteEffects.None,
                 0.9f);
