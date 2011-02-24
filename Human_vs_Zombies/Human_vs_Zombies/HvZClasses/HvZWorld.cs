@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Human_vs_Zombies.HvZClasses.Mobs;
+using Microsoft.Xna.Framework;
 
 namespace Human_vs_Zombies.HvZClasses
 {
@@ -10,14 +11,19 @@ namespace Human_vs_Zombies.HvZClasses
     {
         private Player m_Player;
 
-        public HvZWorld(Player player)
+        public HvZWorld()
         {
-            m_Player = player;
+            m_Player = new Player(this, Vector2.Zero, 0f, 0f, Vector2.Zero);
         }
 
         public Player getPlayer()
         {
             return m_Player;
+        }
+
+        public void Draw()
+        {
+            this.m_Player.Draw();
         }
     }
 }

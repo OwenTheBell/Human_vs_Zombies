@@ -13,14 +13,16 @@ namespace Human_vs_Zombies.Screens
     public class HvZScreen:GameScreen
     {
 
-        //private HvZWorld zombieWorld;
+        private HvZWorld zombieWorld;
 
         public HvZScreen()
         {
+            this.zombieWorld = new HvZWorld();
         }
 
         public override void Draw()
         {
+            /*
             Drawer.Draw(
                 TextureStatic.Get("background"),
                 Drawer.FullScreenRectangle,
@@ -31,8 +33,10 @@ namespace Human_vs_Zombies.Screens
                 SpriteEffects.None,
                 0f
                 );
-
+             */
             base.Draw();
+
+            this.zombieWorld.Draw();
         }
     }
 }

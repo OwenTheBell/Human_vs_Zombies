@@ -38,7 +38,7 @@ namespace Human_vs_Zombies.Controls
             this.m_Shoot = new Vector2(0, 0);
         }
 
-        public override Vector2 getWalk()
+        public override Vector2 GetWalk()
         {
             return m_Walk;
         }
