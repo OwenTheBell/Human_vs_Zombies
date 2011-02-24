@@ -21,7 +21,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private Brains m_Brains;
 
-        public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, int weaponTimer, int weaponSpeed)
+        public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float weaponTimer, float weaponSpeed)
             : base(hvzWorld, position, rotation, radius, velocity, 400f)
         {
             this.SetBrains(new HumanBrains(hvzWorld));
