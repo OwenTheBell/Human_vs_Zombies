@@ -102,6 +102,10 @@ namespace Human_vs_Zombies.HvZClasses
             {
                 if (e.GetDead())
                 {
+                    if (e is Zombie)
+                    {
+                        this.zombieTimer -= 0.5f;
+                    }
                     dieNow.Add(e);
                 }
             }
@@ -119,7 +123,7 @@ namespace Human_vs_Zombies.HvZClasses
             if (zombieCountdown <= 0)
             {
                 this.SpawnZombie();
-                zombieCountdown = zombieTimer;
+                zombieCountdown = zombieTimer ;
             }
 
             for (int i = 0; i < m_Entities.Values.Count; i++)
