@@ -12,21 +12,15 @@ namespace Human_vs_Zombies.Controls
 
     public class SimpleAIBrains : Brains
     {
-        private Player m_Player;
-
         private HvZWorld m_HvZWorld;
-
-        private Zombie m_Zombie;
 
         private Vector2 m_Shoot;
 
         private Vector2 m_Walk;
 
-        public SimpleAIBrains(HvZWorld hvzWorld, Player player, Zombie zombie)
+        public SimpleAIBrains(HvZWorld hvzWorld)
         {
-            this.m_Player = player;
             this.m_HvZWorld = hvzWorld;
-            this.m_Zombie = zombie;
             this.m_Shoot = new Vector2();
             this.m_Walk = new Vector2();
         }
