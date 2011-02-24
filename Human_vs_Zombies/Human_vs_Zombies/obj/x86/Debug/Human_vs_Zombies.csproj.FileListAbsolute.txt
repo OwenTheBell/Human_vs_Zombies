@@ -10,3 +10,6 @@ E:\CODE\290\Human_vs_Zombies\Human_vs_Zombies\Human_vs_Zombies\obj\x86\Debug\Hum
 E:\CODE\290\Human_vs_Zombies\Human_vs_Zombies\Human_vs_Zombies\obj\x86\Debug\Human_vs_Zombies.pdb
 E:\CODE\290\Human_vs_Zombies\Human_vs_Zombies\Human_vs_Zombies\bin\x86\Debug\Human_vs_Zombies.exe
 E:\CODE\290\Human_vs_Zombies\Human_vs_Zombies\Human_vs_Zombies\bin\x86\Debug\Human_vs_Zombies.pdb
+E:\CODE\290\Human_vs_Zombies\Human_vs_Zombies\Human_vs_Zombies\bin\x86\Debug\Content\Art\TempDart.xnb
+E:\CODE\290\Human_vs_Zombies\Human_vs_Zombies\Human_vs_Zombies\bin\x86\Debug\Content\Art\TempHuman.xnb
+E:\CODE\290\Human_vs_Zombies\Human_vs_Zombies\Human_vs_Zombies\bin\x86\Debug\Content\Art\TempZombie.xnb

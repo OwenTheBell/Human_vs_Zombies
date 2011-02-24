@@ -29,7 +29,7 @@ namespace Human_vs_Zombies.GameElements
 
         public GameWorld()
         {
-            //graphics = new GraphicsDeviceManager(this);
+            GraphicsDeviceManager manager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             screens = new ScreenStack();
             controller = new Controller(PlayerIndex.One);
@@ -64,6 +64,12 @@ namespace Human_vs_Zombies.GameElements
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            //TextureStatic.Load("background", @"Art\background");
+            TextureStatic.Load("Dart", @"Art\TempDart");
+            TextureStatic.Load("Zombie", @"Art\TempZombie");
+            TextureStatic.Load("Human", @"Art\TempHuman");
+
 
             screens.Play(new HvZScreen());
 
@@ -104,11 +110,24 @@ namespace Human_vs_Zombies.GameElements
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
             screens.Draw();
 
-            // TODO: Add your drawing code here
+            Drawer.Draw(
+                TextureStatic.Get("background"),
+                Drawer.FullScreenRectangle,
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.None,
+                0f
+                );
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
