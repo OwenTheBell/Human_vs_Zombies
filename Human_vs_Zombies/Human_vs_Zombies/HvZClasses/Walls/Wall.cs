@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Human_vs_Zombies.HvZClasses.Walls
 {
-    public class Wall:Entity
+    public class Wall : Entity
     {
         private float m_Thickness;
 
@@ -28,21 +28,29 @@ namespace Human_vs_Zombies.HvZClasses.Walls
             m_Thickness = thickness;
         }
 
-        public override bool Collides(Entity other)
+        public Vector2[] GetPoints()
         {
             Vector2 len = this.GetRotation() * this.GetRadius();
             Vector2 wid = new Vector2(this.GetRotation().Y, -this.GetRotation().X) * this.GetThickness();
+            Vector2[] ret = { this.GetPosition(), this.GetPosition() + wid, this.GetPosition() + len + wid, this.GetPosition() + len};
 
-            Vector2 a = this.GetPosition();
-            Vector2 b = this.GetPosition() + len;
-            Vector2 c = this.GetPosition() + len + wid;
-            Vector2 d = this.GetPosition() + wid;
+            return ret;
+        }
+
+        public override bool Collides(Entity other)
+        {
+            Vector2[] pts = this.GetPoints();
+
+            Vector2 a = pts[0];
+            Vector2 b = pts[1];
+            Vector2 c = pts[2];
+            Vector2 d = pts[3];
 
             Vector2 p = other.GetPosition();
             float r = other.GetRadius();
 
             //first check if any of the corners are inside the entity
-            if ((p - a).LengthSquared() <= r * r | (p - b).LengthSquared() <= r * r | (p - c).LengthSquared() <= r * r | (p - d).LengthSquared() <= r * r)
+            if ((p - a).LengthSquared() <= r * r || (p - b).LengthSquared() <= r * r || (p - c).LengthSquared() <= r * r || (p - d).LengthSquared() <= r * r)
             {
                 return true;
             }
