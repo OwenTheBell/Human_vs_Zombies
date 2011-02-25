@@ -104,7 +104,7 @@ namespace Human_vs_Zombies.HvZClasses
                 {
                     if (e is Zombie)
                     {
-                        this.zombieTimer -= 0.5f;
+                        //this.zombieTimer *= 0.5f;
                     }
                     dieNow.Add(e);
                 }
@@ -123,7 +123,7 @@ namespace Human_vs_Zombies.HvZClasses
             if (zombieCountdown <= 0)
             {
                 this.SpawnZombie();
-                zombieCountdown = zombieTimer ;
+                zombieCountdown = zombieTimer;
             }
 
             for (int i = 0; i < m_Entities.Values.Count; i++)
@@ -160,14 +160,17 @@ namespace Human_vs_Zombies.HvZClasses
         public void SpawnZombie()
         {
             Random gen = new Random();
-            Vector2 playerPostion = m_Player.GetPosition();
-            int spawnDistance = 100;
+            Vector2 playerPosition = m_Player.GetPosition();
+            int spawnDistance = 300;
             Vector2 position= new Vector2(gen.Next((int)GameWorld.screenDimensions.X - 30), gen.Next((int)GameWorld.screenDimensions.Y - 30));
             //ensure that the zombie does not spawn to close to the player
-            if (position.X - spawnDistance > playerPostion.X) position.X -= spawnDistance;
-            else if (position.X + spawnDistance < playerPostion.X) position.X += spawnDistance;
-            if (position.Y - spawnDistance > playerPostion.Y) position.Y -= spawnDistance;
-            else if (position.Y + spawnDistance < playerPostion.Y) position.Y += spawnDistance;
+            if ((position - playerPosition).LengthSquared() < spawnDistance * spawnDistance)
+            {
+                Vector2 shift = position - playerPosition;
+                shift.Normalize();
+                shift *= spawnDistance;
+                position += shift;
+            }
             
             Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new SimpleAIBrains(this));
             m_Entities.Add(m_Zombie.GetID(), m_Zombie);
