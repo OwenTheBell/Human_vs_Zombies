@@ -47,7 +47,15 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.m_Brains.Update(dTime, this.GetPosition());
 
             this.SetVelocity(m_Brains.GetWalk() * this.GetMaxVel());
-            this.SetRotation(m_Brains.GetShoot());
+
+            if (m_Brains.GetShoot().LengthSquared() > 0f)
+            {
+                this.SetRotation(m_Brains.GetShoot());
+            }
+            else if (this.GetVelocity().LengthSquared() > 0f)
+            {
+                this.SetRotation(this.GetVelocity() / this.GetVelocity().Length());
+            }
 
             List<Entity> cols = GetHvZWorld().Collisions(this);
 
@@ -88,7 +96,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                    this.GetPosition(),
                    null,
                    Color.White,
-                   (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
+                   this.GetRotation().LengthSquared() > 0 ? (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X) : 0,
                    new Vector2(30f),
                    1f,
                    SpriteEffects.None,
