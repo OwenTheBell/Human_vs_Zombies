@@ -79,7 +79,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                     {
                         Vector2 tangent = new Vector2(-(p - a).Y, (p - a).X);
                         Vector2 normal = p - a;
-                        v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
+                        if (Vector2.Dot(v, normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
                         normal.Normalize();
                         p += (r - (p - a).Length()) * normal;
                     }
@@ -87,7 +87,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                     {
                         Vector2 tangent = new Vector2(-(p - b).Y, (p - b).X);
                         Vector2 normal = p - b;
-                        v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
+                        if (Vector2.Dot(v, normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
                         normal.Normalize();
                         p += (r - (p - b).Length()) * normal;
                     }
@@ -95,7 +95,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                     {
                         Vector2 tangent = new Vector2(-(p - c).Y, (p - c).X);
                         Vector2 normal = p - c;
-                        v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
+                        if (Vector2.Dot(v, normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
                         normal.Normalize();
                         p += (r - (p - c).Length()) * normal;
                     }
@@ -103,7 +103,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                     {
                         Vector2 tangent = new Vector2(-(p - d).Y, (p - d).X);
                         Vector2 normal = p - d;
-                        v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
+                        if (Vector2.Dot(v, normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
                         normal.Normalize();
                         p += (r - (p - d).Length()) * normal;
                     } //then check line segment collisions
