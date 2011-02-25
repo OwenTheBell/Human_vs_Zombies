@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Human_vs_Zombies.HvZClasses.Walls;
 
 namespace Human_vs_Zombies.HvZClasses
 {
@@ -115,6 +116,18 @@ namespace Human_vs_Zombies.HvZClasses
         public ulong GetID()
         {
             return m_ID;
+        }
+
+        public bool Collides(Entity other)
+        {
+            if (other is Wall)
+            {
+                return other.Collides(this);
+            }
+            else
+            {
+                return (this.GetPosition() - other.GetPosition()).LengthSquared() <= Math.Pow((this.GetRadius() + other.GetRadius()), 2);
+            }
         }
 
         /// <summary>

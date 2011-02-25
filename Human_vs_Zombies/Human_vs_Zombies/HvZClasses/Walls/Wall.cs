@@ -20,6 +20,11 @@ namespace Human_vs_Zombies.HvZClasses.Walls
             return m_Thickness;
         }
 
+        public void SetThickness(float thickness)
+        {
+            m_Thickness = thickness;
+        }
+
         public override void Update(float dTime) { }
         public override void Draw() { }
     }

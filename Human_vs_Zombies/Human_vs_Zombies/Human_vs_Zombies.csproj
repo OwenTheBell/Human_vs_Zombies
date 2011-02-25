@@ -130,7 +130,6 @@
     <Compile Include="GameElements\GameWorld.cs" />
     <Compile Include="Rendering\Drawer.cs" />
     <Compile Include="Rendering\TextureStatic.cs" />
-    <Compile Include="Screens\DeadScreen.cs" />
     <Compile Include="Screens\HvZScreen.cs" />
     <Compile Include="Screens\MainScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />

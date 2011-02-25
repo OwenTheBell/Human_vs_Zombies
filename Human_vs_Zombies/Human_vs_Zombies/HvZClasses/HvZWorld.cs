@@ -45,7 +45,7 @@ namespace Human_vs_Zombies.HvZClasses
                     Entity one = m_Entities.Values.ElementAt(i);
                     Entity two = m_Entities.Values.ElementAt(j);
 
-                    if ((one.GetPosition() - two.GetPosition()).LengthSquared() <= Math.Pow((one.GetRadius() + two.GetRadius()), 2))
+                    if (one.Collides(two))
                     {
                         if (!m_ColMatrix.ContainsKey(one.GetID()))
                         {
