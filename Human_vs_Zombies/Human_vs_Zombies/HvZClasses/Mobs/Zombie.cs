@@ -63,8 +63,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
                     Vector2 p = this.GetPosition();
                     Vector2 q = z.GetPosition();
-                    Vector2 v = this.GetVelocity();
                     Vector2 w = z.GetVelocity();
+                    Vector2 v = this.GetVelocity() - w;
                     float r = this.GetRadius() + z.GetRadius();
 
                     Vector2 normal = p - q;
@@ -73,7 +73,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                     Vector2 tangent = new Vector2(normal.Y, -normal.X);
                     if (Vector2.Dot(v, normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
 
-                    this.SetVelocity(v);
+                    this.SetVelocity(v + w);
                     p += (r - d) * normal;
                 }
             }
