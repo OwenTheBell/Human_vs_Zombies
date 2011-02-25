@@ -131,7 +131,7 @@ namespace Human_vs_Zombies.HvZClasses
             zombieCountdown -= dTime;
             if (zombieCountdown <= 0)
             {
-                //this.SpawnZombie();
+                this.SpawnZombie();
                 zombieCountdown = zombieTimer;
             }
 
