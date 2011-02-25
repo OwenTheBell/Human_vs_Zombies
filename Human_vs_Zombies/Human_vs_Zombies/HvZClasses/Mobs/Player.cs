@@ -83,20 +83,20 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 }
             }
 
-            this.m_Brains.update(dTime, this.GetPosition());
+            this.m_Brains.Update(dTime, this.GetPosition());
 
             this.SetVelocity(m_Brains.GetWalk());
 
-            if (m_Brains.getShoot().LengthSquared() > 0f)
+            if (m_Brains.GetShoot().LengthSquared() > 0f)
             {
-                this.SetRotation(m_Brains.getShoot());
+                this.SetRotation(m_Brains.GetShoot());
             }
             else if(this.GetVelocity().LengthSquared() > 0f)
             {
                 this.SetRotation(this.GetVelocity() / this.GetVelocity().Length());
             }
             //Only fire the gun if the player is aiming and if the weapon can be fired
-            if ((m_Brains.getShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0)
+            if ((m_Brains.GetShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0)
             {
                 this.GetHvZWorld().AddEntity(new Projectile(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), 5f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
                 m_TimerCurrent = m_WeaponTimer;

@@ -54,10 +54,10 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 }
             }
 
-            this.m_Brains.update(dTime, this.GetPosition());
+            this.m_Brains.Update(dTime, this.GetPosition());
 
             this.SetVelocity(m_Brains.GetWalk() * this.GetMaxVel());
-            this.SetRotation(m_Brains.getShoot());
+            this.SetRotation(m_Brains.GetShoot());
 
             base.Update(dTime);
         }
