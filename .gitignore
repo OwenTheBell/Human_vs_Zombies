@@ -1,7 +1,8 @@
-Human_vs_Zombies/Human_vs_Zombies/bin
-Human_vs_Zombies/Human_vs_Zombies/obj
-Human_vs_Zombies/Human_vs_ZombiesContent/obj
-Human_vs_Zombies/Human_vs_ZombiesContent/bin
+Human_vs_Zombies/Human_vs_Zombies/bin/
+Human_vs_Zombies/Human_vs_Zombies/obj/
+Human_vs_Zombies/Human_vs_ZombiesContent/obj/
+Human_vs_Zombies/Human_vs_ZombiesContent/bin/
 *.cachefile
 Human_vs_Zombies.suo
 *.contentproj
+*.orig
