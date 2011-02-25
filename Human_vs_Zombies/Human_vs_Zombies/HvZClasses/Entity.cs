@@ -16,7 +16,7 @@ namespace Human_vs_Zombies.HvZClasses
         private Vector2 m_Position;
         private Vector2 m_Rotation;
         private float m_Radius;
-        public HvZWorld m_HvZWorld;
+        private HvZWorld m_HvZWorld;
         private bool m_isDead;
         private ulong m_ID;
 
@@ -42,7 +42,7 @@ namespace Human_vs_Zombies.HvZClasses
         /// The environment of this.
         /// </summary>
         /// <returns>The world.</returns>
-        public HvZWorld GetWorld()
+        public HvZWorld GetHvZWorld()
         {
             return this.m_HvZWorld;
         }

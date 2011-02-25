@@ -72,7 +72,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Update(float dTime)
         {
-            List<Entity> cols = GetWorld().Collisions(this);
+            List<Entity> cols = GetHvZWorld().Collisions(this);
 
             foreach (Entity c in cols)
             {
@@ -97,7 +97,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             //Only fire the gun if the player is aiming and if the weapon can be fired
             if ((m_Brains.getShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0)
             {
-                this.m_HvZWorld.AddEntity(new Projectile(this.m_HvZWorld, this.GetPosition(), this.GetRotation(), 1f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
+                this.GetHvZWorld().AddEntity(new Projectile(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), 1f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
                 m_TimerCurrent = m_WeaponTimer;
             }
 

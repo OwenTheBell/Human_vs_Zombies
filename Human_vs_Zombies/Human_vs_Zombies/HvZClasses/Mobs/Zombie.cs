@@ -44,7 +44,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         }
         public override void Update(float dTime)
         {
-            List<Entity> cols = GetWorld().Collisions(this);
+            List<Entity> cols = GetHvZWorld().Collisions(this);
 
             foreach (Entity c in cols)
             {
