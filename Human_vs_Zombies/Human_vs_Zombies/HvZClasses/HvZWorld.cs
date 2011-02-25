@@ -9,6 +9,7 @@ using Human_vs_Zombies.Rendering;
 using Microsoft.Xna.Framework.Graphics;
 using Human_vs_Zombies.GameElements;
 using Human_vs_Zombies.Controls;
+using Human_vs_Zombies.HvZClasses.Walls;
 
 namespace Human_vs_Zombies.HvZClasses
 {
@@ -25,6 +26,14 @@ namespace Human_vs_Zombies.HvZClasses
             m_Player = new Player(this, new Vector2(100f, 100f), new Vector2(1f,0f), 32f, new Vector2(1f,0f), .1f, 500f);
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
+
+            //DEBUG WALLS
+            this.AddEntity(new Wall(this, new Vector2(300, 600), new Vector2(0f, 1f), 256f, 128f));
+
+            this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f));
+
+            this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f));
+
             this.m_ColMatrix = null;
             zombieTimer = 3; // Spawn a zombie every 3 seconds
             zombieCountdown = zombieTimer;
@@ -122,7 +131,7 @@ namespace Human_vs_Zombies.HvZClasses
             zombieCountdown -= dTime;
             if (zombieCountdown <= 0)
             {
-                this.SpawnZombie();
+                //this.SpawnZombie();
                 zombieCountdown = zombieTimer;
             }
 

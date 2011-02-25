@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Human_vs_Zombies.Controls;
 using Human_vs_Zombies.Rendering;
 using Microsoft.Xna.Framework.Graphics;
+using Human_vs_Zombies.HvZClasses.Walls;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
@@ -97,7 +98,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             //Only fire the gun if the player is aiming and if the weapon can be fired
             if ((m_Brains.getShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0)
             {
-                this.GetHvZWorld().AddEntity(new Projectile(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), 1f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
+                this.GetHvZWorld().AddEntity(new Projectile(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), 5f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
                 m_TimerCurrent = m_WeaponTimer;
             }
 

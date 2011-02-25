@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Human_vs_Zombies.Rendering;
 using Microsoft.Xna.Framework.Graphics;
+using Human_vs_Zombies.HvZClasses.Items;
+using Human_vs_Zombies.HvZClasses.Walls;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
@@ -31,7 +33,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
             foreach (Entity c in cols)
             {
-                if (c is Zombie)
+                if (c is Zombie || c is Wall)
                 {
                     this.SetDead(true);
                 }

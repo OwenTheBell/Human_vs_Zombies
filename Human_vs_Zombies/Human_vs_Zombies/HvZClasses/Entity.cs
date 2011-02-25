@@ -118,7 +118,7 @@ namespace Human_vs_Zombies.HvZClasses
             return m_ID;
         }
 
-        public bool Collides(Entity other)
+        public virtual bool Collides(Entity other)
         {
             if (other is Wall)
             {
