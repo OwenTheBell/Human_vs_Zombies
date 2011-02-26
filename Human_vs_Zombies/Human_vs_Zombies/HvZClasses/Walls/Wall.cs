@@ -91,9 +91,9 @@ namespace Human_vs_Zombies.HvZClasses.Walls
                 null,
                 Color.White,
                 (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
-                new Vector2(0, this.GetThickness()),
+                new Vector2(0, TextureStatic.Get("Wall").Width),
                 SpriteEffects.None,
-                0.8f);
+                0.95f);
         }
     }
 }
