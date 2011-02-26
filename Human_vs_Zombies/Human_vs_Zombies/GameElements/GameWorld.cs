@@ -12,6 +12,7 @@ using Human_vs_Zombies.Controls;
 using Human_vs_Zombies.Screens;
 using Human_vs_Zombies.Rendering;
 using Human_vs_Zombies.Mathematics;
+using Human_vs_Zombies.Audio;
 
 namespace Human_vs_Zombies.GameElements
 {
@@ -25,6 +26,7 @@ namespace Human_vs_Zombies.GameElements
         public static Vector2 screenDimensions;
         public static ScreenStack screens;
         public static ContentManager content;
+        public static AudioManager audio;
 
         public static Controller controller { get; private set; }
 
@@ -72,10 +74,17 @@ namespace Human_vs_Zombies.GameElements
             TextureStatic.Load("Human", @"Art\TempHuman");
             TextureStatic.Load("blank", @"Art\blank");
             TextureStatic.Load("Wall", @"Art\Wall");
+            TextureStatic.Load("Shadow", @"Art\Shadow");
 
+            audio = new AudioManager(this);
+
+            audio.LoadSong("theme", "Sounds/zombie");
+            audio.LoadSong("menu", "Sounds/zombie2");
+            
             Drawer.Initiallize();
             
             screens.Play(new HvZScreen());
+            audio.SongPlay("theme");
 
             // TODO: use this.Content to load your game content here
         }

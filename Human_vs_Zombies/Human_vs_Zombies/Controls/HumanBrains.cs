@@ -28,7 +28,7 @@ namespace Human_vs_Zombies.Controls
             this.m_Walk = new Vector2();
         }
 
-        public override void update(float dTime, Vector2 position)
+        public override void Update(float dTime, Vector2 position)
         {
             this.m_Walk = 
                 new Vector2(300 * GameWorld.controller.ContainsFloat(ActionType.MoveHorizontal), 
@@ -43,7 +43,7 @@ namespace Human_vs_Zombies.Controls
             return this.m_Walk;
         }
 
-        public override Vector2 getShoot()
+        public override Vector2 GetShoot()
         {
             return m_Shoot;
         }   

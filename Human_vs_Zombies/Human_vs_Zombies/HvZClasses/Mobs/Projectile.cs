@@ -54,7 +54,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 new Vector2(9f),
                 1f,
                 SpriteEffects.None,
-                0.9f);
+                0.6f);
         }
     }
 }
