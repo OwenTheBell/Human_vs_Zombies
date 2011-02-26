@@ -35,7 +35,7 @@ namespace Human_vs_Zombies.HvZClasses
             this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f));
 
             this.m_ColMatrix = null;
-            zombieTimer = 3; // Spawn a zombie every 3 seconds
+            zombieTimer = 1.5f; // Spawn a zombie every 3 seconds
             zombieCountdown = zombieTimer;
         }
 
@@ -131,7 +131,7 @@ namespace Human_vs_Zombies.HvZClasses
             zombieCountdown -= dTime;
             if (zombieCountdown <= 0)
             {
-                this.SpawnZombie();
+                //this.SpawnZombie();
                 zombieCountdown = zombieTimer;
             }
 
@@ -159,11 +159,88 @@ namespace Human_vs_Zombies.HvZClasses
                 Vector2.Zero,
                 SpriteEffects.None,
                 0f);
-
+            
             foreach (Entity e in m_Entities.Values)
             {
                 e.Draw();
+                if (e is Wall)
+                {
+                    DrawShadow((Wall)e, .9f); //eeeeeeevaaa!
+                }
             }
+        }
+
+        private float SignedAngle(Vector2 v1, Vector2 v2)
+        {
+            float angle = (float)Math.Acos(Vector2.Dot(v1, v2) / (v1.Length() * v2.Length()));
+
+            float cross = (v1.X * v2.Y) - (v1.Y * v2.X);
+
+            return angle * cross / Math.Abs(cross);
+        }
+
+        private void DrawShadow(Wall wall, float layer)
+        {
+            Vector2[] corners = wall.GetPoints();
+
+            Vector2 p = GetPlayer().GetPosition();
+
+            Vector2 center = (corners[0] + corners[1] + corners[2] + corners[3]) / 4;
+            Vector2 ray = center - p;
+
+            Vector2 pos1 = corners[0];
+
+            for (int i = 1; i < 4; i++)
+            {
+                Vector2 ray1 = pos1 - p;
+                Vector2 ray2 = corners[i] - p;
+                if (SignedAngle(ray, ray2) < SignedAngle(ray, ray1)) pos1 = corners[i];
+            }
+
+            Vector2 pos2 = corners[0];
+
+            for (int i = 1; i < 4; i++)
+            {
+                Vector2 ray1 = pos2 - p;
+                Vector2 ray2 = corners[i] - p;
+                if (SignedAngle(ray, ray2) > SignedAngle(ray, ray1)) pos2 = corners[i];
+            }
+
+            Vector2 dir1 = pos1 - p;
+            Vector2 dir2 = pos2 - p;
+            float angle = SignedAngle(dir1, pos2 - p);
+
+            int width = (int) Math.Min(wall.GetRadius(), wall.GetThickness());
+            int length = Drawer.FullScreenRectangle.Width;
+
+            Rectangle rect = new Rectangle(0, 0, length, width);
+
+            Vector2 offset = new Vector2(-dir1.Y, dir1.X);
+            offset.Normalize();
+
+            float arc = angle * (length + Math.Max(dir1.Length(), dir2.Length()));
+
+            //rect.Location = new Point((int)(pos1.X - width * offset.X), (int)(pos1.Y - width * offset.Y));
+            //Drawer.Draw(TextureStatic.Get("Shadow"), rect, null, Color.Black, (float)Math.Atan2(dir1.Y, dir1.X), Vector2.UnitY * TextureStatic.Get("Shadow").Width, SpriteEffects.None, 1f);
+
+            for(float s = 0; s < arc; s += width)
+            {
+                float frac = s / arc; //fraction of total progress
+                float theta = frac * angle;
+
+                //float distMult = (dir2.Length() / dir1.Length()) - (1 - frac) * (dir2.Length() - dir1.Length()) / dir1.Length();
+
+                Vector2 trav = dir2 - dir1;
+                Vector2 norm = new Vector2(trav.Y, -trav.X);
+                norm.Normalize();
+                Vector2 loc = dir1 + trav * frac + norm * width * (1-frac) * (frac) + p;
+
+                rect.Location = new Point((int)(loc.X + width * offset.X * (1 - frac)), (int)(loc.Y + width * offset.Y * (1 - frac)));
+                Drawer.Draw(TextureStatic.Get("Shadow"), rect, null, Color.Black, (float)Math.Atan2(dir1.Y, dir1.X) + theta, Vector2.UnitY * TextureStatic.Get("Shadow").Width, SpriteEffects.None, layer);
+            }
+
+            rect.Location = new Point((int)pos2.X, (int)pos2.Y);
+            Drawer.Draw(TextureStatic.Get("Shadow"), rect, null, Color.Black, (float)Math.Atan2(dir1.Y, dir1.X) + angle, Vector2.UnitY * TextureStatic.Get("Shadow").Width, SpriteEffects.None, layer);
         }
 
         public void SpawnZombie()
@@ -181,7 +258,7 @@ namespace Human_vs_Zombies.HvZClasses
                 position += shift;
             }
             
-            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new ClusterAIBrains(this));
+            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new SimpleAIBrains(this));
             m_Entities.Add(m_Zombie.GetID(), m_Zombie);
         }
     }

@@ -13,6 +13,9 @@ namespace Human_vs_Zombies.HvZClasses.Items
         {
         }
         public override void Update(float dTime) { }
-        public override void Draw() { }
+        public override void Draw()
+        {
+            //floatlayer should be .4
+        }
     }
 }

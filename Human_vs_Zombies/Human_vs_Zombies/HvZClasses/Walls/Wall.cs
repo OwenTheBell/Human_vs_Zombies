@@ -93,7 +93,7 @@ namespace Human_vs_Zombies.HvZClasses.Walls
                 (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
                 new Vector2(0, TextureStatic.Get("Wall").Width),
                 SpriteEffects.None,
-                0.95f);
+                .95f);
         }
     }
 }

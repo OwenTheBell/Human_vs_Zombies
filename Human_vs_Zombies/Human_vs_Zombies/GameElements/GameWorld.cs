@@ -72,6 +72,7 @@ namespace Human_vs_Zombies.GameElements
             TextureStatic.Load("Human", @"Art\TempHuman");
             TextureStatic.Load("blank", @"Art\blank");
             TextureStatic.Load("Wall", @"Art\Wall");
+            TextureStatic.Load("Shadow", @"Art\Shadow");
 
             Drawer.Initiallize();
             
