@@ -22,7 +22,7 @@ namespace Human_vs_Zombies.HvZClasses.Items
                 this.GetPosition(),
                 null,
                 Color.White,
-                (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X)),
+                (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
                 new Vector2(0, TextureStatic.Get("Ammo").Width / 2),
                 1f,
                 SpriteEffects.None,

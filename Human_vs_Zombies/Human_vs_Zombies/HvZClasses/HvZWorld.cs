@@ -35,8 +35,6 @@ namespace Human_vs_Zombies.HvZClasses
 
             this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f));
 
-            this.AddEntity(new Item(this, new Vector2(900, 450), Vector2.UnitX, 32));
-
             this.m_ColMatrix = null;
             zombieTimer = 1.5f; // Spawn a zombie every 3 seconds
             zombieCountdown = zombieTimer;
@@ -134,7 +132,7 @@ namespace Human_vs_Zombies.HvZClasses
             zombieCountdown -= dTime;
             if (zombieCountdown <= 0)
             {
-                //this.SpawnZombie();
+                this.SpawnZombie();
                 zombieCountdown = zombieTimer;
             }
 
