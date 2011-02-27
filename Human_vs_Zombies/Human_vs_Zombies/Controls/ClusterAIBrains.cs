@@ -15,9 +15,6 @@ namespace Human_vs_Zombies.Controls
         // is in the circles of radius minSafeRadius and maxSafeRadius centered
         // on the player.
         // Please ensure at all times that minSafeRadius <= happyRadius <= maxSafeRadius
-        public const float MIN_SAFE_RADIUS = 200f; // When a zombie is closer to the player than this, the zombie will attack.
-        public const float HAPPY_RADIUS = 300f;   // Zombies will desire to be this distance from the player before the onslaught.
-        public const float MAX_SAFE_RADIUS = 400f; // When a zombie is further than this, the zombie will readjust its position.
 
         private static float s_WaitTimer = 10;
         private static float s_AttackTimer = 3;
@@ -27,7 +24,6 @@ namespace Human_vs_Zombies.Controls
 
         private Vector2 m_Shoot;
         private Vector2 m_Walk;
-        private Vector2 m_Destination;
         private bool m_Ready, m_Attacking;
 
         public ClusterAIBrains(HvZWorld hvzWorld)
@@ -88,16 +84,21 @@ namespace Human_vs_Zombies.Controls
                 this.m_Walk = toPlayer;
                 this.m_Attacking = true;
                 this.m_Ready = false;
+
+                this.m_Shoot = toPlayer;
             } else if (!this.m_Ready)
             {
                 this.m_Walk = toPlayer;
+
+                this.m_Shoot = -toPlayer;
                 // Control the velocity here?
             }
             else
             {
                 this.m_Walk = toPlayer * (playerDistance - happyRadius) / dTime / 250f;
+                this.m_Shoot = new Vector2(-toPlayer.Y, toPlayer.X);
             }
-            this.m_Shoot = toPlayer;
+
             //path.Normalize();
             //this.m_Walk = path;
             //this.m_Shoot = this.m_Walk;

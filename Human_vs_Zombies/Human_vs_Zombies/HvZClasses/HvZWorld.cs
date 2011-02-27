@@ -36,7 +36,7 @@ namespace Human_vs_Zombies.HvZClasses
             this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f));
 
             this.m_ColMatrix = null;
-            zombieTimer = 1.5f; // Spawn a zombie every 3 seconds
+            zombieTimer = 1f; // Spawn a zombie every 3 seconds
             zombieCountdown = zombieTimer;
         }
 
@@ -291,11 +291,11 @@ namespace Human_vs_Zombies.HvZClasses
                 Vector2 loc = dir1 + trav * frac + norm * width * (1 - frac) * (frac) + p;
 
                 rect.Location = new Point((int)(loc.X + width * offset.X * (1 - frac)), (int)(loc.Y + width * offset.Y * (1 - frac)));
-                Drawer.Draw(TextureStatic.Get("Shadow"), rect, null, Color.Black, (float)Math.Atan2(dir1.Y, dir1.X) + theta, Vector2.UnitY * TextureStatic.Get("Shadow").Width, SpriteEffects.None, layer);
+                Drawer.Draw(TextureStatic.Get("Shadow"), new Rectangle(rect.X * (int)Drawer.GetRatio(), rect.Y * (int)Drawer.GetRatio(), rect.Width * (int)Drawer.GetRatio(), rect.Height * (int)Drawer.GetRatio()), null, Color.Black, (float)Math.Atan2(dir1.Y, dir1.X) + theta, Vector2.UnitY * TextureStatic.Get("Shadow").Width, SpriteEffects.None, layer);
             }
 
             rect.Location = new Point((int)pos2.X, (int)pos2.Y);
-            Drawer.Draw(TextureStatic.Get("Shadow"), rect, null, Color.Black, (float)Math.Atan2(dir1.Y, dir1.X) + angle, Vector2.UnitY * TextureStatic.Get("Shadow").Width, SpriteEffects.None, layer);
+            Drawer.Draw(TextureStatic.Get("Shadow"), new Rectangle(rect.X * (int)Drawer.GetRatio(), rect.Y * (int)Drawer.GetRatio(), rect.Width * (int)Drawer.GetRatio(), rect.Height * (int)Drawer.GetRatio()), null, Color.Black, (float)Math.Atan2(dir1.Y, dir1.X) + angle, Vector2.UnitY * TextureStatic.Get("Shadow").Width, SpriteEffects.None, layer);
         }
 
         private float SignedAngle(Vector2 v1, Vector2 v2)

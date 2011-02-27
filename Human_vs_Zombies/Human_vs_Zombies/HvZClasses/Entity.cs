@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Human_vs_Zombies.HvZClasses.Walls;
+using Human_vs_Zombies.Rendering;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Human_vs_Zombies.HvZClasses
 {
@@ -140,5 +142,18 @@ namespace Human_vs_Zombies.HvZClasses
         /// Draws this Entity.
         /// </summary>
         public abstract void Draw();
+
+        protected void DrawCircular(Texture2D texture, float layer)
+        {
+            Drawer.Draw(
+                texture,
+                new Rectangle((int)(this.GetPosition().X * Drawer.GetRatio()), (int)(this.GetPosition().Y * Drawer.GetRatio()), (int)(this.GetRadius() * 2 * Drawer.GetRatio()), (int)(this.GetRadius() * 2 * Drawer.GetRatio())),
+                null,
+                Color.White,
+                (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
+                new Vector2(texture.Width / 2, texture.Height / 2),
+                SpriteEffects.None,
+                layer);
+        }
     }
 }

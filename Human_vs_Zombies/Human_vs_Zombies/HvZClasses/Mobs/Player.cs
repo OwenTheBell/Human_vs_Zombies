@@ -98,7 +98,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             //Only fire the gun if the player is aiming and if the weapon can be fired
             if ((m_Brains.GetShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0)
             {
-                this.GetHvZWorld().AddEntity(new Projectile(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), 5f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
+                this.GetHvZWorld().AddEntity(new Projectile(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), 12f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
                 m_TimerCurrent = m_WeaponTimer;
             }
 
@@ -109,16 +109,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Draw() 
         {
-            Drawer.Draw(
-                TextureStatic.Get("Human"),
-                this.GetPosition(),
-                null,
-                Color.White,
-                (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
-                new Vector2(30f),
-                1f,
-                SpriteEffects.None,
-                0.7f);
+            base.DrawCircular(TextureStatic.Get("Human"), 0.7f);
         }
     }
 }
