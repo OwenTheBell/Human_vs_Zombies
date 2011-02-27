@@ -75,6 +75,7 @@ namespace Human_vs_Zombies.GameElements
             TextureStatic.Load("blank", @"Art\blank");
             TextureStatic.Load("Wall", @"Art\Wall");
             TextureStatic.Load("Shadow", @"Art\Shadow");
+            TextureStatic.Load("Ammo", @"Art\Ammo");
 
             audio = new AudioManager(this);
 
@@ -84,7 +85,7 @@ namespace Human_vs_Zombies.GameElements
             Drawer.Initiallize();
             
             screens.Play(new HvZScreen());
-            audio.SongPlay("theme");
+            //audio.SongPlay("theme");
 
             // TODO: use this.Content to load your game content here
         }
