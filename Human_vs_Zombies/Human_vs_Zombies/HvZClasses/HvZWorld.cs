@@ -135,6 +135,8 @@ namespace Human_vs_Zombies.HvZClasses
                 zombieCountdown = zombieTimer;
             }
 
+            ClusterAIBrains.StaticUpdate(dTime);
+
             for (int i = 0; i < m_Entities.Values.Count; i++)
             {
                     m_Entities.Values.ElementAt(i).Update(dTime);
@@ -259,7 +261,7 @@ namespace Human_vs_Zombies.HvZClasses
                 position += shift;
             }
             
-            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new SimpleAIBrains(this));
+            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new Random().NextDouble() < 0 ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
             m_Entities.Add(m_Zombie.GetID(), m_Zombie);
         }
     }
