@@ -147,7 +147,7 @@ namespace Human_vs_Zombies.HvZClasses
         {
             Drawer.Draw(
                 texture,
-                new Rectangle((int)(this.GetPosition().X * Drawer.GetRatio()), (int)(this.GetPosition().Y * Drawer.GetRatio()), (int)(this.GetRadius() * 2 * Drawer.GetRatio()), (int)(this.GetRadius() * 2 * Drawer.GetRatio())),
+                new Rectangle((int)(this.GetPosition().X), (int)(this.GetPosition().Y), (int)(this.GetRadius() * 2), (int)(this.GetRadius() * 2)),
                 null,
                 Color.White,
                 (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),

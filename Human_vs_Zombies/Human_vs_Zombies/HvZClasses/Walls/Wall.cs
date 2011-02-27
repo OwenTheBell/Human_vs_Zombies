@@ -88,7 +88,7 @@ namespace Human_vs_Zombies.HvZClasses.Walls
             Texture2D texture = TextureStatic.Get("Wall");
             Drawer.Draw(
                 texture,
-                new Rectangle((int)(this.GetPosition().X * Drawer.GetRatio()), (int)(this.GetPosition().Y * Drawer.GetRatio()), (int)(this.GetRadius() * Drawer.GetRatio()), (int)(this.GetThickness() * Drawer.GetRatio())),
+                new Rectangle((int)(this.GetPosition().X), (int)(this.GetPosition().Y), (int)(this.GetRadius()), (int)(this.GetThickness())),
                 null,
                 Color.White,
                 (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),

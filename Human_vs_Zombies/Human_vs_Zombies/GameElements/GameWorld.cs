@@ -33,8 +33,8 @@ namespace Human_vs_Zombies.GameElements
         public GameWorld()
         {
             GraphicsDeviceManager manager = new GraphicsDeviceManager(this);
-            manager.PreferredBackBufferHeight = 1080;
-            manager.PreferredBackBufferWidth = 1920;
+            manager.PreferredBackBufferWidth = 960;
+            manager.PreferredBackBufferHeight = 540;
 
             Content.RootDirectory = "Content";
             screens = new ScreenStack();
@@ -64,13 +64,12 @@ namespace Human_vs_Zombies.GameElements
             graphics = GraphicsDevice;
 
             //graphics.PresentationParameters.BackBufferWidth
-              //  = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * 2;
+            //    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * 2;
             //graphics.PresentationParameters.BackBufferHeight
-              //  = (int)(0.5625f * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * 2);
+            //    = (int)(0.5625f * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * 2);
+                        
 
-            
-
-            GameWorld.screenDimensions = new Vector2(graphics.PresentationParameters.BackBufferWidth, graphics.PresentationParameters.BackBufferHeight);
+            GameWorld.screenDimensions = new Vector2(1920, 1080);
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
