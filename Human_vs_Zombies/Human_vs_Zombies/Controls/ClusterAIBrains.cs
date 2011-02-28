@@ -6,6 +6,7 @@ using Human_vs_Zombies.HvZClasses.Mobs;
 using Human_vs_Zombies.HvZClasses;
 using Human_vs_Zombies.Controls;
 using Microsoft.Xna.Framework;
+using Human_vs_Zombies.GameElements;
 
 namespace Human_vs_Zombies.Controls
 {
@@ -17,7 +18,7 @@ namespace Human_vs_Zombies.Controls
         // Please ensure at all times that minSafeRadius <= happyRadius <= maxSafeRadius
 
         private static float s_WaitTimer = 10;
-        private static float s_AttackTimer = 3;
+        private static float s_AttackTimer = 10;
         private static bool s_Attack = false;
 
         private HvZWorld m_HvZWorld;
@@ -95,7 +96,7 @@ namespace Human_vs_Zombies.Controls
             }
             else
             {
-                this.m_Walk = toPlayer * (playerDistance - happyRadius) / dTime / 250f;
+                this.m_Walk = toPlayer * (playerDistance - happyRadius) / dTime / 1000f;
                 this.m_Shoot = new Vector2(-toPlayer.Y, toPlayer.X);
             }
 
@@ -118,12 +119,15 @@ namespace Human_vs_Zombies.Controls
             if (s_WaitTimer <= 0)
             {
                 Attack();
+
+                GameWorld.audio.SongPlay("yakety");
                 s_WaitTimer = 10;
             }
             else if (s_AttackTimer <= 0)
             {
                 s_Attack = false;
-                s_AttackTimer = 1;
+                GameWorld.audio.SongPlay("theme");
+                s_AttackTimer = 10;
             }
         }
 
