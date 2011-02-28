@@ -45,14 +45,13 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Draw()
         {
-            float ratio = Drawer.GetRatio();
             Drawer.Draw(
                 TextureStatic.Get("Dart"),
                 this.GetPosition(),
                 null,
                 Color.White,
                 (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
-                new Vector2(9f) * ratio,
+                new Vector2(9f),
                 1f,
                 SpriteEffects.None,
                 0.6f);

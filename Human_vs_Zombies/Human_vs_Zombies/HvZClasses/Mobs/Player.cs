@@ -7,7 +7,6 @@ using Human_vs_Zombies.Controls;
 using Human_vs_Zombies.Rendering;
 using Microsoft.Xna.Framework.Graphics;
 using Human_vs_Zombies.HvZClasses.Walls;
-using Human_vs_Zombies.GameElements;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
@@ -30,7 +29,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.SetWeaponTimer(weaponTimer);
             m_TimerCurrent = 0;
             this.SetWeaponSpeed(weaponSpeed);
-            GameWorld.audio.LoadSound("shoot", @"Sounds/gunshot");
         }
 
         public Brains GetBrains()
@@ -102,7 +100,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             {
                 this.GetHvZWorld().AddEntity(new Projectile(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), 5f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
                 m_TimerCurrent = m_WeaponTimer;
-                GameWorld.audio.PlaySound("shoot");
             }
 
             this.m_TimerCurrent -= dTime;
@@ -112,7 +109,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Draw() 
         {
-            float ratio = Drawer.GetRatio();
             Drawer.Draw(
                 TextureStatic.Get("Human"),
                 this.GetPosition(),

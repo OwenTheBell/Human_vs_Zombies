@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Human_vs_Zombies.GameElements;
 using Human_vs_Zombies.Controls;
 using Human_vs_Zombies.HvZClasses.Walls;
-using Human_vs_Zombies.Audio;
 
 namespace Human_vs_Zombies.HvZClasses
 {
@@ -20,7 +19,7 @@ namespace Human_vs_Zombies.HvZClasses
         private SortedDictionary<ulong, Entity> m_Entities; // <ID of entity, The Entity>
         private SortedDictionary<ulong, List<Entity>> m_ColMatrix;
         private bool m_ColUpdated;
-        private float zombieTimer, zombieCountdown, wallMin; // How often zombies will spawn.
+        private float zombieTimer, zombieCountdown; // How often zombies will spawn.
 
         public HvZWorld()
         {
@@ -28,15 +27,12 @@ namespace Human_vs_Zombies.HvZClasses
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
 
-
             //DEBUG WALLS
             this.AddEntity(new Wall(this, new Vector2(300, 600), new Vector2(0f, 1f), 256f, 128f));
 
             this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f));
 
             this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f));
-
-            wallMin = 300f;
 
             this.m_ColMatrix = null;
             zombieTimer = 1.5f; // Spawn a zombie every 3 seconds
@@ -137,7 +133,6 @@ namespace Human_vs_Zombies.HvZClasses
             {
                 this.SpawnZombie();
                 zombieCountdown = zombieTimer;
-                GameWorld.audio.PlaySound("growl");
             }
 
             for (int i = 0; i < m_Entities.Values.Count; i++)
@@ -267,11 +262,5 @@ namespace Human_vs_Zombies.HvZClasses
             Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new SimpleAIBrains(this));
             m_Entities.Add(m_Zombie.GetID(), m_Zombie);
         }
-
-       /* private Boolean IsInShadow(Vector2 position)
-        {
-            Vector2 path = new Vector2(position.X - m_Player.GetPosition().X, position.Y - m_Player.GetPosition().Y);
-
-        }*/
     }
 }
