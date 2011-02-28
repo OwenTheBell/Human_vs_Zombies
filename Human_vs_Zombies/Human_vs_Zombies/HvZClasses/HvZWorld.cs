@@ -197,9 +197,10 @@ namespace Human_vs_Zombies.HvZClasses
                 shift *= spawnDistance;
                 position += shift;
             }
-            
-            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 300f, new Random().NextDouble() < 0f ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
-            m_Entities.Add(m_Zombie.GetID(), m_Zombie);
+            if (InShadow(position, playerPosition)) {
+                Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 300f, new Random().NextDouble() < 0f ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
+                m_Entities.Add(m_Zombie.GetID(), m_Zombie);
+            }
         }
 
         public bool InShadow(Vector2 point, Vector2 pov)
@@ -209,34 +210,37 @@ namespace Human_vs_Zombies.HvZClasses
                 if (e is Wall)
                 {
                     Wall wall = (Wall)e; //wwwaaaaaaallllllleeeee
-                    Vector2[] corners = wall.GetPoints();
-                
-                    Vector2 center = (corners[0] + corners[1] + corners[2] + corners[3]) / 4;
-                    Vector2 ray = center - pov;
-
-                    Vector2 pos1 = corners[0];
-
-                    for (int i = 1; i < 4; i++)
+                    if (wall.CastShadow())
                     {
-                        Vector2 ray1 = pos1 - pov;
-                        Vector2 ray2 = corners[i] - pov;
-                        if (SignedAngle(ray, ray2) < SignedAngle(ray, ray1)) pos1 = corners[i];
-                    }
+                        Vector2[] corners = wall.GetPoints();
 
-                    Vector2 pos2 = corners[0];
+                        Vector2 center = (corners[0] + corners[1] + corners[2] + corners[3]) / 4;
+                        Vector2 ray = center - pov;
 
-                    for (int i = 1; i < 4; i++)
-                    {
-                        Vector2 ray1 = pos2 - pov;
-                        Vector2 ray2 = corners[i] - pov;
-                        if (SignedAngle(ray, ray2) > SignedAngle(ray, ray1)) pos2 = corners[i];
-                    }
+                        Vector2 pos1 = corners[0];
 
-                    Vector2 raytrace = point - pov;
+                        for (int i = 1; i < 4; i++)
+                        {
+                            Vector2 ray1 = pos1 - pov;
+                            Vector2 ray2 = corners[i] - pov;
+                            if (SignedAngle(ray, ray2) < SignedAngle(ray, ray1)) pos1 = corners[i];
+                        }
 
-                    if (ray.Length() <= raytrace.Length() && SignedAngle(ray, raytrace) < SignedAngle(ray, pos2 - pov) && SignedAngle(ray, raytrace) > SignedAngle(ray, pos1 - pov))
-                    {
-                        return true;
+                        Vector2 pos2 = corners[0];
+
+                        for (int i = 1; i < 4; i++)
+                        {
+                            Vector2 ray1 = pos2 - pov;
+                            Vector2 ray2 = corners[i] - pov;
+                            if (SignedAngle(ray, ray2) > SignedAngle(ray, ray1)) pos2 = corners[i];
+                        }
+
+                        Vector2 raytrace = point - pov;
+
+                        if (ray.Length() <= raytrace.Length() && SignedAngle(ray, raytrace) < SignedAngle(ray, pos2 - pov) && SignedAngle(ray, raytrace) > SignedAngle(ray, pos1 - pov))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
