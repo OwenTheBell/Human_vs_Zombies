@@ -33,8 +33,8 @@ namespace Human_vs_Zombies.GameElements
         public GameWorld()
         {
             GraphicsDeviceManager manager = new GraphicsDeviceManager(this);
-            manager.PreferredBackBufferWidth = 960;
-            manager.PreferredBackBufferHeight = 540;
+            manager.PreferredBackBufferWidth = 1920;
+            manager.PreferredBackBufferHeight = 1080;
 
             Content.RootDirectory = "Content";
             screens = new ScreenStack();
@@ -86,12 +86,13 @@ namespace Human_vs_Zombies.GameElements
             audio = new AudioManager(this);
 
             audio.LoadSong("theme", "Sounds/zombie");
-            audio.LoadSong("menu", "Sounds/zombie2");
+            audio.LoadSong("menu", "Sounds/zombie 2");
+            audio.LoadSong("yakety", "Sounds/yaketysax");
             
             Drawer.Initiallize();
             
             screens.Play(new HvZScreen());
-            //audio.SongPlay("theme");
+            audio.SongPlay("theme");
 
             // TODO: use this.Content to load your game content here
         }

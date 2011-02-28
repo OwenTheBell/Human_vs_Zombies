@@ -6,6 +6,7 @@ using Human_vs_Zombies.HvZClasses.Mobs;
 using Human_vs_Zombies.HvZClasses;
 using Human_vs_Zombies.Controls;
 using Microsoft.Xna.Framework;
+using Human_vs_Zombies.GameElements;
 
 namespace Human_vs_Zombies.Controls
 {
@@ -118,11 +119,14 @@ namespace Human_vs_Zombies.Controls
             if (s_WaitTimer <= 0)
             {
                 Attack();
+
+                GameWorld.audio.SongPlay("yakety");
                 s_WaitTimer = 10;
             }
             else if (s_AttackTimer <= 0)
             {
                 s_Attack = false;
+                GameWorld.audio.SongPlay("theme");
                 s_AttackTimer = 1;
             }
         }
