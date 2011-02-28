@@ -127,7 +127,7 @@ namespace Human_vs_Zombies.Controls
             {
                 s_Attack = false;
                 GameWorld.audio.SongPlay("theme");
-                s_AttackTimer = 1;
+                s_AttackTimer = 10;
             }
         }
 

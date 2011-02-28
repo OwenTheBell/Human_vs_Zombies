@@ -33,8 +33,8 @@ namespace Human_vs_Zombies.GameElements
         public GameWorld()
         {
             GraphicsDeviceManager manager = new GraphicsDeviceManager(this);
-            manager.PreferredBackBufferWidth = 1920;
-            manager.PreferredBackBufferHeight = 1080;
+            manager.PreferredBackBufferWidth = 960;
+            manager.PreferredBackBufferHeight = 540;
 
             Content.RootDirectory = "Content";
             screens = new ScreenStack();
