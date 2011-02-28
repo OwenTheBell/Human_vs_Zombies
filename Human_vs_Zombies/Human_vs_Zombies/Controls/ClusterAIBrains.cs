@@ -18,7 +18,7 @@ namespace Human_vs_Zombies.Controls
         // Please ensure at all times that minSafeRadius <= happyRadius <= maxSafeRadius
 
         private static float s_WaitTimer = 10;
-        private static float s_AttackTimer = 3;
+        private static float s_AttackTimer = 10;
         private static bool s_Attack = false;
 
         private HvZWorld m_HvZWorld;
@@ -96,7 +96,7 @@ namespace Human_vs_Zombies.Controls
             }
             else
             {
-                this.m_Walk = toPlayer * (playerDistance - happyRadius) / dTime / 250f;
+                this.m_Walk = toPlayer * (playerDistance - happyRadius) / dTime / 1000f;
                 this.m_Shoot = new Vector2(-toPlayer.Y, toPlayer.X);
             }
 
