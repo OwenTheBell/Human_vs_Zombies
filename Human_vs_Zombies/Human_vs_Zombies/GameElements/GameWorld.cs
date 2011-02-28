@@ -33,6 +33,9 @@ namespace Human_vs_Zombies.GameElements
         public GameWorld()
         {
             GraphicsDeviceManager manager = new GraphicsDeviceManager(this);
+            manager.PreferredBackBufferWidth = 960;
+            manager.PreferredBackBufferHeight = 540;
+
             Content.RootDirectory = "Content";
             screens = new ScreenStack();
             controller = new Controller(PlayerIndex.One);
@@ -60,11 +63,14 @@ namespace Human_vs_Zombies.GameElements
             content = Content;
             graphics = GraphicsDevice;
 
-            graphics.PresentationParameters.BackBufferWidth
-                = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            graphics.PresentationParameters.BackBufferHeight
-                = (int)(0.5625f * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width);
-            GameWorld.screenDimensions = new Vector2(graphics.PresentationParameters.BackBufferWidth, graphics.PresentationParameters.BackBufferHeight);
+            //graphics.PresentationParameters.BackBufferWidth
+            //    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * 2;
+            //graphics.PresentationParameters.BackBufferHeight
+            //    = (int)(0.5625f * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * 2);
+                        
+
+            GameWorld.screenDimensions = new Vector2(1920, 1080);
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -75,6 +81,7 @@ namespace Human_vs_Zombies.GameElements
             TextureStatic.Load("blank", @"Art\blank");
             TextureStatic.Load("Wall", @"Art\Wall");
             TextureStatic.Load("Shadow", @"Art\Shadow");
+            TextureStatic.Load("Ammo", @"Art\Ammo");
 
             audio = new AudioManager(this);
 
@@ -84,7 +91,7 @@ namespace Human_vs_Zombies.GameElements
             Drawer.Initiallize();
             
             screens.Play(new HvZScreen());
-            audio.SongPlay("theme");
+            //audio.SongPlay("theme");
 
             // TODO: use this.Content to load your game content here
         }

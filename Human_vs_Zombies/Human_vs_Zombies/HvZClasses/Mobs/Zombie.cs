@@ -91,16 +91,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Draw() 
         {
-            Drawer.Draw(
-                   TextureStatic.Get("Zombie"),
-                   this.GetPosition(),
-                   null,
-                   Color.White,
-                   this.GetRotation().LengthSquared() > 0 ? (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X) : 0,
-                   new Vector2(30f),
-                   1f,
-                   SpriteEffects.None,
-                   0.5f);
+            base.DrawCircular(TextureStatic.Get("Zombie"), 0.5f);
         }
     }
 }

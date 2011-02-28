@@ -85,13 +85,14 @@ namespace Human_vs_Zombies.HvZClasses.Walls
         public override void Update(float dTime) { }
         public override void Draw()
         {
+            Texture2D texture = TextureStatic.Get("Wall");
             Drawer.Draw(
-                TextureStatic.Get("Wall"),
-                new Rectangle((int)this.GetPosition().X, (int)this.GetPosition().Y, (int)this.GetRadius(), (int)this.GetThickness()),
+                texture,
+                new Rectangle((int)(this.GetPosition().X), (int)(this.GetPosition().Y), (int)(this.GetRadius()), (int)(this.GetThickness())),
                 null,
                 Color.White,
                 (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
-                new Vector2(0, TextureStatic.Get("Wall").Width),
+                new Vector2(0, texture.Height),
                 SpriteEffects.None,
                 .95f);
         }

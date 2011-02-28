@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Human_vs_Zombies.Rendering;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Human_vs_Zombies.HvZClasses.Items
 {
@@ -15,7 +17,7 @@ namespace Human_vs_Zombies.HvZClasses.Items
         public override void Update(float dTime) { }
         public override void Draw()
         {
-            //floatlayer should be .4
+            base.DrawCircular(TextureStatic.Get("Ammo"), 1f);
         }
     }
 }
