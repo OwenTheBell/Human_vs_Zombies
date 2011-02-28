@@ -50,7 +50,7 @@ namespace Human_vs_Zombies.Controls
 
             if (playerDistance < happyRadius)  // If the zombie is potentially too close to the human.
             {
-                if (playerDistance < minSafeRadius)
+                if (playerDistance < minSafeRadius || player.GetDead())
                 {
                     // If the zombie is too close to the human, the zombie should attack!
                     this.m_Attacking = true;
@@ -109,24 +109,23 @@ namespace Human_vs_Zombies.Controls
         {
             if (s_Attack)
             {
+                GameWorld.audio.SongPlay("yakety");
                 s_AttackTimer -= dTime;
             }
             else
             {
+                GameWorld.audio.SongPlay("theme");
                 s_WaitTimer -= dTime;
             }
 
             if (s_WaitTimer <= 0)
             {
                 Attack();
-
-                GameWorld.audio.SongPlay("yakety");
                 s_WaitTimer = 10;
             }
             else if (s_AttackTimer <= 0)
             {
                 s_Attack = false;
-                GameWorld.audio.SongPlay("theme");
                 s_AttackTimer = 10;
             }
         }
