@@ -91,6 +91,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Draw() 
         {
+
+            float ratio = Drawer.GetRatio();
             Drawer.Draw(
                    TextureStatic.Get("Zombie"),
                    this.GetPosition(),

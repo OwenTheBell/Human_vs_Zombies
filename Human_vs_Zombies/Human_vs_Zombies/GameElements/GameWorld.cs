@@ -80,11 +80,12 @@ namespace Human_vs_Zombies.GameElements
 
             audio.LoadSong("theme", "Sounds/zombie");
             audio.LoadSong("menu", "Sounds/zombie2");
+            audio.LoadSound("growl", @"Sounds/growl");
             
             Drawer.Initiallize();
             
             screens.Play(new HvZScreen());
-            audio.SongPlay("theme");
+            //audio.SongPlay("theme");
 
             // TODO: use this.Content to load your game content here
         }
