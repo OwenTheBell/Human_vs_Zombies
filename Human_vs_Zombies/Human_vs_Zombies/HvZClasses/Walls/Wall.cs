@@ -12,10 +12,13 @@ namespace Human_vs_Zombies.HvZClasses.Walls
     {
         private float m_Thickness;
 
-        public Wall(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, float thickness)
+        private bool m_edgeWall;
+
+        public Wall(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, float thickness, bool edgeWall)
             : base(hvzWorld, position, rotation, radius)
         {
             this.SetThickness(thickness);
+            this.SetShadow(edgeWall);
         }
 
         public float GetThickness()
@@ -26,6 +29,16 @@ namespace Human_vs_Zombies.HvZClasses.Walls
         public void SetThickness(float thickness)
         {
             m_Thickness = thickness;
+        }
+
+        public bool CastShadow()
+        {
+            return !this.m_edgeWall;
+        }
+
+        public void SetShadow(bool edgeWall)
+        {
+            this.m_edgeWall = edgeWall;
         }
 
         public Vector2[] GetPoints()

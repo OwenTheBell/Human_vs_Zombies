@@ -29,11 +29,16 @@ namespace Human_vs_Zombies.HvZClasses
             this.AddEntity(this.m_Player);
 
             //DEBUG WALLS
-            this.AddEntity(new Wall(this, new Vector2(300, 600), new Vector2(0f, 1f), 256f, 128f));
+            this.AddEntity(new Wall(this, new Vector2(300, 600), new Vector2(0f, 1f), 256f, 128f, false));
 
-            this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f));
+            this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f, false));
 
-            this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f));
+            this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f, false));
+
+            this.AddEntity(new Wall(this, new Vector2(0, 0), new Vector2(1f, 0f), Settings.screenWidth*2, 40f, true));
+            this.AddEntity(new Wall(this, new Vector2(-40f, 0), new Vector2(0f, 1f), Settings.screenHeight*2, 40f, true));
+            this.AddEntity(new Wall(this, new Vector2(0, Settings.screenHeight*2 + 40f), new Vector2(1f, 0f), Settings.screenWidth * 2, 40f, true));
+            this.AddEntity(new Wall(this, new Vector2(Settings.screenWidth*2, 0), new Vector2(0f, 1f), Settings.screenHeight * 2, 40f, true));
 
             this.m_ColMatrix = null;
             zombieTimer = 1f; // Spawn a zombie every 3 seconds
@@ -169,7 +174,11 @@ namespace Human_vs_Zombies.HvZClasses
                 e.Draw();
                 if (e is Wall)
                 {
-                    DrawShadow((Wall)e, .9f); //eeeeeeevaaa!
+                    Wall wall = (Wall)e;
+                    if (wall.CastShadow())
+                    {
+                        DrawShadow(wall, .9f); //eeeeeeevaaa!
+                    }
                 }
             }
         }
