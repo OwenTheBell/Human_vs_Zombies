@@ -189,7 +189,7 @@ namespace Human_vs_Zombies.HvZClasses
                 position += shift;
             }
             
-            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new Random().NextDouble() < 0 ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
+            Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 250f, new Random().NextDouble() < 0.5f ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
             m_Entities.Add(m_Zombie.GetID(), m_Zombie);
         }
 
