@@ -20,7 +20,20 @@ namespace Human_vs_Zombies.HvZClasses
         private SortedDictionary<ulong, Entity> m_Entities; // <ID of entity, The Entity>
         private SortedDictionary<ulong, List<Entity>> m_ColMatrix;
         private bool m_ColUpdated;
-        private float zombieTimer, zombieCountdown; // How often zombies will spawn.
+        private float zombieCountdown; // How often zombies will spawn
+        private float wallCountdown; // How often a new wall spawns
+        private List<GridPoint> m_WallGrid; //List of all the 
+
+        private class GridPoint
+        {
+            public int X, Y;
+
+            public GridPoint(int X, int Y)
+            {
+                this.X = X;
+                this.Y = Y;
+            }
+        }
 
         public HvZWorld()
         {
@@ -28,27 +41,52 @@ namespace Human_vs_Zombies.HvZClasses
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
 
+            this.m_WallGrid = new List<GridPoint>();
+
+            this.CreateGrid();
+
             //DEBUG WALLS
+            /*
             this.AddEntity(new Wall(this, new Vector2(300, 600), new Vector2(0f, 1f), 256f, 128f, true));
 
             this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f, true));
 
             this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f, true));
+             */
+
+            this.SpawnWall();
 
             //define the boundaries of the play area using walls drawn offscreen that do not cast shadows
-            this.AddEntity(new Wall(this, new Vector2(0, 0), new Vector2(1f, 0f), Settings.screenWidth*2, 40f, false));
-            this.AddEntity(new Wall(this, new Vector2(-40f, 0), new Vector2(0f, 1f), Settings.screenHeight*2, 40f, false));
-            this.AddEntity(new Wall(this, new Vector2(0, Settings.screenHeight*2 + 40f), new Vector2(1f, 0f), Settings.screenWidth * 2, 40f, false));
-            this.AddEntity(new Wall(this, new Vector2(Settings.screenWidth*2, 0), new Vector2(0f, 1f), Settings.screenHeight * 2, 40f, false));
+            this.AddEntity(new Wall(this, new Vector2(0, 0), new Vector2(1f, 0f), Settings.screenWidth * 2, 40f, false));
+            this.AddEntity(new Wall(this, new Vector2(-40f, 0), new Vector2(0f, 1f), Settings.screenHeight * 2, 40f, false));
+            this.AddEntity(new Wall(this, new Vector2(0, Settings.screenHeight * 2 + 40f), new Vector2(1f, 0f), Settings.screenWidth * 2, 40f, false));
+            this.AddEntity(new Wall(this, new Vector2(Settings.screenWidth * 2, 0), new Vector2(0f, 1f), Settings.screenHeight * 2, 40f, false));
 
             this.m_ColMatrix = null;
-            zombieTimer = 1f; // Spawn a zombie every 3 seconds
-            zombieCountdown = zombieTimer;
+            this.zombieCountdown = Settings.zombieTimer;
+            this.wallCountdown = Settings.wallTimer;
         }
 
         public Player GetPlayer()
         {
             return m_Player;
+        }
+
+        private void CreateGrid()
+        {
+            int gridX = 0;
+            int gridY = 0;
+
+            while (gridX < (Settings.screenWidth * 2) - Settings.wallRadius)
+            {
+                while (gridY < (Settings.screenHeight * 2) - Settings.wallRadius)
+                {
+                    this.m_WallGrid.Add(new GridPoint(gridX, gridY));
+                    gridY += (int) Settings.wallRadius;
+                }
+                gridX += (int)Settings.wallRadius;
+                gridY = 0;
+            }
         }
 
         private void CheckCols()
@@ -138,11 +176,18 @@ namespace Human_vs_Zombies.HvZClasses
             zombieCountdown -= dTime;
             if (zombieCountdown <= 0)
             {
-                this.SpawnZombie();
-                zombieCountdown = zombieTimer;
+                //this.SpawnZombie();
+                zombieCountdown = Settings.zombieTimer;
             }
 
             ClusterAIBrains.StaticUpdate(dTime);
+
+            wallCountdown -= dTime;
+            if (wallCountdown <= 0)
+            {
+                this.SpawnWall();
+                wallCountdown = Settings.wallTimer;
+            }
 
             for (int i = 0; i < m_Entities.Values.Count; i++)
             {
@@ -246,6 +291,31 @@ namespace Human_vs_Zombies.HvZClasses
                 }
             }
             return false;
+        }
+
+        private void SpawnWall()
+        {
+            Random random = new Random();
+
+            int selectedPoint = random.Next(0, this.m_WallGrid.Count - 1);
+
+            GridPoint selected = this.m_WallGrid.ElementAt(selectedPoint);
+
+            //create floats in the range -1 to 1
+            float x = (float) (random.NextDouble() * 2 - 1);
+            float y = (float) (random.NextDouble() * 2 - 1);
+
+            this.AddEntity(new Wall(
+                    this,
+                    new Vector2(selected.X, selected.Y),
+                    new Vector2(x, y),
+                    Settings.wallRadius,
+                    Settings.wallThickness,
+                    true
+                    )
+                );
+
+            this.m_WallGrid.Remove(selected);
         }
 
         private void DrawShadow(Wall wall, float layer)
