@@ -237,7 +237,7 @@ namespace Human_vs_Zombies.HvZClasses
             Random gen = new Random();
             Vector2 playerPosition = m_Player.GetPosition();
             int spawnDistance = 300;
-            Vector2 position= new Vector2(gen.Next((int)Settings.screenWidth - 30), gen.Next((int)Settings.screenHeight - 30));
+            Vector2 position= new Vector2(gen.Next((int)Settings.worldWidth - 30), gen.Next((int)Settings.worldHeight - 30));
             //ensure that the zombie does not spawn to close to the player
             if ((position - playerPosition).LengthSquared() < spawnDistance * spawnDistance)
             {
