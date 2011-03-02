@@ -62,6 +62,8 @@ namespace Human_vs_Zombies.GameElements
             {
                 if (this[i].Disposed)
                 {
+                    if (this[i] is PauseScreen)
+                        this.Unpause();
                     Remove(this[i]);
                     return;
                 }
@@ -111,6 +113,11 @@ namespace Human_vs_Zombies.GameElements
         {
             this.Add(new PauseScreen());
             this.IsPaused = true;
+        }
+
+        public void Unpause()
+        {
+            this.IsPaused = false;
         }
 
         /// <summary>
