@@ -47,14 +47,14 @@ namespace Human_vs_Zombies.HvZClasses
 
             //DEBUG WALLS
             
-            this.AddEntity(new Wall(this, new Vector2(300, 300), new Vector2(0f, 1f), 256f, 128f, true));
+            //this.AddEntity(new Wall(this, new Vector2(300, 300), new Vector2(0f, 1f), 256f, 128f, true));
 
             //this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f, true));
 
             //this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f, true));
             
 
-            //this.SpawnWall();
+            this.SpawnWall();
 
             //define the boundaries of the play area using walls drawn offscreen that do not cast shadows
             this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth / 2, -0), Vector2.UnitX, Settings.worldWidth, 32f, false));
@@ -176,7 +176,7 @@ namespace Human_vs_Zombies.HvZClasses
             zombieCountdown -= dTime;
             if (zombieCountdown <= 0)
             {
-                //this.SpawnZombie();
+                this.SpawnZombie();
                 zombieCountdown = Settings.zombieTimer;
             }
 
@@ -185,7 +185,7 @@ namespace Human_vs_Zombies.HvZClasses
             wallCountdown -= dTime;
             if (wallCountdown <= 0)
             {
-                //this.SpawnWall();
+                this.SpawnWall();
                 wallCountdown = Settings.wallTimer;
             }
 
