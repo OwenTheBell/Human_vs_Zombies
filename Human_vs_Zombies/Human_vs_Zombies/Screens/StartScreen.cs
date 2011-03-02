@@ -15,7 +15,7 @@ namespace Human_vs_Zombies.Screens
     /// <summary>
     /// This instanciates a new Pause Screen.
     /// </summary>
-    public class PauseScreen : GameScreen
+    public class StartScreen : GameScreen
     {
         /// <summary>
         /// This is the time (DateTime, not GameClock) 
@@ -26,7 +26,7 @@ namespace Human_vs_Zombies.Screens
         /// <summary>
         /// This is the menu used for the pause screen.
         /// </summary>
-        private PauseMenu menu;
+        private StartMenu menu;
 
         /// <summary>
         /// Where to write "Paused"
@@ -41,21 +41,21 @@ namespace Human_vs_Zombies.Screens
         /// <summary>
         /// Initializes a new instance of the <see cref="PauseScreen"/> class.
         /// </summary>
-        public PauseScreen()
+        public StartScreen()
             : base()
         {
             // Note: Do not use GameClock, it will be paused!
             this.initialTime = DateTime.Now.Ticks;
-            this.menu = new PauseMenu(
-                new Vector2(1440, 300),
+            this.menu = new StartMenu(
+                new Vector2(1440, 400),
                 new MenuAction[]
                 { 
-                    new MenuAction(ActionType.GoBack, new QuitTopDelegate()),
+                    new MenuAction(ActionType.GoBack, new StartGameDelegate()),
                 },
                 75);
 
-            this.textDrawPosition = new Vector2(1440, 125);
-            this.textDrawOrigin = Drawer.font.MeasureString("Paused") / 2f;
+            this.textDrawPosition = new Vector2(700, 125);
+            this.textDrawOrigin = Drawer.font.MeasureString("Pong!") / 2f;
         }
 
         /// <summary>
@@ -76,12 +76,12 @@ namespace Human_vs_Zombies.Screens
         {
             // Write "Paused" at the center of the screen.
             Drawer.DrawString(
-                "Paused",
+                "HUMAN VS ZOMBIES",
                 this.textDrawPosition,
-                Color.Black,
+                Color.Purple,
                 0f,
                 this.textDrawOrigin,
-                0.35f,
+                0.45f,
                 SpriteEffects.None,
                 1f);
 

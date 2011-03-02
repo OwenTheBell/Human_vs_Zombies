@@ -27,6 +27,7 @@ namespace Human_vs_Zombies.GameElements
         public static ScreenStack screens;
         public static ContentManager content;
         public static AudioManager audio;
+        private static Boolean exitStatus;
 
         public static Controller controller { get; private set; }
 
@@ -35,6 +36,7 @@ namespace Human_vs_Zombies.GameElements
             GraphicsDeviceManager manager = new GraphicsDeviceManager(this);
             manager.PreferredBackBufferWidth = Settings.screenWidth;
             manager.PreferredBackBufferHeight = Settings.screenHeight;
+            exitStatus = false;
 
             Content.RootDirectory = "Content";
             screens = new ScreenStack();
@@ -91,8 +93,8 @@ namespace Human_vs_Zombies.GameElements
             
             Drawer.Initiallize();
             
-            screens.Play(new HvZScreen());
-            audio.SongPlay("theme");
+            screens.Play(new StartScreen());
+            audio.SongPlay("menu");
 
             // TODO: use this.Content to load your game content here
         }
@@ -114,7 +116,7 @@ namespace Human_vs_Zombies.GameElements
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || exitStatus)
                 this.Exit();
 
             // TODO: Add your update logic here
@@ -140,6 +142,12 @@ namespace Human_vs_Zombies.GameElements
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+
+        public static void ExitGame()
+        {
+            exitStatus = true;
         }
     }
 }

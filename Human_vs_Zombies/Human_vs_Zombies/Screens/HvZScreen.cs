@@ -17,6 +17,7 @@ namespace Human_vs_Zombies.Screens
 
         public HvZScreen()
         {
+            GameWorld.audio.SongPlay("theme");
             this.zombieWorld = new HvZWorld();
             m_LastUpdate = System.Environment.TickCount;
         }

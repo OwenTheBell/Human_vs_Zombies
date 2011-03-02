@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Human_vs_Zombies.Screens;
+using Human_vs_Zombies.Controls;
 
 namespace Human_vs_Zombies.GameElements
 {
@@ -86,16 +88,29 @@ namespace Human_vs_Zombies.GameElements
             this.Kill();
             this.Add();
 
+            if (!this.IsPaused && GameWorld.controller.ContainsBool(ActionType.Pause))
+            {
+                this.Pause();
+            }
+
             // Update the screens from top to bottom, stopping when a
             // screen is found that is not "fading out".
             for (int i = Count - 1; i >= 0; i--)
             {
                 this[i].Update();
-                if (!this[i].FadingOut)
+                if (this.IsPaused)
+                    break;
+                else if (!this[i].FadingOut)
                 {
                     break;
                 }
             }
+        }
+
+        public void Pause()
+        {
+            this.Add(new PauseScreen());
+            this.IsPaused = true;
         }
 
         /// <summary>
