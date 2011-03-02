@@ -13,7 +13,7 @@ namespace Human_vs_Zombies.HvZClasses.Walls
         private float m_Thickness;
 
         //tracks whether or not this wall casts a shadow
-        private bool m_castsShadow;
+        private bool m_CastsShadow;
 
         public Wall(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, float thickness, bool castsShadow)
             : base(hvzWorld, position, rotation, radius)
@@ -34,19 +34,19 @@ namespace Human_vs_Zombies.HvZClasses.Walls
 
         public bool CastShadow()
         {
-            return this.m_castsShadow;
+            return this.m_CastsShadow;
         }
 
         public void SetShadow(bool castsShadow)
         {
-            this.m_castsShadow = castsShadow;
+            this.m_CastsShadow = castsShadow;
         }
 
         public Vector2[] GetPoints()
         {
             Vector2 len = this.GetRotation() * this.GetRadius();
             Vector2 wid = new Vector2(this.GetRotation().Y, -this.GetRotation().X) * this.GetThickness();
-            Vector2[] ret = { this.GetPosition(), this.GetPosition() + wid, this.GetPosition() + len + wid, this.GetPosition() + len};
+            Vector2[] ret = { this.GetPosition() - len / 2 - wid / 2, this.GetPosition() - len / 2 + wid / 2, this.GetPosition() + len / 2 + wid / 2, this.GetPosition() + len / 2 - wid / 2 };
 
             return ret;
         }
@@ -99,10 +99,10 @@ namespace Human_vs_Zombies.HvZClasses.Walls
         public override void Update(float dTime) { }
         public override void Draw()
         {
-            Texture2D texture = TextureStatic.Get("Wall");
+                        Texture2D texture = TextureStatic.Get("Wall");
             Drawer.Draw(
                 texture,
-                new Rectangle((int)(this.GetPosition().X), (int)(this.GetPosition().Y), (int)(this.GetRadius()), (int)(this.GetThickness())),
+                new Rectangle((int)(this.GetPoints()[0].X), (int)(this.GetPoints()[0].Y), (int)(this.GetRadius()), (int)(this.GetThickness())),
                 null,
                 Color.White,
                 (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),

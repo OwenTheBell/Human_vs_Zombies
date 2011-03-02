@@ -46,21 +46,21 @@ namespace Human_vs_Zombies.HvZClasses
             this.CreateGrid();
 
             //DEBUG WALLS
-            /*
-            this.AddEntity(new Wall(this, new Vector2(300, 600), new Vector2(0f, 1f), 256f, 128f, true));
+            
+            //this.AddEntity(new Wall(this, new Vector2(300, 300), new Vector2(0f, 1f), 256f, 128f, true));
 
-            this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f, true));
+            //this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f, true));
 
-            this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f, true));
-             */
+            //this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f, true));
+            
 
             this.SpawnWall();
 
             //define the boundaries of the play area using walls drawn offscreen that do not cast shadows
-            this.AddEntity(new Wall(this, new Vector2(0, 0), new Vector2(1f, 0f), Settings.screenWidth * 2, 40f, false));
-            this.AddEntity(new Wall(this, new Vector2(-40f, 0), new Vector2(0f, 1f), Settings.screenHeight * 2, 40f, false));
-            this.AddEntity(new Wall(this, new Vector2(0, Settings.screenHeight * 2 + 40f), new Vector2(1f, 0f), Settings.screenWidth * 2, 40f, false));
-            this.AddEntity(new Wall(this, new Vector2(Settings.screenWidth * 2, 0), new Vector2(0f, 1f), Settings.screenHeight * 2, 40f, false));
+            this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth / 2, -0), Vector2.UnitX, Settings.worldWidth, 32f, false));
+            this.AddEntity(new Wall(this, new Vector2(-0, Settings.worldHeight / 2), Vector2.UnitY, Settings.worldHeight, 32f, false));
+            this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth / 2, Settings.worldHeight + 0), Vector2.UnitX, Settings.worldWidth, 32f, false));
+            this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth + 0, Settings.worldHeight / 2), Vector2.UnitY, Settings.worldHeight, 32f, false));
 
             this.m_ColMatrix = null;
             this.zombieCountdown = Settings.zombieTimer;
@@ -77,9 +77,9 @@ namespace Human_vs_Zombies.HvZClasses
             int gridX = 0;
             int gridY = 0;
 
-            while (gridX < (Settings.screenWidth * 2) - Settings.wallRadius)
+            while (gridX < (Settings.worldWidth * 2) - Settings.wallRadius)
             {
-                while (gridY < (Settings.screenHeight * 2) - Settings.wallRadius)
+                while (gridY < (Settings.worldHeight * 2) - Settings.wallRadius)
                 {
                     this.m_WallGrid.Add(new GridPoint(gridX, gridY));
                     gridY += (int) Settings.wallRadius;
@@ -176,7 +176,7 @@ namespace Human_vs_Zombies.HvZClasses
             zombieCountdown -= dTime;
             if (zombieCountdown <= 0)
             {
-                //this.SpawnZombie();
+                this.SpawnZombie();
                 zombieCountdown = Settings.zombieTimer;
             }
 
@@ -234,7 +234,7 @@ namespace Human_vs_Zombies.HvZClasses
             Random gen = new Random();
             Vector2 playerPosition = m_Player.GetPosition();
             int spawnDistance = 300;
-            Vector2 position= new Vector2(gen.Next((int)GameWorld.screenDimensions.X - 30), gen.Next((int)GameWorld.screenDimensions.Y - 30));
+            Vector2 position= new Vector2(gen.Next((int)Settings.screenWidth - 30), gen.Next((int)Settings.screenHeight - 30));
             //ensure that the zombie does not spawn to close to the player
             if ((position - playerPosition).LengthSquared() < spawnDistance * spawnDistance)
             {
