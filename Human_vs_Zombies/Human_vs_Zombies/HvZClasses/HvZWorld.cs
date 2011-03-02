@@ -23,6 +23,7 @@ namespace Human_vs_Zombies.HvZClasses
         private float zombieCountdown; // How often zombies will spawn
         private float wallCountdown; // How often a new wall spawns
         private List<GridPoint> m_WallGrid; //List of all the 
+        private int numZombies;
 
         private class GridPoint
         {
@@ -40,6 +41,7 @@ namespace Human_vs_Zombies.HvZClasses
             m_Player = new Player(this, new Vector2(100f, 100f), new Vector2(1f,0f), 32f, new Vector2(1f,0f), 400f, .1f, 500f);
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
+            this.numZombies = 0;
 
             this.m_WallGrid = new List<GridPoint>();
 
@@ -159,6 +161,7 @@ namespace Human_vs_Zombies.HvZClasses
                     if (e is Zombie)
                     {
                         //this.zombieTimer *= 0.5f;
+                        this.numZombies--;
                     }
                     dieNow.Add(e);
                 }
@@ -174,7 +177,7 @@ namespace Human_vs_Zombies.HvZClasses
             this.CheckCols();
 
             zombieCountdown -= dTime;
-            if (zombieCountdown <= 0)
+            if (zombieCountdown <= 0 && this.numZombies < Settings.zombieMax)
             {
                 this.SpawnZombie();
                 zombieCountdown = Settings.zombieTimer;
@@ -244,6 +247,7 @@ namespace Human_vs_Zombies.HvZClasses
                 position += shift;
             }
             if (InShadow(position, playerPosition)) {
+                this.numZombies++;
                 Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 300f, new Random().NextDouble() < 0f ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
                 m_Entities.Add(m_Zombie.GetID(), m_Zombie);
             }
@@ -305,17 +309,17 @@ namespace Human_vs_Zombies.HvZClasses
             float x = (float) (random.NextDouble() * 2 - 1);
             float y = (float) (random.NextDouble() * 2 - 1);
 
-            this.AddEntity(new Wall(
+            Wall wall = new Wall(
                     this,
                     new Vector2(selected.X, selected.Y),
                     new Vector2(x, y),
                     Settings.wallRadius,
                     Settings.wallThickness,
-                    true
-                    )
-                );
-
-            this.m_WallGrid.Remove(selected);
+                    true);
+            if (!(wall.Collides(this.GetPlayer()))) {
+                this.AddEntity(wall);
+                this.m_WallGrid.Remove(selected);
+            }
         }
 
         private void DrawShadow(Wall wall, float layer)
