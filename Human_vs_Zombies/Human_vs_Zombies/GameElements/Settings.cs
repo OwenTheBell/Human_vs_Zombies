@@ -19,6 +19,12 @@ namespace Human_vs_Zombies.GameElements
         //height of game screen
         public static int screenHeight { get { return 540; } }
 
+        //width of game world
+        public static int worldWidth { get { return 1920; } }
+
+        //height of game world
+        public static int worldHeight { get { return 1080; } }
+
         public static float wallRadius { get { return 256f; } }
 
         public static float wallThickness { get { return 126f; } }
