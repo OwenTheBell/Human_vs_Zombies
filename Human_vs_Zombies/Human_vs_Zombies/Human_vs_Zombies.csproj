@@ -123,6 +123,7 @@
     <Compile Include="HvZClasses\Items\ExplosionItem.cs" />
     <Compile Include="HvZClasses\Items\Item.cs" />
     <Compile Include="HvZClasses\Items\AmmoItem.cs" />
+    <Compile Include="HvZClasses\Mobs\Explosion.cs" />
     <Compile Include="HvZClasses\Mobs\Mob.cs" />
     <Compile Include="HvZClasses\Mobs\Player.cs" />
     <Compile Include="HvZClasses\Mobs\Projectile.cs" />

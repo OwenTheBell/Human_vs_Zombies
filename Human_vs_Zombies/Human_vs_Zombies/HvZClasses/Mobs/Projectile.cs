@@ -7,6 +7,7 @@ using Human_vs_Zombies.Rendering;
 using Microsoft.Xna.Framework.Graphics;
 using Human_vs_Zombies.HvZClasses.Items;
 using Human_vs_Zombies.HvZClasses.Walls;
+using Human_vs_Zombies.GameElements;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
@@ -45,7 +46,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Draw()
         {
-            base.DrawCircular(TextureStatic.Get("Dart"), 0.6f);
+            base.DrawCircular(TextureStatic.Get("Dart"), Settings.dartLayer);
         }
     }
 }
