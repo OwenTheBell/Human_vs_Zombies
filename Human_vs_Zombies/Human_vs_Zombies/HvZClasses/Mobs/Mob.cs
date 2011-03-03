@@ -39,6 +39,11 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             }
         }
 
+        public void SetVelocityUnchecked(Vector2 velocity)
+        {
+            this.m_Velocity = velocity;
+        }
+
         public void SetMax(float maxVelocity)
         {
             this.m_maxVelocity = maxVelocity;

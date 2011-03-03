@@ -30,6 +30,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private bool isDead;
 
+        private float m_FasterFor;
+
         public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity, float weaponTimer, float weaponSpeed, int ammo)
             : base(hvzWorld, position, rotation, radius, velocity, maxVelocity)
         {
@@ -41,6 +43,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.SetWeaponSpeed(Settings.playerWeaponSpeed);
             this.isDead = false;
             this.m_Score = 0;
+            this.m_FasterFor = 0;
         }
 
         public Brains GetBrains()
@@ -107,7 +110,10 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         {
             return this.m_Score;
         }
-
+        public void TemporarySpeedIncrease(float length)
+        {
+            this.m_FasterFor = length;
+        }
         public override void Update(float dTime)
         {
             List<Entity> cols = GetHvZWorld().Collisions(this);
@@ -126,7 +132,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
             this.m_Brains.Update(dTime, this.GetPosition());
 
-            this.SetVelocity(m_Brains.GetWalk());
+            this.SetVelocityPlayer(m_Brains.GetWalk());
 
             if (m_Brains.GetShoot().LengthSquared() > 0f)
             {
@@ -147,6 +153,11 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
             this.m_TimerCurrent -= dTime;
 
+            if (this.m_FasterFor > 0)
+            {   // Keep track of those running shoes!
+                this.m_FasterFor -= dTime;
+            }
+
             base.Update(dTime);
         }
 
@@ -155,6 +166,26 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.isDead = true;
         }
 
+        public void SetVelocityPlayer(Vector2 velocity)
+        {
+            float effectiveMaxVel = this.GetMaxVel();
+            if (this.m_FasterFor > 0)
+            {
+                effectiveMaxVel = effectiveMaxVel * 1.5f;
+                velocity *= 1.5f;
+            }
+
+            if (velocity.LengthSquared() <= (this.GetMaxVel() * this.GetMaxVel()))
+            {
+                base.SetVelocityUnchecked(velocity);
+            }
+            else
+            {
+                Vector2 unitVelocity = velocity;
+                unitVelocity.Normalize();
+                base.SetVelocityUnchecked(effectiveMaxVel * unitVelocity);
+            }
+        }
         public bool IsDead()
         {
             return isDead;
