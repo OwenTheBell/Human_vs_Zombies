@@ -48,15 +48,6 @@ namespace Human_vs_Zombies.HvZClasses
 
             this.CreateGrid();
 
-            //DEBUG WALLS
-            
-            //this.AddEntity(new Wall(this, new Vector2(300, 300), new Vector2(0f, 1f), 256f, 128f, true));
-
-            //this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f, true));
-
-            //this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f, true));
-            
-
             this.SpawnWall();
 
             //define the boundaries of the play area using walls drawn offscreen that do not cast shadows
@@ -78,18 +69,18 @@ namespace Human_vs_Zombies.HvZClasses
 
         private void CreateGrid()
         {
-            int gridX = 0;
-            int gridY = 0;
+            int gridX = (int) Settings.wallRadius;
+            int gridY = (int) Settings.wallRadius;
 
-            while (gridX < (Settings.worldWidth * 2) - Settings.wallRadius)
+            while (gridX < Settings.worldWidth)
             {
-                while (gridY < (Settings.worldHeight * 2) - Settings.wallRadius)
+                while (gridY < Settings.worldHeight)
                 {
                     this.m_WallGrid.Add(new GridPoint(gridX, gridY));
                     gridY += (int) Settings.wallRadius;
                 }
-                gridX += (int)Settings.wallRadius;
-                gridY = 0;
+                gridX += (int) Settings.wallRadius;
+                gridY = 0; 
             }
         }
 
@@ -320,25 +311,28 @@ namespace Human_vs_Zombies.HvZClasses
         private void SpawnWall()
         {
             Random random = new Random();
+            if (this.m_WallGrid.Count > 0)
+            {
+                int selectedPoint = random.Next(0, this.m_WallGrid.Count - 1);
 
-            int selectedPoint = random.Next(0, this.m_WallGrid.Count - 1);
+                GridPoint selected = this.m_WallGrid.ElementAt(selectedPoint);
 
-            GridPoint selected = this.m_WallGrid.ElementAt(selectedPoint);
+                //create floats in the range -1 to 1
+                float x = (float)(random.NextDouble() * 2 - 1);
+                float y = (float)(random.NextDouble() * 2 - 1);
 
-            //create floats in the range -1 to 1
-            float x = (float) (random.NextDouble() * 2 - 1);
-            float y = (float) (random.NextDouble() * 2 - 1);
-
-            Wall wall = new Wall(
-                    this,
-                    new Vector2(selected.X, selected.Y),
-                    new Vector2(x, y),
-                    Settings.wallRadius,
-                    Settings.wallThickness,
-                    true);
-            if (!(wall.Collides(this.GetPlayer()))) {
-                this.AddEntity(wall);
-                this.m_WallGrid.Remove(selected);
+                Wall wall = new Wall(
+                        this,
+                        new Vector2(selected.X, selected.Y),
+                        new Vector2(x, y),
+                        Settings.wallRadius,
+                        Settings.wallThickness,
+                        true);
+                if (!(wall.Collides(this.GetPlayer())))
+                {
+                    this.AddEntity(wall);
+                    this.m_WallGrid.Remove(selected);
+                }
             }
         }
 
