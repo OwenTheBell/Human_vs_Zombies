@@ -11,7 +11,9 @@ namespace Human_vs_Zombies.GameElements
         public static float playerWeaponSpeed { get { return 500f; } }
 
         //rate at which the player can fire their weapon
-        public static float playerWeaponTimer { get { return .05f; } }
+        public static float playerWeaponTimer { get { return .1f; } }
+
+        public static int playerAmmo { get { return 128; } }
 
         //width of game screen
         public static int screenWidth { get { return 960; } }
@@ -36,8 +38,10 @@ namespace Human_vs_Zombies.GameElements
 
         //rate at which the zombies spawn, spawns a zombie every 3 seconds
         //zombie spawn rate is also affected by the amount of shadow on the screen
-        public static float zombieTimer { get { return .05f; } }
+        public static float zombieTimer { get { return .1f; } }
 
         public static int zombieMax { get { return 30; } }
+
+        public static float startClusterAI { get { return 30f; } } 
     }
 }
