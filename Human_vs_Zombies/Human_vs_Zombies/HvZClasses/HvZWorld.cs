@@ -19,9 +19,11 @@ namespace Human_vs_Zombies.HvZClasses
         private Player m_Player;
         private SortedDictionary<ulong, Entity> m_Entities; // <ID of entity, The Entity>
         private SortedDictionary<ulong, List<Entity>> m_ColMatrix;
+        private List<ulong> m_WallIndices; //store the indices of walls in the entities dictionary for easy access
         private bool m_ColUpdated;
         private float zombieCountdown; // How often zombies will spawn
         private float wallCountdown; // How often a new wall spawns
+        private float wallKillCountdown; // How often to kill existing walls
         private List<GridPoint> m_WallGrid; //List of all the 
         private int numZombies;
 
@@ -44,6 +46,7 @@ namespace Human_vs_Zombies.HvZClasses
             this.numZombies = 0;
 
             this.m_WallGrid = new List<GridPoint>();
+            this.m_WallIndices = new List<ulong>();
 
             this.CreateGrid();
 
@@ -57,7 +60,8 @@ namespace Human_vs_Zombies.HvZClasses
 
             this.m_ColMatrix = null;
             this.zombieCountdown = Settings.zombieTimer;
-            this.wallCountdown = Settings.wallTimer;
+            this.wallCountdown = Settings.wallSpawnTimer;
+            this.wallKillCountdown = Settings.wallKillTimer;
         }
 
         public Player GetPlayer()
@@ -176,11 +180,18 @@ namespace Human_vs_Zombies.HvZClasses
 
             ClusterAIBrains.StaticUpdate(dTime);
 
+            wallKillCountdown -= dTime;
+            if (wallKillCountdown <= 0)
+            {
+                this.KillWall();
+                wallKillCountdown = Settings.wallKillTimer;
+            }
+
             wallCountdown -= dTime;
             if (wallCountdown <= 0)
             {
                 this.SpawnWall();
-                wallCountdown = Settings.wallTimer;
+                wallCountdown = Settings.wallSpawnTimer;
             }
 
             for (int i = 0; i < m_Entities.Values.Count; i++)
@@ -310,10 +321,22 @@ namespace Human_vs_Zombies.HvZClasses
                         true);
                 if (!(wall.Collides(this.GetPlayer())))
                 {
+                    this.m_WallIndices.Add(wall.GetID());
                     this.AddEntity(wall);
                     this.m_WallGrid.Remove(selected);
                 }
             }
+        }
+
+        private void KillWall()
+        {
+            Random random = new Random();
+
+            int toRemove = random.Next(0, m_WallIndices.Count - 1);
+
+            this.m_WallIndices.Remove(this.m_Entities.ElementAt(toRemove).Key);
+
+            this.m_Entities.Remove(m_WallIndices.ElementAt(toRemove));
         }
 
         private void DrawShadow(Wall wall, float layer)
