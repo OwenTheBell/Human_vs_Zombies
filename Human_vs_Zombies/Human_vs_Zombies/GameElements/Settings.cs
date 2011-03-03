@@ -58,6 +58,6 @@ namespace Human_vs_Zombies.GameElements
 
 	public static int itemMax { get { return 20; } }
 
-        public static int itemAmmo { get { return 10; } }
+        public static int itemAmmo { get { return 32; } }
     }
 }
