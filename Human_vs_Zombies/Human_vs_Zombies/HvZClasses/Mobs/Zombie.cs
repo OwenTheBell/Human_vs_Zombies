@@ -61,7 +61,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
             foreach (Entity c in cols)
             {
-                if (c is Projectile)
+                if (c is Projectile || c is Explosion)
                 {
                     this.SetDead(true);
                 }

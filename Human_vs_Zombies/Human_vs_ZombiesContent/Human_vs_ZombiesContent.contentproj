@@ -137,6 +137,9 @@
   <ItemGroup>
     <Compile Include="Art\RunFaster.png">
       <Name>RunFaster</Name>
+	  </Compile>
+    <Compile Include="Art\Explosion.png">
+      <Name>Explosion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

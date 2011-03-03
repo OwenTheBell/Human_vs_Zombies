@@ -50,7 +50,7 @@ namespace Human_vs_Zombies.Controls
 
             if (playerDistance < happyRadius)  // If the zombie is potentially too close to the human.
             {
-                if (playerDistance < minSafeRadius || player.GetDead())
+                if (playerDistance < minSafeRadius || player.IsDead())
                 {
                     // If the zombie is too close to the human, the zombie should attack!
                     this.m_Attacking = true;

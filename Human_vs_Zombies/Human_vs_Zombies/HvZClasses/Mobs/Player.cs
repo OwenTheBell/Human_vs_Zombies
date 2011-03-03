@@ -31,6 +31,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         private bool isDead;
 
         private float m_FasterFor;
+        
+		private Brains m_Brains;
 
         public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity, float weaponTimer, float weaponSpeed, int ammo)
             : base(hvzWorld, position, rotation, radius, velocity, maxVelocity)
@@ -44,6 +46,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.isDead = false;
             this.m_Score = 0;
             this.m_FasterFor = 0;
+            this.m_Score = 0;
         }
 
         public Brains GetBrains()
@@ -103,7 +106,10 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public void AddToScore(int scoreBonus)
         {
-            this.m_Score += scoreBonus;
+            if (!this.IsDead())
+            {
+                this.m_Score += scoreBonus;
+            }
         }
 
         public int GetScore()
@@ -193,7 +199,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Draw() 
         {
-            base.DrawCircular(TextureStatic.Get("Human"), 0.7f);
+            base.DrawCircular(TextureStatic.Get("Human"), Settings.humanLayer);
         }
     }
 }

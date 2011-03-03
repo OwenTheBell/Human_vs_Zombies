@@ -24,8 +24,7 @@ namespace Human_vs_Zombies.HvZClasses.Items
         public override void OnPickup(Player player)
         {
             this.SetDead(true);
-            world.KillAllZombies();
-           
+            world.AddEntity(new Explosion(world, this.GetPosition(), Vector2.UnitX, 0f, 1024, 2200));
         }
     }
 }

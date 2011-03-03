@@ -110,7 +110,7 @@ namespace Human_vs_Zombies.HvZClasses
             this.m_isDead = isDead;
         }
 
-        public bool GetDead()
+        public bool IsDead()
         {
             return this.m_isDead;
         }

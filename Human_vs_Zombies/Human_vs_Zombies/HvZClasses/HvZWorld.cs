@@ -28,7 +28,6 @@ namespace Human_vs_Zombies.HvZClasses
         private int numItems;
         private float m_TimeElapsed;
         private float m_secondCheck;
-        private bool m_GameOver;
         private Random m_Random;
 
         private class GridPoint
@@ -70,7 +69,6 @@ namespace Human_vs_Zombies.HvZClasses
             m_TimeElapsed = 0;
             m_secondCheck = m_TimeElapsed;
             m_Random = new Random();
-            m_GameOver = false;
 
             ClusterAIBrains.Initialize();
         }
@@ -162,7 +160,7 @@ namespace Human_vs_Zombies.HvZClasses
             List<Entity> dieNow = new List<Entity>();
             foreach(Entity e in m_Entities.Values)
             {
-                if (e.GetDead())
+                if (e.IsDead())
                 {
                     if (e is Zombie)
                     {
@@ -173,7 +171,6 @@ namespace Human_vs_Zombies.HvZClasses
                     else if (e is Player)
                     {
                         GameWorld.audio.SongPlay("death", false);
-                        m_GameOver = true;
                         GameWorld.screens.GameOver();
                     }
                     else if (e is Item)
@@ -242,7 +239,7 @@ namespace Human_vs_Zombies.HvZClasses
 
             this.KillDeadEntities();
 
-            if (!m_GameOver)
+            if (!GetPlayer().IsDead())
             {
                 if (ClusterAIBrains.AreAttacking())
                 {
