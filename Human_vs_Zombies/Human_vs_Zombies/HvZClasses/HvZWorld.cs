@@ -39,7 +39,7 @@ namespace Human_vs_Zombies.HvZClasses
 
         public HvZWorld()
         {
-            m_Player = new Player(this, new Vector2(100f, 100f), new Vector2(1f,0f), 32f, new Vector2(1f,0f), 400f, Settings.playerWeaponTimer, Settings.playerWeaponSpeed, Settings.playerAmmo);
+            m_Player = new Player(this, new Vector2(300, 300), new Vector2(1f,0f), 32f, new Vector2(1f,0f), 400f, Settings.playerWeaponTimer, Settings.playerWeaponSpeed, Settings.playerAmmo);
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
             this.numZombies = 0;
@@ -48,22 +48,13 @@ namespace Human_vs_Zombies.HvZClasses
 
             this.CreateGrid();
 
-            //DEBUG WALLS
-            
-            //this.AddEntity(new Wall(this, new Vector2(300, 300), new Vector2(0f, 1f), 256f, 128f, true));
-
-            //this.AddEntity(new Wall(this, new Vector2(600, 600), new Vector2(1f, 1f), 256f, 128f, true));
-
-            //this.AddEntity(new Wall(this, new Vector2(600, 300), new Vector2(1f, 0f), 256f, 128f, true));
-            
-
             this.SpawnWall();
 
             //define the boundaries of the play area using walls drawn offscreen that do not cast shadows
-            this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth / 2, -0), Vector2.UnitX, Settings.worldWidth, 32f, false));
-            this.AddEntity(new Wall(this, new Vector2(-0, Settings.worldHeight / 2), Vector2.UnitY, Settings.worldHeight, 32f, false));
-            this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth / 2, Settings.worldHeight + 0), Vector2.UnitX, Settings.worldWidth, 32f, false));
-            this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth + 0, Settings.worldHeight / 2), Vector2.UnitY, Settings.worldHeight, 32f, false));
+            this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth / 2, -16), Vector2.UnitX, Settings.worldWidth, 64, false));
+            this.AddEntity(new Wall(this, new Vector2(-16, Settings.worldHeight / 2), Vector2.UnitY, Settings.worldHeight, 64, false));
+            this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth / 2, Settings.worldHeight + 16), Vector2.UnitX, Settings.worldWidth, 64, false));
+            this.AddEntity(new Wall(this, new Vector2(Settings.worldWidth + 16, Settings.worldHeight / 2), Vector2.UnitY, Settings.worldHeight, 64, false));
 
             this.m_ColMatrix = null;
             this.zombieCountdown = Settings.zombieTimer;
@@ -255,7 +246,7 @@ namespace Human_vs_Zombies.HvZClasses
             }
             if (InShadow(position, playerPosition)) {
                 this.numZombies++;
-                Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 300f, m_TimeElapsed < Settings.startClusterAI ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
+                Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, Settings.zombieMaxVel, m_TimeElapsed < Settings.startClusterAI ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
                 m_Entities.Add(m_Zombie.GetID(), m_Zombie);
             }
         }
