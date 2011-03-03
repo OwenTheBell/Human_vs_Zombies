@@ -31,8 +31,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         private bool isDead;
 
         private float m_FasterFor;
-        
-		private Brains m_Brains;
 
         public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity, float weaponTimer, float weaponSpeed, int ammo)
             : base(hvzWorld, position, rotation, radius, velocity, maxVelocity)
