@@ -44,6 +44,12 @@ namespace Human_vs_Zombies.GameElements
 
         public static float zombieMaxVel { get { return 256f; } }
 
-        public static float startClusterAI { get { return 30f; } } 
+        public static float startClusterAI { get { return 30f; } }
+
+        public static float itemLifespan { get { return 15; } }
+
+        public static float itemWarningTime { get { return 5; } }
+
+        public static float itemBlinkRate { get { return .5f; } }
     }
 }

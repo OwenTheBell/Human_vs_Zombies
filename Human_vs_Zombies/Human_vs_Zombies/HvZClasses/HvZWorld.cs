@@ -264,21 +264,20 @@ namespace Human_vs_Zombies.HvZClasses
             }
             if (InShadow(position, playerPosition)) {
                 this.numZombies++;
-                Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, Settings.zombieMaxVel, m_TimeElapsed < Settings.startClusterAI ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
-                m_Entities.Add(m_Zombie.GetID(), m_Zombie);
+                Zombie zomblie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, Settings.zombieMaxVel, m_TimeElapsed < Settings.startClusterAI ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
+                this.AddEntity(zomblie);
             }
         }
         public void SpawnItem()
         {
             Random gen = new Random();
             Vector2 playerPosition = m_Player.GetPosition();
-            int spawnDistance = 300;
             Vector2 position = new Vector2(gen.Next((int)Settings.worldWidth - 30), gen.Next((int)Settings.worldHeight - 30));
 
             if (InShadow(position, playerPosition))
             {
-                Item it = Item.NewRandomItem(this, position, Vector2.Zero, 32f);
-                m_Entities.Add(it.GetID(), it);
+                Item it = Item.NewRandomItem(this, position, Vector2.Zero, 32f, Settings.itemLifespan);
+                this.AddEntity(it);
             }
         }
         public bool InShadow(Vector2 point, Vector2 pov)

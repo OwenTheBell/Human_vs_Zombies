@@ -121,7 +121,7 @@
     <Compile Include="HvZClasses\HvZWorld.cs" />
     <Compile Include="HvZClasses\Entity.cs" />
     <Compile Include="HvZClasses\Items\Item.cs" />
-    <Compile Include="HvZClasses\Items\ItemReplenishAmmo.cs" />
+    <Compile Include="HvZClasses\Items\AmmoItem.cs" />
     <Compile Include="HvZClasses\Mobs\Mob.cs" />
     <Compile Include="HvZClasses\Mobs\Player.cs" />
     <Compile Include="HvZClasses\Mobs\Projectile.cs" />

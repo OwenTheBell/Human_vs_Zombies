@@ -85,20 +85,17 @@ namespace Human_vs_Zombies.Controls
                 this.m_Walk = toPlayer;
                 this.m_Attacking = true;
                 this.m_Ready = false;
-
-                this.m_Shoot = toPlayer;
             } else if (!this.m_Ready)
             {
                 this.m_Walk = toPlayer;
-
-                this.m_Shoot = -toPlayer;
                 // Control the velocity here?
             }
             else
             {
                 this.m_Walk = toPlayer * (playerDistance - happyRadius) / dTime / 1000f;
-                this.m_Shoot = new Vector2(-toPlayer.Y, toPlayer.X);
             }
+            
+            this.m_Shoot = toPlayer;
 
             //path.Normalize();
             //this.m_Walk = path;
