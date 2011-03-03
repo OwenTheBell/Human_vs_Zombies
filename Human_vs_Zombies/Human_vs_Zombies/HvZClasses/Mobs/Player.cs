@@ -100,7 +100,10 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public void AddToScore(int scoreBonus)
         {
-            this.m_Score += scoreBonus;
+            if (!this.IsDead())
+            {
+                this.m_Score += scoreBonus;
+            }
         }
 
         public int GetScore()
