@@ -322,7 +322,7 @@ namespace Human_vs_Zombies.HvZClasses
             }
             if (InShadow(position, playerPosition)) {
                 this.numZombies++;
-                Zombie zomblie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, Settings.zombieMaxVel, m_TimeElapsed < Settings.startClusterAI ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
+                Zombie zomblie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, Settings.zombieMaxVel, m_TimeElapsed < Settings.startClusterAI ? (Brains)new SimpleAIBrains(this) : new DodgeAIBrains(this));
                 this.AddEntity(zomblie);
             }
         }
@@ -504,7 +504,7 @@ namespace Human_vs_Zombies.HvZClasses
                 null, Color.Black, (float)Math.Atan2(dir1.Y, dir1.X) + angle, Vector2.UnitY * TextureStatic.Get("Shadow").Width, SpriteEffects.None, layer);
         }
 
-        private float SignedAngle(Vector2 v1, Vector2 v2)
+        public static float SignedAngle(Vector2 v1, Vector2 v2)
         {
             float angle = (float)Math.Acos(Vector2.Dot(v1, v2) / (v1.Length() * v2.Length()));
 
