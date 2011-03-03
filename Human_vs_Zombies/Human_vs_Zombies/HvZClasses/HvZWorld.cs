@@ -270,7 +270,7 @@ namespace Human_vs_Zombies.HvZClasses
                 0f,
                 Vector2.Zero,
                 SpriteEffects.None,
-                0f);
+                Settings.backgroundLayer);
 
             Drawer.DrawString(
                 "Ammo: " + this.m_Player.GetAmmo(),
@@ -301,7 +301,7 @@ namespace Human_vs_Zombies.HvZClasses
                     Wall wall = (Wall)e; //eeeeeeevaaa!
                     if (wall.CastShadow())
                     {
-                        DrawShadow(wall, .9f);
+                        DrawShadow(wall, Settings.shadowLayer);
                     }
                 }
             }

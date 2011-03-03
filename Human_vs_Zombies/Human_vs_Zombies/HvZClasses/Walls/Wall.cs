@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Human_vs_Zombies.Rendering;
 using Microsoft.Xna.Framework.Graphics;
+using Human_vs_Zombies.GameElements;
 
 namespace Human_vs_Zombies.HvZClasses.Walls
 {
@@ -108,7 +109,7 @@ namespace Human_vs_Zombies.HvZClasses.Walls
                 (float)Math.Atan2(this.GetRotation().Y, this.GetRotation().X),
                 new Vector2(0, texture.Height),
                 SpriteEffects.None,
-                .95f);
+                Settings.wallLayer);
         }
     }
 }

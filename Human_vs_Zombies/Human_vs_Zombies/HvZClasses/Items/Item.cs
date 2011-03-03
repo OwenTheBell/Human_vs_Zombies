@@ -39,7 +39,7 @@ namespace Human_vs_Zombies.HvZClasses.Items
         {
             if (m_Life > Settings.itemWarningTime || m_Life % Settings.itemBlinkRate < Settings.itemBlinkRate / 3)
             {
-                base.DrawCircular(m_Texture, 0.5f);
+                base.DrawCircular(m_Texture, Settings.itemLayer);
             }
         }
         public static Item NewRandomItem(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, float lifespan)
