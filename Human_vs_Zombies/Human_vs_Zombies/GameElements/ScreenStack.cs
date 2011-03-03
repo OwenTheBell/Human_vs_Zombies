@@ -133,7 +133,6 @@ namespace Human_vs_Zombies.GameElements
 
         public void GameOver()
         {
-            this.KillAll();
             this.Add(new GameOverScreen());
         }
 

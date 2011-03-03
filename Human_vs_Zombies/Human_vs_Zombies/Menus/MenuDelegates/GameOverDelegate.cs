@@ -17,7 +17,7 @@ namespace Human_vs_Zombies.Menus.MenuDelegates
         {
             if (GameWorld.screens.Count > 0)
             {
-                GameWorld.screens[GameWorld.screens.Count - 1].Disposed = true;
+                GameWorld.screens.KillAll();
             }
             GameWorld.screens.Play(new StartScreen());
             GameWorld.audio.SongPlay("menu");
