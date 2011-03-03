@@ -82,7 +82,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                     if (Vector2.Dot(v, normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
 
                     this.SetVelocity(v + w);
-                    p += (r - d) * normal;
                 }
             }
 
