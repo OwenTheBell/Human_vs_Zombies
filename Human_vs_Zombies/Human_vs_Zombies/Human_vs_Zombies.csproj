@@ -128,7 +128,9 @@
     <Compile Include="HvZClasses\Walls\Wall.cs" />
     <Compile Include="Mathematics\RotationHelper.cs" />
     <Compile Include="Mathematics\tfloat.cs" />
+    <Compile Include="Menus\GameOverMenu.cs" />
     <Compile Include="Menus\Menu.cs" />
+    <Compile Include="Menus\MenuDelegates\GameOverDelegate.cs" />
     <Compile Include="Menus\StartMenu.cs" />
     <Compile Include="Menus\MenuAction.cs" />
     <Compile Include="Menus\MenuDelegates\StartGameDelegate.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="GameElements\GameWorld.cs" />
     <Compile Include="Rendering\Drawer.cs" />
     <Compile Include="Rendering\TextureStatic.cs" />
+    <Compile Include="Screens\GameOverScreen.cs" />
     <Compile Include="Screens\StartScreen.cs" />
     <Compile Include="Screens\HvZScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />

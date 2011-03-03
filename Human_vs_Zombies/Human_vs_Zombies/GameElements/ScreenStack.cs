@@ -120,6 +120,12 @@ namespace Human_vs_Zombies.GameElements
             this.IsPaused = false;
         }
 
+        public void GameOver()
+        {
+            this.KillAll();
+            this.Add(new GameOverScreen());
+        }
+
         /// <summary>
         /// Draws this instance.
         /// </summary>

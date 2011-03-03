@@ -90,6 +90,8 @@ namespace Human_vs_Zombies.GameElements
             audio.LoadSong("theme", "Sounds/zombie");
             audio.LoadSong("menu", "Sounds/zombie 2");
             audio.LoadSong("yakety", "Sounds/yaketysax");
+            audio.LoadSong("death", "Sounds/death");
+            audio.LoadSound("kill", "Sounds/kill");
             
             Drawer.Initiallize();
             

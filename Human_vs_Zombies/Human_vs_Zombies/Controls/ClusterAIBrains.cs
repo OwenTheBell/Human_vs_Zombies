@@ -109,12 +109,12 @@ namespace Human_vs_Zombies.Controls
         {
             if (s_Attack)
             {
-                GameWorld.audio.SongPlay("yakety");
+                //GameWorld.audio.SongPlay("yakety");
                 s_AttackTimer -= dTime;
             }
             else
             {
-                GameWorld.audio.SongPlay("theme");
+                //GameWorld.audio.SongPlay("theme");
                 s_WaitTimer -= dTime;
             }
 
