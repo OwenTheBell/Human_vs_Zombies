@@ -28,8 +28,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private Brains m_Brains;
 
-        private bool isDead;
-
         private float m_FasterFor;
 
         public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity, float weaponTimer, float weaponSpeed, int ammo)
@@ -41,7 +39,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.SetWeaponSpeed(weaponSpeed);
             this.SetAmmo(ammo);
             this.SetWeaponSpeed(Settings.playerWeaponSpeed);
-            this.isDead = false;
             this.m_Score = 0;
             this.m_FasterFor = 0;
             this.m_Score = 0;

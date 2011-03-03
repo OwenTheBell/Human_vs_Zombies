@@ -27,21 +27,27 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public void SetVelocity(Vector2 velocity)
         {
-            if (velocity.LengthSquared() <= (m_maxVelocity * m_maxVelocity))
+            if (!(float.IsNaN(velocity.X) || float.IsNaN(velocity.Y)))
             {
-                this.m_Velocity = velocity;
-            }
-            else
-            {
-                Vector2 unitVelocity = velocity;
-                unitVelocity.Normalize();
-                this.m_Velocity = m_maxVelocity * unitVelocity;
+                if (velocity.LengthSquared() <= (m_maxVelocity * m_maxVelocity))
+                {
+                    this.m_Velocity = velocity;
+                }
+                else
+                {
+                    Vector2 unitVelocity = velocity;
+                    unitVelocity.Normalize();
+                    this.m_Velocity = m_maxVelocity * unitVelocity;
+                }
             }
         }
 
         public void SetVelocityUnchecked(Vector2 velocity)
         {
-            this.m_Velocity = velocity;
+            if (!(float.IsNaN(velocity.X) || float.IsNaN(velocity.Y)))
+            {
+                this.m_Velocity = velocity;
+            }
         }
 
         public void SetMax(float maxVelocity)
@@ -117,7 +123,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                         Vector2 tangent = b - a;
                         Vector2 normal = new Vector2(tangent.Y, -tangent.X);
                         normal.Normalize();
-                        if(Vector2.Dot(v,normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
+                        if(Vector2.Dot(v,normal) <= 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
                         p += (r - (p - a - ((Vector2.Dot(p - a, b - a) / (b - a).LengthSquared()) * (b - a))).Length()) * normal;
                     }
                     else if (Vector2.Dot(p - b, c - b) >= 0 && Vector2.Dot(p - b, c - b) <= (c - b).LengthSquared() && (p - b - ((Vector2.Dot(p - b, c - b) / (c - b).LengthSquared()) * (c - b))).LengthSquared() <= r * r)
@@ -125,7 +131,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                         Vector2 tangent = c - b;
                         Vector2 normal = new Vector2(tangent.Y, -tangent.X);
                         normal.Normalize();
-                        if (Vector2.Dot(v, normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
+                        if (Vector2.Dot(v, normal) <= 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
                         p += (r - (p - b - ((Vector2.Dot(p - b, c - b) / (c - b).LengthSquared()) * (c - b))).Length()) * normal;
                     }
                     else if (Vector2.Dot(p - c, d - c) >= 0 && Vector2.Dot(p - c, d - c) <= (d - c).LengthSquared() && (p - c - ((Vector2.Dot(p - c, d - c) / (d - c).LengthSquared()) * (d - c))).LengthSquared() <= r * r)
@@ -133,7 +139,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                         Vector2 tangent = d - c;
                         Vector2 normal = new Vector2(tangent.Y, -tangent.X);
                         normal.Normalize();
-                        if (Vector2.Dot(v, normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
+                        if (Vector2.Dot(v, normal) <= 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
                         p += (r - (p - c - ((Vector2.Dot(p - c, d - c) / (d - c).LengthSquared()) * (d - c))).Length()) * normal;
                     }
                     else if (Vector2.Dot(p - d, a - d) >= 0 && Vector2.Dot(p - d, a - d) <= (a - d).LengthSquared() && (p - d - ((Vector2.Dot(p - d, a - d) / (a - d).LengthSquared()) * (a - d))).LengthSquared() <= r * r)
@@ -141,11 +147,12 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                         Vector2 tangent = a - d;
                         Vector2 normal = new Vector2(tangent.Y, -tangent.X);
                         normal.Normalize();
-                        if (Vector2.Dot(v, normal) < 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
+                        if (Vector2.Dot(v, normal) <= 0) v = tangent * Vector2.Dot(v, tangent) / tangent.LengthSquared();
                         p += (r - (p - d - ((Vector2.Dot(p - d, a - d) / (a - d).LengthSquared()) * (a - d))).Length()) * normal;
                     }
 
                     this.SetVelocity(v);
+                    
                     this.SetPosition(p);
                 }
             }

@@ -65,7 +65,10 @@ namespace Human_vs_Zombies.HvZClasses
         /// <param name="position">Vector for position, in pixels</param>
         public void SetPosition(Vector2 position)
         {
-            this.m_Position = position;
+            if (!(float.IsNaN(position.X) || float.IsNaN(position.Y)))
+            {
+                this.m_Position = position;
+            }
         }
 
         /// <summary>
