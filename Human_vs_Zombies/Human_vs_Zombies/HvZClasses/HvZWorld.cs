@@ -326,6 +326,16 @@ namespace Human_vs_Zombies.HvZClasses
                 this.AddEntity(zomblie);
             }
         }
+        public void KillAllZombies()
+        {
+            foreach (Entity e in m_Entities.Values)
+            {
+                if (e is Zombie)
+                {
+                    e.SetDead(true);
+                }
+            }
+        }
         public void SpawnItem()
         {
             Vector2 playerPosition = m_Player.GetPosition();
