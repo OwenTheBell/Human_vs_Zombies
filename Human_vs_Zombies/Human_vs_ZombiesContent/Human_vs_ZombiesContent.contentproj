@@ -128,8 +128,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Art\Explosion.png">
-      <Name>Explosion</Name>
+    <Compile Include="Art\Nuke.png">
+      <Name>Nuke</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

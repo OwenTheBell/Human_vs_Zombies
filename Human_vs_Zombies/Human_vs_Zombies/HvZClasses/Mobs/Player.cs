@@ -24,6 +24,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private int m_Ammo;
 
+        private int m_Score;
+
         private Brains m_Brains;
 
         private bool isDead;
@@ -38,6 +40,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.SetAmmo(ammo);
             this.SetWeaponSpeed(Settings.playerWeaponSpeed);
             this.isDead = false;
+            this.m_Score = 0;
         }
 
         public Brains GetBrains()
@@ -95,6 +98,16 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             return m_Ammo;
         }
 
+        public void AddToScore(int scoreBonus)
+        {
+            this.m_Score += scoreBonus;
+        }
+
+        public int GetScore()
+        {
+            return this.m_Score;
+        }
+
         public override void Update(float dTime)
         {
             List<Entity> cols = GetHvZWorld().Collisions(this);
@@ -104,6 +117,10 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 if (c is Zombie)
                 {
                     this.SetDead(true);
+                }
+                if (c is Item)
+                {
+                    ((Item)c).OnPickup(this);
                 }
             }
 
