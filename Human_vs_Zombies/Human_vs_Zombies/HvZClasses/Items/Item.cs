@@ -45,7 +45,12 @@ namespace Human_vs_Zombies.HvZClasses.Items
         public static Item NewRandomItem(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, float lifespan)
         {
             // Eventually, put logic in here to determine which random item to spawn.
-            return new AmmoItem(hvzWorld, position, rotation, radius, lifespan, Settings.itemAmmo);
+            double item = (new Random()).Next(100);
+            // Spawn more ammo 70% of the time and a Nuke 30%
+            if (item < 70)
+                return new AmmoItem(hvzWorld, position, rotation, radius, lifespan, Settings.itemAmmo);
+            else
+                return new ExplosionItem(hvzWorld, position, rotation, radius, lifespan);
         }
     }
 }
