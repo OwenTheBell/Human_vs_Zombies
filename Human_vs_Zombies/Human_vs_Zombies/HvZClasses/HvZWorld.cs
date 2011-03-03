@@ -398,9 +398,15 @@ namespace Human_vs_Zombies.HvZClasses
 
             int toRemove = random.Next(0, m_WallIndices.Count - 1);
 
-            this.m_WallIndices.Remove(this.m_Entities.ElementAt(toRemove).Key);
+            ulong ID = m_WallIndices.ElementAt(toRemove);
 
-            this.m_Entities.Remove(m_WallIndices.ElementAt(toRemove));
+            Entity e;
+            m_Entities.TryGetValue(ID, out e);
+
+            m_WallGrid.Add(new GridPoint((int)e.GetPosition().X, (int)e.GetPosition().Y));
+
+            this.m_WallIndices.Remove(ID);
+            this.m_Entities.Remove(ID);
         }
 
         private void DrawShadow(Wall wall, float layer)
