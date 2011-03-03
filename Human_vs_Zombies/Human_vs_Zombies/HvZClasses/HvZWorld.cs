@@ -23,9 +23,9 @@ namespace Human_vs_Zombies.HvZClasses
         private bool m_ColUpdated;
         private float zombieCountdown; // How often zombies will spawn
         private float wallCountdown; // How often a new wall spawns
-        private float wallKillCountdown; // How often to kill existing walls
         private List<GridPoint> m_WallGrid; //List of all the 
         private int numZombies;
+        private int numItems;
         private float m_TimeElapsed;
 
         private class GridPoint
@@ -45,6 +45,7 @@ namespace Human_vs_Zombies.HvZClasses
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
             this.numZombies = 0;
+            this.numItems = 0;
 
             this.m_WallGrid = new List<GridPoint>();
             this.m_WallIndices = new List<ulong>();
@@ -62,7 +63,6 @@ namespace Human_vs_Zombies.HvZClasses
             this.m_ColMatrix = null;
             this.zombieCountdown = Settings.zombieTimer;
             this.wallCountdown = Settings.wallSpawnTimer;
-            this.wallKillCountdown = Settings.wallKillTimer;
             this.wallCountdown = Settings.wallSpawnTimer;
             m_TimeElapsed = 0;
         }
@@ -166,6 +166,11 @@ namespace Human_vs_Zombies.HvZClasses
                         GameWorld.audio.SongPlay("death", false);
                         GameWorld.screens.GameOver();
                     }
+                    else if (e is Item)
+                    {
+                        this.numItems--;
+                        this.m_Player.AddAmmo(Settings.itemAmmo);
+                    }
                     dieNow.Add(e);
                 }
             }
@@ -182,10 +187,16 @@ namespace Human_vs_Zombies.HvZClasses
             this.CheckCols();
 
             zombieCountdown -= dTime;
-            if (zombieCountdown <= 0 && this.numZombies < Settings.zombieMax)
+            if (zombieCountdown <= 0)
             {
-                this.SpawnZombie();
-                this.SpawnItem();
+                if (this.numZombies < Settings.zombieMax)
+                {
+                    this.SpawnZombie();
+                }
+                if (this.numItems < Settings.itemMax)
+                {
+                    this.SpawnItem();
+                }
                 zombieCountdown = Settings.zombieTimer;
             }
 
@@ -194,17 +205,18 @@ namespace Human_vs_Zombies.HvZClasses
                 ClusterAIBrains.StaticUpdate(dTime);
             }
 
-            wallKillCountdown -= dTime;
-            if (wallKillCountdown <= 0)
-            {
-                this.KillWall();
-                wallKillCountdown = Settings.wallKillTimer;
-            }
-
             wallCountdown -= dTime;
             if (wallCountdown <= 0)
             {
-                this.SpawnWall();
+                if (this.m_WallIndices.Count < Settings.wallMax)
+                {
+                    this.SpawnWall();
+                }
+                else
+                {
+                    this.KillWall();
+                    this.SpawnWall();
+                }
                 wallCountdown = Settings.wallSpawnTimer;
             }
 
@@ -232,6 +244,16 @@ namespace Human_vs_Zombies.HvZClasses
                 Vector2.Zero,
                 SpriteEffects.None,
                 0f);
+
+            Drawer.DrawString(
+                "Ammo: " + this.m_Player.GetAmmo(),
+                new Vector2(0, 0),
+                Color.Red,
+                0f,
+                new Vector2(0, 0),
+                4f,
+                SpriteEffects.None,
+                1f);
 
             foreach (Entity e in m_Entities.Values)
             {
@@ -273,6 +295,8 @@ namespace Human_vs_Zombies.HvZClasses
             Random gen = new Random();
             Vector2 playerPosition = m_Player.GetPosition();
             Vector2 position = new Vector2(gen.Next((int)Settings.worldWidth - 30), gen.Next((int)Settings.worldHeight - 30));
+
+            this.numItems++;
 
             if (InShadow(position, playerPosition))
             {
