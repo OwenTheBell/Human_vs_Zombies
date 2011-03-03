@@ -62,9 +62,9 @@ namespace Human_vs_Zombies.Screens
         /// Updates this instance. This makes sure that GameClock is paused,
         /// and it also updates the menu.
         /// </summary>
-        public override void Update()
+        public override void Update( float dTime)
         {
-            base.Update();
+            base.Update( dTime);
 
             this.menu.Update();
         }

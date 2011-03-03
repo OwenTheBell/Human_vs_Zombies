@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Human_vs_Zombies.Screens;
 using Human_vs_Zombies.Controls;
+using System.Diagnostics;
 
 namespace Human_vs_Zombies.GameElements
 {
@@ -20,6 +21,10 @@ namespace Human_vs_Zombies.GameElements
         /// </summary>
         private GameScreen toAdd;
 
+        private long m_LastUpdate;
+
+        private Stopwatch m_Timer;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ScreenStack"/> class.
         /// </summary>
@@ -28,6 +33,9 @@ namespace Human_vs_Zombies.GameElements
         {
             this.IsPaused = false;
             this.toAdd = null;
+            m_Timer = new Stopwatch();
+            m_Timer.Start();
+            m_LastUpdate = m_Timer.ElapsedMilliseconds;
         }
 
         /// <summary>
@@ -95,29 +103,32 @@ namespace Human_vs_Zombies.GameElements
                 this.Pause();
             }
 
+            long time = m_Timer.ElapsedMilliseconds;
+            float dTime = (time - m_LastUpdate) / 1000f;
+
             // Update the screens from top to bottom, stopping when a
             // screen is found that is not "fading out".
             for (int i = Count - 1; i >= 0; i--)
             {
-                this[i].Update();
-                if (this.IsPaused)
-                    break;
-                else if (!this[i].FadingOut)
-                {
-                    break;
-                }
+                this[i].Update(dTime);
             }
+            m_LastUpdate = time;
+
+
+
         }
 
         public void Pause()
         {
             this.Add(new PauseScreen());
+            m_Timer.Stop();
             this.IsPaused = true;
         }
 
         public void Unpause()
         {
             this.IsPaused = false;
+            m_Timer.Start();
         }
 
         /// <summary>

@@ -24,6 +24,7 @@ namespace Human_vs_Zombies.HvZClasses
         private float wallCountdown; // How often a new wall spawns
         private List<GridPoint> m_WallGrid; //List of all the 
         private int numZombies;
+        private float m_TimeElapsed;
 
         private class GridPoint
         {
@@ -38,7 +39,7 @@ namespace Human_vs_Zombies.HvZClasses
 
         public HvZWorld()
         {
-            m_Player = new Player(this, new Vector2(100f, 100f), new Vector2(1f,0f), 32f, new Vector2(1f,0f), 400f, .1f, 500f);
+            m_Player = new Player(this, new Vector2(100f, 100f), new Vector2(1f,0f), 32f, new Vector2(1f,0f), 400f, Settings.playerWeaponTimer, Settings.playerWeaponSpeed, Settings.playerAmmo);
             this.m_Entities = new SortedDictionary<ulong, Entity>();
             this.AddEntity(this.m_Player);
             this.numZombies = 0;
@@ -67,6 +68,7 @@ namespace Human_vs_Zombies.HvZClasses
             this.m_ColMatrix = null;
             this.zombieCountdown = Settings.zombieTimer;
             this.wallCountdown = Settings.wallTimer;
+            m_TimeElapsed = 0;
         }
 
         public Player GetPlayer()
@@ -174,6 +176,8 @@ namespace Human_vs_Zombies.HvZClasses
 
         public void Update(float dTime)
         {
+            m_TimeElapsed += dTime;
+
             this.CheckCols();
 
             zombieCountdown -= dTime;
@@ -184,7 +188,10 @@ namespace Human_vs_Zombies.HvZClasses
                 zombieCountdown = Settings.zombieTimer;
             }
 
-            ClusterAIBrains.StaticUpdate(dTime);
+            if (m_TimeElapsed >= Settings.startClusterAI)
+            {
+                ClusterAIBrains.StaticUpdate(dTime);
+            }
 
             wallCountdown -= dTime;
             if (wallCountdown <= 0)
@@ -249,7 +256,7 @@ namespace Human_vs_Zombies.HvZClasses
             }
             if (InShadow(position, playerPosition)) {
                 this.numZombies++;
-                Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 300f, new Random().NextDouble() < 0f ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
+                Zombie m_Zombie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, 300f, m_TimeElapsed < Settings.startClusterAI ? (Brains)new SimpleAIBrains(this) : new ClusterAIBrains(this));
                 m_Entities.Add(m_Zombie.GetID(), m_Zombie);
             }
         }

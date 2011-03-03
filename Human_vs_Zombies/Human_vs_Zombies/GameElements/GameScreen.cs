@@ -43,7 +43,7 @@ namespace Human_vs_Zombies.GameElements
         /// <summary>
         /// Updates this instance.
         /// </summary>
-        public virtual void Update()
+        public virtual void Update( float dTime)
         {
         }
 
