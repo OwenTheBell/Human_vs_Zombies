@@ -27,6 +27,7 @@ namespace Human_vs_Zombies.HvZClasses
         private int numZombies;
         private int numItems;
         private float m_TimeElapsed;
+        private float m_secondCheck;
         private bool m_GameOver;
         private Random m_Random;
 
@@ -67,6 +68,7 @@ namespace Human_vs_Zombies.HvZClasses
             this.wallCountdown = Settings.wallSpawnTimer;
             this.wallCountdown = Settings.wallSpawnTimer;
             m_TimeElapsed = 0;
+            m_secondCheck = m_TimeElapsed;
             m_Random = new Random();
             m_GameOver = false;
 
@@ -166,6 +168,7 @@ namespace Human_vs_Zombies.HvZClasses
                     {
                         //this.zombieTimer *= 0.5f;
                         this.numZombies--;
+                        this.m_Player.AddToScore(Settings.zombiePoints);
                     }
                     else if (e is Player)
                     {
@@ -189,6 +192,12 @@ namespace Human_vs_Zombies.HvZClasses
         public void Update(float dTime)
         {
             m_TimeElapsed += dTime;
+
+            if (m_TimeElapsed - m_secondCheck > 1)
+            {
+                this.m_Player.AddToScore(Settings.timePoints);
+                m_secondCheck = m_TimeElapsed;
+            }
 
             this.CheckCols();
 
@@ -273,7 +282,7 @@ namespace Human_vs_Zombies.HvZClasses
                 SpriteEffects.None,
                 1f);
 
-            String scoreString = "Score: " + this.m_Player.GetAmmo(); // OWEN: REPLACE THIS WITH GET SCORE!!!!
+            String scoreString = "Score: " + this.m_Player.GetScore(); // OWEN: REPLACE THIS WITH GET SCORE!!!!
             Drawer.DrawString(
                 scoreString,
                 new Vector2(Settings.worldWidth-2*(Drawer.font.MeasureString(scoreString).X)-20, Settings.worldHeight - 2*(Drawer.font.MeasureString("Ammo").Y)),
