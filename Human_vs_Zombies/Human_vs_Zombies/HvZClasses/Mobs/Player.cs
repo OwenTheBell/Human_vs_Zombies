@@ -8,6 +8,7 @@ using Human_vs_Zombies.Rendering;
 using Microsoft.Xna.Framework.Graphics;
 using Human_vs_Zombies.HvZClasses.Walls;
 using Human_vs_Zombies.GameElements;
+using Human_vs_Zombies.HvZClasses.Items;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {

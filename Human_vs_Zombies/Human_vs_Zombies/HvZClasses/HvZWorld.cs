@@ -180,6 +180,7 @@ namespace Human_vs_Zombies.HvZClasses
             if (zombieCountdown <= 0 && this.numZombies < Settings.zombieMax)
             {
                 this.SpawnZombie();
+                this.SpawnItem();
                 zombieCountdown = Settings.zombieTimer;
             }
 
@@ -252,7 +253,19 @@ namespace Human_vs_Zombies.HvZClasses
                 m_Entities.Add(m_Zombie.GetID(), m_Zombie);
             }
         }
+        public void SpawnItem()
+        {
+            Random gen = new Random();
+            Vector2 playerPosition = m_Player.GetPosition();
+            int spawnDistance = 300;
+            Vector2 position = new Vector2(gen.Next((int)Settings.worldWidth - 30), gen.Next((int)Settings.worldHeight - 30));
 
+            if (InShadow(position, playerPosition))
+            {
+                Item it = Item.NewRandomItem(this, position, Vector2.Zero, 32f);
+                m_Entities.Add(it.GetID(), it);
+            }
+        }
         public bool InShadow(Vector2 point, Vector2 pov)
         {
             foreach(Entity e in m_Entities.Values)
