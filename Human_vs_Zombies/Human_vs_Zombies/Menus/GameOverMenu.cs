@@ -36,6 +36,7 @@ namespace Human_vs_Zombies.Menus
             tryAgain.UpperMenu = quit;
             tryAgain.LowerMenu = quit;
 
+            this.Add(tryAgain);
             this.Add(quit);
         }
     }
