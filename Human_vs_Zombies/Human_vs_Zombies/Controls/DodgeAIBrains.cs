@@ -31,16 +31,16 @@ namespace Human_vs_Zombies.Controls
 
             if (angle < 0)
             {
-                rotation = ((float)Math.PI + angle) / 4;
+                rotation = ((float)Math.PI + angle) / 2;
             }
             else
             {
-                rotation = (-(float)Math.PI + angle) / 4;
+                rotation = (-(float)Math.PI + angle) / 2;
             }
 
             float angleToPlayer = (float)Math.Atan2(toPlayer.Y, toPlayer.X);
 
-            this.m_Walk = base.GetWalk() + new Vector2((float)Math.Cos(angleToPlayer + rotation), (float)Math.Sin(angleToPlayer + rotation));
+            this.m_Walk = base.GetWalk() + 2 * new Vector2((float)Math.Cos(angleToPlayer + rotation), (float)Math.Sin(angleToPlayer + rotation));
             this.m_Walk.Normalize();
             this.m_Shoot = base.GetShoot();
         }
