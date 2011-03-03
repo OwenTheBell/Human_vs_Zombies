@@ -122,10 +122,10 @@ namespace Human_vs_Zombies.Menus
             Drawer.DrawString(
                 this.text,
                 this.position,
-                Color.Black,
+                Color.Red,
                 0f,
                 this.origin,
-                (highlighted ? 0.3f : 0.2f),
+                (highlighted ? 2f : 1f),
                 SpriteEffects.None,
                 1f);
         }

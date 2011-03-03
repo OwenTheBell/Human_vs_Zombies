@@ -37,6 +37,7 @@ namespace Human_vs_Zombies.GameElements
         public static float wallTimer { get { return 1f; } }
 
         //rate at which the zombies spawn, spawns a zombie every 3 seconds
+        //zombie spawn rate is also affected by the amount of shadow on the screen
         public static float zombieTimer { get { return .05f; } }
 
         public static int zombieMax { get { return 30; } }

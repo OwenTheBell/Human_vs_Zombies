@@ -144,7 +144,6 @@
     <Compile Include="Rendering\TextureStatic.cs" />
     <Compile Include="Screens\StartScreen.cs" />
     <Compile Include="Screens\HvZScreen.cs" />
-    <Compile Include="Screens\MainScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
   </ItemGroup>
   <ItemGroup>

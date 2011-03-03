@@ -223,10 +223,10 @@ namespace Human_vs_Zombies.HvZClasses
                 e.Draw();
                 if (e is Wall)
                 {
-                    Wall wall = (Wall)e;
+                    Wall wall = (Wall)e; //eeeeeeevaaa!
                     if (wall.CastShadow())
                     {
-                        DrawShadow(wall, .9f); //eeeeeeevaaa!
+                        DrawShadow(wall, .9f);
                     }
                 }
             }

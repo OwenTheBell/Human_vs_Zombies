@@ -47,15 +47,15 @@ namespace Human_vs_Zombies.Screens
             // Note: Do not use GameClock, it will be paused!
             this.initialTime = DateTime.Now.Ticks;
             this.menu = new StartMenu(
-                new Vector2(1440, 400),
+                new Vector2(1000, 330),
                 new MenuAction[]
                 { 
                     new MenuAction(ActionType.GoBack, new StartGameDelegate()),
                 },
-                75);
+                75f);
 
-            this.textDrawPosition = new Vector2(700, 125);
-            this.textDrawOrigin = Drawer.font.MeasureString("Pong!") / 2f;
+            this.textDrawPosition = new Vector2(Settings.worldWidth / 2, 200);
+            this.textDrawOrigin = Drawer.font.MeasureString("HUMAN VS ZOMBIES") / 2f;
         }
 
         /// <summary>
@@ -74,14 +74,24 @@ namespace Human_vs_Zombies.Screens
         /// </summary>
         public override void Draw()
         {
-            // Write "Paused" at the center of the screen.
+
+            Drawer.Draw(
+                TextureStatic.Get("background"),
+                Drawer.FullScreenRectangle,
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.None,
+                0f);
+
             Drawer.DrawString(
                 "HUMAN VS ZOMBIES",
                 this.textDrawPosition,
-                Color.Purple,
+                Color.Red,
                 0f,
                 this.textDrawOrigin,
-                0.45f,
+                4f,
                 SpriteEffects.None,
                 1f);
 
