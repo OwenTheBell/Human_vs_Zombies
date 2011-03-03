@@ -21,15 +21,18 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private float m_WeaponSpeed;
 
+        private int m_Ammo;
+
         private Brains m_Brains;
 
-        public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity, float weaponTimer, float weaponSpeed)
+        public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity, float weaponTimer, float weaponSpeed, int ammo)
             : base(hvzWorld, position, rotation, radius, velocity, maxVelocity)
         {
             this.SetBrains(new HumanBrains(hvzWorld));
-            this.SetWeaponTimer(Settings.playerWeaponTimer);
+            this.SetWeaponTimer(weaponTimer);
             m_TimerCurrent = 0;
-            this.SetWeaponSpeed(Settings.playerWeaponSpeed);
+            this.SetWeaponSpeed(weaponSpeed);
+            this.SetAmmo(ammo);
         }
 
         public Brains GetBrains()
@@ -54,7 +57,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public void SetWeaponTimer(float weaponTimer)
         {
-            this.m_WeaponTimer = weaponTimer;
+            this.m_WeaponTimer = Math.Max(weaponTimer, 0);
         }
 
         public float GetWeaponTimer()
@@ -64,12 +67,27 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public void SetWeaponSpeed(float weaponSpeed)
         {
-            this.m_WeaponSpeed = weaponSpeed;
+            this.m_WeaponSpeed = Math.Max(weaponSpeed, 0);
         }
 
         public float GetWeaponSpeed()
         {
             return this.m_WeaponSpeed;
+        }
+
+        public void AddAmmo(int add)
+        {
+            this.SetAmmo(m_Ammo + add);
+        }
+
+        public void SetAmmo(int ammo)
+        {
+            m_Ammo = Math.Max(ammo, 0);
+        }
+
+        public int GetAmmo()
+        {
+            return m_Ammo;
         }
 
         public override void Update(float dTime)
@@ -96,11 +114,13 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             {
                 this.SetRotation(this.GetVelocity() / this.GetVelocity().Length());
             }
+
             //Only fire the gun if the player is aiming and if the weapon can be fired
-            if ((m_Brains.GetShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0)
+            if ((m_Brains.GetShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0 && m_Ammo > 0)
             {
                 this.GetHvZWorld().AddEntity(new Projectile(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), 12f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
                 m_TimerCurrent = m_WeaponTimer;
+                m_Ammo--;
             }
 
             this.m_TimerCurrent -= dTime;

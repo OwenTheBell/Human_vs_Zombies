@@ -11,7 +11,7 @@ namespace Human_vs_Zombies.GameElements
         public static float playerWeaponSpeed { get { return 500f; } }
 
         //rate at which the player can fire their weapon
-        public static float playerWeaponTimer { get { return .05f; } }
+        public static float playerWeaponTimer { get { return .25f; } }
 
         //width of game screen
         public static int screenWidth { get { return 960; } }
