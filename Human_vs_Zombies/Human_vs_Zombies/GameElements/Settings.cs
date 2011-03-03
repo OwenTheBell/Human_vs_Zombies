@@ -13,6 +13,8 @@ namespace Human_vs_Zombies.GameElements
         //rate at which the player can fire their weapon
         public static float playerWeaponTimer { get { return .1f; } }
 
+        public static float playerRocketTimer { get { return .3f; } }
+
         public static int playerAmmo { get { return 128; } }
 
         public static int zombiePoints { get { return 1; } }
@@ -50,6 +52,8 @@ namespace Human_vs_Zombies.GameElements
 
         public static float startClusterAI { get { return 15f; } }
 
+        public static float startDodgeAI { get { return 30f; } }
+
         public static float clusterAttackTimer { get { return 5; } }
 
         public static float clusterWaitTimer { get { return 10; } }
@@ -60,9 +64,23 @@ namespace Human_vs_Zombies.GameElements
 
         public static float itemBlinkRate { get { return .5f; } }
 	    
-	public static int itemMax { get { return 10; } }
+	    public static int itemMax { get { return 10; } }
 
         public static int itemAmmo { get { return 10; } }
+
+        public static float dartLife { get { return .5f; } }
+
+        public static float rocketLife { get { return 1f; } }
+
+        public static int rocketAmmo { get { return 3; } }
+
+        public static float rocketRadius { get { return 16; } }
+
+        public static float rocketAccel { get { return 1024; } }
+
+        public static float rocketBlastRadius { get { return 128; } }
+
+        public static float rocketBlastSpeed { get { return 256; } }
 
         public static float backgroundLayer { get { return 0f; } }
         public static float zombieLayer { get { return 0.1f; } }

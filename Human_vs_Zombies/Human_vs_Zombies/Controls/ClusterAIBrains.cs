@@ -43,7 +43,7 @@ namespace Human_vs_Zombies.Controls
             float playerDistance = toPlayer.Length();
             toPlayer.Normalize();
 
-            float happyRadius = player.GetWeaponSpeed() * Projectile.LIFE + 128;
+            float happyRadius = player.GetWeaponSpeed() * Settings.dartLife + 128;
             float minSafeRadius = .7f * happyRadius;
             float maxSafeRadius = 1.2f * happyRadius;
             

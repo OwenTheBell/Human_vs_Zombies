@@ -24,6 +24,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private int m_Ammo;
 
+        private int m_Rockets;
+
         private int m_Score;
 
         private Brains m_Brains;
@@ -42,6 +44,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.m_Score = 0;
             this.m_FasterFor = 0;
             this.m_Score = 0;
+            this.m_Rockets = 0;
         }
 
         public Brains GetBrains()
@@ -82,6 +85,25 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         public float GetWeaponSpeed()
         {
             return this.m_WeaponSpeed;
+        }
+
+        public void AddRockets(int add)
+        {
+            this.SetRockets(m_Rockets + add);
+        }
+
+        public void SetRockets(int rockets)
+        {
+            m_Rockets = Math.Max(rockets, 0);
+            if (m_Rockets > 0)
+            {
+                m_TimerCurrent = Settings.playerRocketTimer;
+            }
+        }
+
+        public int GetRockets()
+        {
+            return m_Rockets;
         }
 
         public void AddAmmo(int add)
@@ -145,7 +167,15 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             }
 
             //Only fire the gun if the player is aiming and if the weapon can be fired
-            if ((m_Brains.GetShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0 && m_Ammo > 0)
+            if (m_Rockets > 0)
+            {
+                if ((m_Brains.GetShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0)
+                {
+                    this.GetHvZWorld().AddEntity(new Rocket(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), Settings.rocketRadius, this.GetRotation() * Settings.rocketAccel, Settings.rocketBlastRadius, Settings.rocketBlastSpeed));
+                    m_TimerCurrent = Settings.playerRocketTimer;
+                    m_Rockets--;
+                }
+            } else if ((m_Brains.GetShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0 && m_Ammo > 0)
             {
                 this.GetHvZWorld().AddEntity(new Projectile(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), 12f, this.GetVelocity() + this.GetRotation() * this.m_WeaponSpeed));
                 m_TimerCurrent = m_WeaponTimer;

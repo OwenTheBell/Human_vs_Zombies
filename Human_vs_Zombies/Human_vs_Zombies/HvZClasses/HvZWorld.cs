@@ -322,7 +322,25 @@ namespace Human_vs_Zombies.HvZClasses
             }
             if (InShadow(position, playerPosition)) {
                 this.numZombies++;
-                Zombie zomblie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, Settings.zombieMaxVel, m_TimeElapsed < Settings.startClusterAI ? (Brains)new SimpleAIBrains(this) : new DodgeAIBrains(this));
+
+                Brains brains;
+
+                double rand = m_Random.NextDouble();
+
+                if (m_TimeElapsed > Settings.startDodgeAI && rand < .3)
+                {
+                    brains = new DodgeAIBrains(this);
+                }
+                else if (m_TimeElapsed > Settings.startClusterAI && rand < .7)
+                {
+                    brains = new ClusterAIBrains(this);
+                }
+                else
+                {
+                    brains = new SimpleAIBrains(this);
+                }
+
+                Zombie zomblie = new Zombie(this, position, Vector2.Zero, 32f, Vector2.Zero, Settings.zombieMaxVel, brains);
                 this.AddEntity(zomblie);
             }
         }

@@ -124,11 +124,13 @@
     <Compile Include="HvZClasses\Items\ExplosionItem.cs" />
     <Compile Include="HvZClasses\Items\Item.cs" />
     <Compile Include="HvZClasses\Items\AmmoItem.cs" />
+    <Compile Include="HvZClasses\Items\RocketItem.cs" />
     <Compile Include="HvZClasses\Items\SpeedItem.cs" />
     <Compile Include="HvZClasses\Explosion.cs" />
     <Compile Include="HvZClasses\Mobs\Mob.cs" />
     <Compile Include="HvZClasses\Mobs\Player.cs" />
     <Compile Include="HvZClasses\Mobs\Projectile.cs" />
+    <Compile Include="HvZClasses\Mobs\Rocket.cs" />
     <Compile Include="HvZClasses\Mobs\Zombie.cs" />
     <Compile Include="HvZClasses\Walls\Wall.cs" />
     <Compile Include="Mathematics\RotationHelper.cs" />

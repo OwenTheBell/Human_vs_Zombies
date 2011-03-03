@@ -13,14 +13,13 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 {
     public class Projectile : Mob
     {
-        public const float LIFE = .5f;
 
         private float m_Life;
 
         public Projectile(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity)
             : base(hvzWorld, position, rotation, radius, velocity, velocity.Length())
         {
-            m_Life = LIFE;
+            this.SetLife(Settings.dartLife);
         }
 
         public override void Update(float dTime)
@@ -42,6 +41,16 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
             m_Life -= dTime;
             base.Update(dTime);
+        }
+
+        public void SetLife(float life)
+        {
+            m_Life = life;
+        }
+
+        public float GetLife()
+        {
+            return m_Life;
         }
 
         public override void Draw()
