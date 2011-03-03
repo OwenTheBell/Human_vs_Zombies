@@ -79,7 +79,7 @@ namespace Human_vs_Zombies.Screens
                 TextureStatic.Get("background"),
                 Drawer.FullScreenRectangle,
                 null,
-                Color.White,
+                Color.Black,
                 0f,
                 Vector2.Zero,
                 SpriteEffects.None,
@@ -91,7 +91,7 @@ namespace Human_vs_Zombies.Screens
                 Color.Red,
                 0f,
                 this.textDrawOrigin,
-                4f,
+                2f,
                 SpriteEffects.None,
                 1f);
 

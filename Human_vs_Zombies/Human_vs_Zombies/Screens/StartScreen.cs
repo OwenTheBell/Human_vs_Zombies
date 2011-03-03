@@ -47,15 +47,15 @@ namespace Human_vs_Zombies.Screens
             // Note: Do not use GameClock, it will be paused!
             this.initialTime = DateTime.Now.Ticks;
             this.menu = new StartMenu(
-                new Vector2(1000, 330),
+                new Vector2(Settings.worldWidth / 2, 1000 * Drawer.GetRatio()),
                 new MenuAction[]
                 { 
                     new MenuAction(ActionType.GoBack, new StartGameDelegate()),
                 },
                 75f);
 
-            this.textDrawPosition = new Vector2(Settings.worldWidth / 2, 200);
-            this.textDrawOrigin = Drawer.font.MeasureString("HUMAN VS ZOMBIES") / 2f;
+            this.textDrawPosition = new Vector2(Settings.worldWidth / 2, 700*Drawer.GetRatio());
+            this.textDrawOrigin = Drawer.font.MeasureString("Human Vs. Zombies") / 2f;
         }
 
         /// <summary>
@@ -74,10 +74,10 @@ namespace Human_vs_Zombies.Screens
         /// </summary>
         public override void Draw()
         {
-
+            int offset = (int)(initialTime - DateTime.Now.Ticks)/5000000;
             Drawer.Draw(
-                TextureStatic.Get("background"),
-                Drawer.FullScreenRectangle,
+                TextureStatic.Get("MenuBackground"),
+                new Rectangle(Math.Min(offset,300), 0, TextureStatic.Get("MenuBackground").Width, TextureStatic.Get("MenuBackground").Height),
                 null,
                 Color.White,
                 0f,
@@ -86,7 +86,7 @@ namespace Human_vs_Zombies.Screens
                 0f);
 
             Drawer.DrawString(
-                "HUMAN VS ZOMBIES",
+                "HUMAN VS. ZOMBIES",
                 this.textDrawPosition,
                 Color.Red,
                 0f,
