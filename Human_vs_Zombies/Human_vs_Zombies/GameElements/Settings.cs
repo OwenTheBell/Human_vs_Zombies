@@ -17,15 +17,15 @@ namespace Human_vs_Zombies.GameElements
 
         public static int playerAmmo { get { return 128; } }
 
-        public static int zombiePoints { get { return 1; } }
+        public static int zombiePoints { get { return 5; } }
 
         public static int timePoints { get { return 1; } }
 
         //width of game screen
-        public static int screenWidth { get { return 960; } }
+        public static int screenWidth { get { return 1366; } }
 
         //height of game screen
-        public static int screenHeight { get { return 540; } }
+        public static int screenHeight { get { return 768; } }
 
         //width of game world
         public static int worldWidth { get { return 1920; } }
