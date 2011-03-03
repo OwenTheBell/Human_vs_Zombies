@@ -15,6 +15,7 @@ namespace Human_vs_Zombies.Menus.MenuDelegates
 
         public void Run()
         {
+            GameWorld.audio.StopAllSounds();
             if (GameWorld.screens.Count > 0)
             {
                 GameWorld.screens.KillAll();

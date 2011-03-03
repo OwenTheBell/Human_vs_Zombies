@@ -27,6 +27,8 @@ namespace Human_vs_Zombies.HvZClasses
         private int numZombies;
         private int numItems;
         private float m_TimeElapsed;
+        private bool m_GameOver;
+        private Random m_Random;
 
         private class GridPoint
         {
@@ -65,6 +67,10 @@ namespace Human_vs_Zombies.HvZClasses
             this.wallCountdown = Settings.wallSpawnTimer;
             this.wallCountdown = Settings.wallSpawnTimer;
             m_TimeElapsed = 0;
+            m_Random = new Random();
+            m_GameOver = false;
+
+            ClusterAIBrains.Initialize();
         }
 
         public Player GetPlayer()
@@ -164,6 +170,7 @@ namespace Human_vs_Zombies.HvZClasses
                     else if (e is Player)
                     {
                         GameWorld.audio.SongPlay("death", false);
+                        m_GameOver = true;
                         GameWorld.screens.GameOver();
                     }
                     else if (e is Item)
@@ -222,6 +229,18 @@ namespace Human_vs_Zombies.HvZClasses
             }
 
             this.KillDeadEntities();
+
+            if (!m_GameOver)
+            {
+                if (ClusterAIBrains.AreAttacking())
+                {
+                    GameWorld.audio.SongPlay("yakety");
+                }
+                else
+                {
+                    GameWorld.audio.SongPlay("theme");
+                }
+            }
         }
 
         public void AddEntity(Entity entity)
@@ -278,10 +297,9 @@ namespace Human_vs_Zombies.HvZClasses
 
         public void SpawnZombie()
         {
-            Random gen = new Random();
             Vector2 playerPosition = m_Player.GetPosition();
             int spawnDistance = 300;
-            Vector2 position= new Vector2(gen.Next((int)Settings.worldWidth - 30), gen.Next((int)Settings.worldHeight - 30));
+            Vector2 position= new Vector2(m_Random.Next((int)Settings.worldWidth - 30), m_Random.Next((int)Settings.worldHeight - 30));
             //ensure that the zombie does not spawn to close to the player
             if ((position - playerPosition).LengthSquared() < spawnDistance * spawnDistance)
             {
@@ -298,14 +316,12 @@ namespace Human_vs_Zombies.HvZClasses
         }
         public void SpawnItem()
         {
-            Random gen = new Random();
             Vector2 playerPosition = m_Player.GetPosition();
-            Vector2 position = new Vector2(gen.Next((int)Settings.worldWidth - 30), gen.Next((int)Settings.worldHeight - 30));
-
-            this.numItems++;
+            Vector2 position = new Vector2(m_Random.Next((int)Settings.worldWidth - 30), m_Random.Next((int)Settings.worldHeight - 30));
 
             if (InShadow(position, playerPosition))
             {
+                this.numItems++;
                 Item it = Item.NewRandomItem(this, position, Vector2.Zero, 32f, Settings.itemLifespan);
                 this.AddEntity(it);
             }
@@ -389,9 +405,15 @@ namespace Human_vs_Zombies.HvZClasses
 
             int toRemove = random.Next(0, m_WallIndices.Count - 1);
 
-            this.m_WallIndices.Remove(this.m_Entities.ElementAt(toRemove).Key);
+            ulong ID = m_WallIndices.ElementAt(toRemove);
 
-            this.m_Entities.Remove(m_WallIndices.ElementAt(toRemove));
+            Entity e;
+            m_Entities.TryGetValue(ID, out e);
+
+            m_WallGrid.Add(new GridPoint((int)e.GetPosition().X, (int)e.GetPosition().Y));
+
+            this.m_WallIndices.Remove(ID);
+            this.m_Entities.Remove(ID);
         }
 
         private void DrawShadow(Wall wall, float layer)

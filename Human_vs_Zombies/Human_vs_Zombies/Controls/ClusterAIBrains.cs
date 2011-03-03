@@ -17,9 +17,9 @@ namespace Human_vs_Zombies.Controls
         // on the player.
         // Please ensure at all times that minSafeRadius <= happyRadius <= maxSafeRadius
 
-        private static float s_WaitTimer = 10;
-        private static float s_AttackTimer = 10;
-        private static bool s_Attack = false;
+        private static float s_WaitTimer;
+        private static float s_AttackTimer;
+        private static bool s_Attack;
 
         private HvZWorld m_HvZWorld;
 
@@ -102,6 +102,13 @@ namespace Human_vs_Zombies.Controls
             //this.m_Shoot = this.m_Walk;
         }
 
+        public static void Initialize()
+        {
+            s_Attack = false;
+            s_AttackTimer = Settings.clusterAttackTimer;
+            s_WaitTimer = Settings.clusterWaitTimer;
+        }
+
         public static void StaticUpdate(float dTime)
         {
             if (s_Attack)
@@ -130,6 +137,11 @@ namespace Human_vs_Zombies.Controls
         public static void Attack()
         {
             s_Attack = true;
+        }
+
+        public static bool AreAttacking()
+        {
+            return s_Attack;
         }
 
         public override Vector2 GetWalk()

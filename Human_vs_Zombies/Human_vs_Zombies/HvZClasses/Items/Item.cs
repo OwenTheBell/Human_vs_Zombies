@@ -46,7 +46,7 @@ namespace Human_vs_Zombies.HvZClasses.Items
 
         public override void Draw()
         {
-            if (m_Life > Settings.itemWarningTime || m_Life % Settings.itemBlinkRate < Settings.itemBlinkRate / 2)
+            if (m_Life > Settings.itemWarningTime || m_Life % Settings.itemBlinkRate < Settings.itemBlinkRate / 3)
             {
                 base.DrawCircular(m_Texture, 0.5f);
             }
@@ -54,7 +54,7 @@ namespace Human_vs_Zombies.HvZClasses.Items
         public static Item NewRandomItem(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, float lifespan)
         {
             // Eventually, put logic in here to determine which random item to spawn.
-            return new AmmoItem(hvzWorld, position, rotation, radius, lifespan, new Random().Next(64, 128));
+            return new AmmoItem(hvzWorld, position, rotation, radius, lifespan, Settings.itemAmmo);
         }
     }
 }
