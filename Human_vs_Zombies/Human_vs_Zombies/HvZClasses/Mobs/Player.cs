@@ -96,7 +96,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
         {
             m_Ammo = Math.Max(ammo, 0);
         }
-
         public int GetAmmo()
         {
             return m_Ammo;
