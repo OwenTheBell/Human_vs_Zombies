@@ -8,6 +8,7 @@ using Human_vs_Zombies.Rendering;
 using Microsoft.Xna.Framework.Graphics;
 using Human_vs_Zombies.HvZClasses.Walls;
 using Human_vs_Zombies.GameElements;
+using Human_vs_Zombies.HvZClasses.Items;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
@@ -25,6 +26,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         private Brains m_Brains;
 
+        private bool isDead;
+
         public Player(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity, float weaponTimer, float weaponSpeed, int ammo)
             : base(hvzWorld, position, rotation, radius, velocity, maxVelocity)
         {
@@ -33,6 +36,8 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             m_TimerCurrent = 0;
             this.SetWeaponSpeed(weaponSpeed);
             this.SetAmmo(ammo);
+            this.SetWeaponSpeed(Settings.playerWeaponSpeed);
+            this.isDead = false;
         }
 
         public Brains GetBrains()
@@ -126,6 +131,16 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             this.m_TimerCurrent -= dTime;
 
             base.Update(dTime);
+        }
+
+        public void Kill()
+        {
+            this.isDead = true;
+        }
+
+        public bool IsDead()
+        {
+            return isDead;
         }
 
         public override void Draw() 

@@ -19,9 +19,11 @@ namespace Human_vs_Zombies.HvZClasses
         private Player m_Player;
         private SortedDictionary<ulong, Entity> m_Entities; // <ID of entity, The Entity>
         private SortedDictionary<ulong, List<Entity>> m_ColMatrix;
+        private List<ulong> m_WallIndices; //store the indices of walls in the entities dictionary for easy access
         private bool m_ColUpdated;
         private float zombieCountdown; // How often zombies will spawn
         private float wallCountdown; // How often a new wall spawns
+        private float wallKillCountdown; // How often to kill existing walls
         private List<GridPoint> m_WallGrid; //List of all the 
         private int numZombies;
         private float m_TimeElapsed;
@@ -45,6 +47,7 @@ namespace Human_vs_Zombies.HvZClasses
             this.numZombies = 0;
 
             this.m_WallGrid = new List<GridPoint>();
+            this.m_WallIndices = new List<ulong>();
 
             this.CreateGrid();
 
@@ -58,7 +61,9 @@ namespace Human_vs_Zombies.HvZClasses
 
             this.m_ColMatrix = null;
             this.zombieCountdown = Settings.zombieTimer;
-            this.wallCountdown = Settings.wallTimer;
+            this.wallCountdown = Settings.wallSpawnTimer;
+            this.wallKillCountdown = Settings.wallKillTimer;
+            this.wallCountdown = Settings.wallSpawnTimer;
             m_TimeElapsed = 0;
         }
 
@@ -69,18 +74,18 @@ namespace Human_vs_Zombies.HvZClasses
 
         private void CreateGrid()
         {
-            int gridX = 0;
-            int gridY = 0;
+            int gridX = (int) Settings.wallRadius;
+            int gridY = (int) Settings.wallRadius;
 
-            while (gridX < (Settings.worldWidth * 2) - Settings.wallRadius)
+            while (gridX < Settings.worldWidth)
             {
-                while (gridY < (Settings.worldHeight * 2) - Settings.wallRadius)
+                while (gridY < Settings.worldHeight)
                 {
                     this.m_WallGrid.Add(new GridPoint(gridX, gridY));
                     gridY += (int) Settings.wallRadius;
                 }
-                gridX += (int)Settings.wallRadius;
-                gridY = 0;
+                gridX += (int) Settings.wallRadius;
+                gridY = 0; 
             }
         }
 
@@ -156,6 +161,11 @@ namespace Human_vs_Zombies.HvZClasses
                         //this.zombieTimer *= 0.5f;
                         this.numZombies--;
                     }
+                    else if (e is Player)
+                    {
+                        GameWorld.audio.SongPlay("death", false);
+                        GameWorld.screens.GameOver();
+                    }
                     dieNow.Add(e);
                 }
             }
@@ -175,6 +185,7 @@ namespace Human_vs_Zombies.HvZClasses
             if (zombieCountdown <= 0 && this.numZombies < Settings.zombieMax)
             {
                 this.SpawnZombie();
+                this.SpawnItem();
                 zombieCountdown = Settings.zombieTimer;
             }
 
@@ -183,11 +194,18 @@ namespace Human_vs_Zombies.HvZClasses
                 ClusterAIBrains.StaticUpdate(dTime);
             }
 
+            wallKillCountdown -= dTime;
+            if (wallKillCountdown <= 0)
+            {
+                this.KillWall();
+                wallKillCountdown = Settings.wallKillTimer;
+            }
+
             wallCountdown -= dTime;
             if (wallCountdown <= 0)
             {
                 this.SpawnWall();
-                wallCountdown = Settings.wallTimer;
+                wallCountdown = Settings.wallSpawnTimer;
             }
 
             for (int i = 0; i < m_Entities.Values.Count; i++)
@@ -250,7 +268,19 @@ namespace Human_vs_Zombies.HvZClasses
                 m_Entities.Add(m_Zombie.GetID(), m_Zombie);
             }
         }
+        public void SpawnItem()
+        {
+            Random gen = new Random();
+            Vector2 playerPosition = m_Player.GetPosition();
+            int spawnDistance = 300;
+            Vector2 position = new Vector2(gen.Next((int)Settings.worldWidth - 30), gen.Next((int)Settings.worldHeight - 30));
 
+            if (InShadow(position, playerPosition))
+            {
+                Item it = Item.NewRandomItem(this, position, Vector2.Zero, 32f);
+                m_Entities.Add(it.GetID(), it);
+            }
+        }
         public bool InShadow(Vector2 point, Vector2 pov)
         {
             foreach(Entity e in m_Entities.Values)
@@ -298,26 +328,41 @@ namespace Human_vs_Zombies.HvZClasses
         private void SpawnWall()
         {
             Random random = new Random();
+            if (this.m_WallGrid.Count > 0)
+            {
+                int selectedPoint = random.Next(0, this.m_WallGrid.Count - 1);
 
-            int selectedPoint = random.Next(0, this.m_WallGrid.Count - 1);
+                GridPoint selected = this.m_WallGrid.ElementAt(selectedPoint);
 
-            GridPoint selected = this.m_WallGrid.ElementAt(selectedPoint);
+                //create floats in the range -1 to 1
+                float x = (float)(random.NextDouble() * 2 - 1);
+                float y = (float)(random.NextDouble() * 2 - 1);
 
-            //create floats in the range -1 to 1
-            float x = (float) (random.NextDouble() * 2 - 1);
-            float y = (float) (random.NextDouble() * 2 - 1);
-
-            Wall wall = new Wall(
-                    this,
-                    new Vector2(selected.X, selected.Y),
-                    new Vector2(x, y),
-                    Settings.wallRadius,
-                    Settings.wallThickness,
-                    true);
-            if (!(wall.Collides(this.GetPlayer()))) {
-                this.AddEntity(wall);
-                this.m_WallGrid.Remove(selected);
+                Wall wall = new Wall(
+                        this,
+                        new Vector2(selected.X, selected.Y),
+                        new Vector2(x, y),
+                        Settings.wallRadius,
+                        Settings.wallThickness,
+                        true);
+                if (!(wall.Collides(this.GetPlayer())))
+                {
+                    this.m_WallIndices.Add(wall.GetID());
+                    this.AddEntity(wall);
+                    this.m_WallGrid.Remove(selected);
+                }
             }
+        }
+
+        private void KillWall()
+        {
+            Random random = new Random();
+
+            int toRemove = random.Next(0, m_WallIndices.Count - 1);
+
+            this.m_WallIndices.Remove(this.m_Entities.ElementAt(toRemove).Key);
+
+            this.m_Entities.Remove(m_WallIndices.ElementAt(toRemove));
         }
 
         private void DrawShadow(Wall wall, float layer)

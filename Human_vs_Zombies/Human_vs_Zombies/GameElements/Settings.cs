@@ -31,12 +31,10 @@ namespace Human_vs_Zombies.GameElements
 
         public static float wallThickness { get { return 64f; } }
 
-        public static int wallGridX { get { return (int)((worldWidth * 2) / wallRadius); } }
-
-        public static int wallGridY { get { return (int)((worldHeight * 2) / wallRadius); } }
-
         //rate at which new walls spawn
-        public static float wallTimer { get { return 1f; } }
+        public static float wallSpawnTimer { get { return 5f; } }
+
+        public static float wallKillTimer { get { return 10f; } }
 
         //rate at which the zombies spawn, spawns a zombie every 3 seconds
         //zombie spawn rate is also affected by the amount of shadow on the screen

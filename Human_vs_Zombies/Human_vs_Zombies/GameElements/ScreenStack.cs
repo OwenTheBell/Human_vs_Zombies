@@ -131,6 +131,11 @@ namespace Human_vs_Zombies.GameElements
             m_Timer.Start();
         }
 
+        public void GameOver()
+        {
+            this.Add(new GameOverScreen());
+        }
+
         /// <summary>
         /// Draws this instance.
         /// </summary>
