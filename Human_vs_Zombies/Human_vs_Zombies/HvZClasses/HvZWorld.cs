@@ -27,6 +27,7 @@ namespace Human_vs_Zombies.HvZClasses
         private int numZombies;
         private int numItems;
         private float m_TimeElapsed;
+        private bool m_GameOver;
 
         private class GridPoint
         {
@@ -65,6 +66,9 @@ namespace Human_vs_Zombies.HvZClasses
             this.wallCountdown = Settings.wallSpawnTimer;
             this.wallCountdown = Settings.wallSpawnTimer;
             m_TimeElapsed = 0;
+            m_GameOver = false;
+
+            ClusterAIBrains.Initialize();
         }
 
         public Player GetPlayer()
@@ -164,6 +168,7 @@ namespace Human_vs_Zombies.HvZClasses
                     else if (e is Player)
                     {
                         GameWorld.audio.SongPlay("death", false);
+                        m_GameOver = true;
                         GameWorld.screens.GameOver();
                     }
                     else if (e is Item)
@@ -226,6 +231,18 @@ namespace Human_vs_Zombies.HvZClasses
             }
 
             this.KillDeadEntities();
+
+            if (!m_GameOver)
+            {
+                if (ClusterAIBrains.AreAttacking())
+                {
+                    GameWorld.audio.SongPlay("yakety");
+                }
+                else
+                {
+                    GameWorld.audio.SongPlay("theme");
+                }
+            }
         }
 
         public void AddEntity(Entity entity)
