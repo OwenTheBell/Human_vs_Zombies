@@ -176,7 +176,6 @@ namespace Human_vs_Zombies.HvZClasses
                     else if (e is Item)
                     {
                         this.numItems--;
-                        this.m_Player.AddAmmo(Settings.itemAmmo);
                     }
                     dieNow.Add(e);
                 }
