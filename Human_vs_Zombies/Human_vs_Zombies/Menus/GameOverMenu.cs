@@ -20,7 +20,7 @@ namespace Human_vs_Zombies.Menus
                 { 
                     new MenuAction(ActionType.Select, new GameOverDelegate())
                 },
-                position + new Vector2(0, spacing));
+                position);
 
             MenuEntry quit = new MenuEntry(
                 "Quit",
