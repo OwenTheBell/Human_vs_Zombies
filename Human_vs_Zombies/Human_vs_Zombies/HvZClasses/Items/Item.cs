@@ -46,7 +46,7 @@ namespace Human_vs_Zombies.HvZClasses.Items
 
         public override void Draw()
         {
-            if (m_Life > Settings.itemWarningTime || m_Life % Settings.itemBlinkRate < Settings.itemBlinkRate / 2)
+            if (m_Life > Settings.itemWarningTime || m_Life % Settings.itemBlinkRate < Settings.itemBlinkRate / 3)
             {
                 base.DrawCircular(m_Texture, 0.5f);
             }
