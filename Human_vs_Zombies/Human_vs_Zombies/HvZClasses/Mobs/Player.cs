@@ -145,7 +145,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
 
         public override void Draw() 
         {
-            base.DrawCircular(TextureStatic.Get("Human"), 0.7f);
+            base.DrawCircular(TextureStatic.Get("Human"), Settings.humanLayer);
         }
     }
 }

@@ -85,6 +85,7 @@ namespace Human_vs_Zombies.GameElements
             TextureStatic.Load("Shadow", @"Art\Shadow");
             TextureStatic.Load("Ammo", @"Art\Ammo");
             TextureStatic.Load("MenuBackground", @"Art\MenuBackground");
+            TextureStatic.Load("Explosion", @"Art\Explosion");
 
             audio = new AudioManager(this);
 
