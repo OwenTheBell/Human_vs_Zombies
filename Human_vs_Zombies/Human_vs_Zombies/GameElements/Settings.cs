@@ -55,8 +55,8 @@ namespace Human_vs_Zombies.GameElements
         public static float itemWarningTime { get { return 5; } }
 
         public static float itemBlinkRate { get { return .5f; } }
-
-	    public static int itemMax { get { return 20; } }
+	    
+		public static int itemMax { get { return 20; } }
 
         public static int itemAmmo { get { return 10; } }
     }

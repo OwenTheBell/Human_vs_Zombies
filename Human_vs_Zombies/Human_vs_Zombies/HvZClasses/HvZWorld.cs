@@ -200,10 +200,7 @@ namespace Human_vs_Zombies.HvZClasses
                 {
                     this.SpawnZombie();
                 }
-                if (this.numItems < Settings.itemMax)
-                {
-                    this.SpawnItem();
-                }
+                this.SpawnItem();
                 zombieCountdown = Settings.zombieTimer;
             }
 
@@ -266,14 +263,24 @@ namespace Human_vs_Zombies.HvZClasses
 
             Drawer.DrawString(
                 "Ammo: " + this.m_Player.GetAmmo(),
-                new Vector2(0, 0),
+                new Vector2(20, Settings.worldHeight-2*(Drawer.font.MeasureString("Ammo").Y)),
                 Color.Red,
                 0f,
                 new Vector2(0, 0),
-                4f,
+                2f,
                 SpriteEffects.None,
                 1f);
 
+            String scoreString = "Score: " + this.m_Player.GetAmmo(); // OWEN: REPLACE THIS WITH GET SCORE!!!!
+            Drawer.DrawString(
+                scoreString,
+                new Vector2(Settings.worldWidth-2*(Drawer.font.MeasureString(scoreString).X)-20, Settings.worldHeight - 2*(Drawer.font.MeasureString("Ammo").Y)),
+                Color.Red,
+                0f,
+                new Vector2(0, 0),
+                2f,
+                SpriteEffects.None,
+                1f);
             foreach (Entity e in m_Entities.Values)
             {
 
