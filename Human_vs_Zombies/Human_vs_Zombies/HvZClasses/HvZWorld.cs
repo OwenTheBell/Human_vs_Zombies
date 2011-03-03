@@ -93,7 +93,7 @@ namespace Human_vs_Zombies.HvZClasses
                     gridY += (int) Settings.wallRadius;
                 }
                 gridX += (int) Settings.wallRadius;
-                gridY = 0; 
+                gridY = (int) Settings.wallRadius; 
             }
         }
 
@@ -339,7 +339,7 @@ namespace Human_vs_Zombies.HvZClasses
         public void SpawnItem()
         {
             Vector2 playerPosition = m_Player.GetPosition();
-            Vector2 position = new Vector2(m_Random.Next((int)Settings.worldWidth - 30), m_Random.Next((int)Settings.worldHeight - 30));
+            Vector2 position = new Vector2(m_Random.Next(32, (int)Settings.worldWidth - 30), m_Random.Next(32, (int)Settings.worldHeight - 30));
 
             if (InShadow(position, playerPosition))
             {
