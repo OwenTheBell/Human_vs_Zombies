@@ -166,6 +166,7 @@ namespace Human_vs_Zombies.HvZClasses
                     {
                         //this.zombieTimer *= 0.5f;
                         this.numZombies--;
+                        this.m_Player.IncrementScore();
                     }
                     else if (e is Player)
                     {
