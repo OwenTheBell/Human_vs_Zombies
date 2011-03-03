@@ -171,7 +171,7 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             {
                 if ((m_Brains.GetShoot().LengthSquared() > 0f) && m_TimerCurrent <= 0)
                 {
-                    this.GetHvZWorld().AddEntity(new Rocket(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), Settings.rocketRadius, this.GetRotation() * Settings.rocketAccel, Settings.rocketBlastRadius, Settings.rocketBlastSpeed));
+                    this.GetHvZWorld().AddEntity(new Rocket(this.GetHvZWorld(), this.GetPosition(), this.GetRotation(), Settings.rocketRadius, this.GetVelocity() + this.GetRotation() * Settings.rocketAccel, Settings.rocketBlastRadius, Settings.rocketBlastSpeed));
                     m_TimerCurrent = Settings.playerRocketTimer;
                     m_Rockets--;
                 }

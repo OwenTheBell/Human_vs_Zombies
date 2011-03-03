@@ -282,6 +282,19 @@ namespace Human_vs_Zombies.HvZClasses
                 SpriteEffects.None,
                 1f);
 
+            if (this.m_Player.GetRockets() > 0)
+            {
+                Drawer.DrawString(
+                "Rockets: " + this.m_Player.GetRockets(),
+                new Vector2(20, Settings.worldHeight - 4 * (Drawer.font.MeasureString("Rockets").Y)),
+                Color.Red,
+                0f,
+                new Vector2(0, 0),
+                2f,
+                SpriteEffects.None,
+                1f);
+            }
+
             String scoreString = "Score: " + this.m_Player.GetScore(); // OWEN: REPLACE THIS WITH GET SCORE!!!!
             Drawer.DrawString(
                 scoreString,

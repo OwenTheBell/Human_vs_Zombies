@@ -70,7 +70,7 @@ namespace Human_vs_Zombies.GameElements
 
         public static float dartLife { get { return .5f; } }
 
-        public static float rocketLife { get { return 1f; } }
+        public static float rocketLife { get { return .9f; } }
 
         public static int rocketAmmo { get { return 3; } }
 
