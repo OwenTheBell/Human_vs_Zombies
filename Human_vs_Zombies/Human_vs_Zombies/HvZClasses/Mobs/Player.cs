@@ -105,6 +105,10 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 {
                     this.SetDead(true);
                 }
+                if (c is Item)
+                {
+                    ((Item)c).OnPickup(this);
+                }
             }
 
             this.m_Brains.Update(dTime, this.GetPosition());

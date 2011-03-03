@@ -199,7 +199,10 @@ namespace Human_vs_Zombies.HvZClasses
                 {
                     this.SpawnZombie();
                 }
-                this.SpawnItem();
+                if (this.numItems < Settings.itemMax)
+                {
+                    this.SpawnItem();
+                }
                 zombieCountdown = Settings.zombieTimer;
             }
 
