@@ -113,6 +113,7 @@
     <Compile Include="Controls\ActionType.cs" />
     <Compile Include="Controls\ClusterAIBrains.cs" />
     <Compile Include="Controls\Controller.cs" />
+    <Compile Include="Controls\DodgeAIBrains.cs" />
     <Compile Include="Controls\HumanBrains.cs" />
     <Compile Include="Controls\SimpleAIBrains.cs" />
     <Compile Include="GameElements\GameScreen.cs" />
