@@ -27,10 +27,10 @@ namespace Human_vs_Zombies.Screens
             m_Time += dTime;
 
 
-            while (m_Time > 1f / 60f)
+            if (m_Time > 1f / 60f)
             {
-                zombieWorld.Update(1f / 60f);
-                m_Time -= 1f / 60f;
+                zombieWorld.Update(m_Time);
+                m_Time = 0;
             }
             base.Update( dTime);
         }
