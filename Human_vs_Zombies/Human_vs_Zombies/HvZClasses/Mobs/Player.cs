@@ -98,9 +98,9 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
             return m_Ammo;
         }
 
-        public void IncrementScore()
+        public void AddToScore(int scoreBonus)
         {
-            this.m_Score++;
+            this.m_Score += scoreBonus;
         }
 
         public int GetScore()

@@ -14,7 +14,7 @@ namespace Human_vs_Zombies.Menus
         public GameOverMenu(Vector2 position, MenuAction[] actions, float spacing)
             : base(position, actions)
         {
-            MenuEntry quit = new MenuEntry(
+            MenuEntry tryAgain = new MenuEntry(
                 "Try Again",
                 new MenuAction[] 
                 { 
@@ -22,8 +22,19 @@ namespace Human_vs_Zombies.Menus
                 },
                 position + new Vector2(0, spacing));
 
-            quit.UpperMenu = quit;
-            quit.LowerMenu = quit;
+            MenuEntry quit = new MenuEntry(
+                "Quit",
+                new MenuAction[] 
+                { 
+                    new MenuAction(ActionType.Select, new QuitGameDeleage())
+                },
+                position + new Vector2(0, spacing));
+
+            quit.UpperMenu = tryAgain;
+            quit.LowerMenu = tryAgain;
+
+            tryAgain.UpperMenu = quit;
+            tryAgain.LowerMenu = quit;
 
             this.Add(quit);
         }
