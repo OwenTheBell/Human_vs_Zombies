@@ -29,10 +29,6 @@ namespace Human_vs_Zombies.GameElements
 
         public static float wallThickness { get { return 64f; } }
 
-        public static int wallGridX { get { return (int)((worldWidth * 2) / wallRadius); } }
-
-        public static int wallGridY { get { return (int)((worldHeight * 2) / wallRadius); } }
-
         //rate at which new walls spawn
         public static float wallTimer { get { return 1f; } }
 
