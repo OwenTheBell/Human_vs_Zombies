@@ -8,12 +8,12 @@ using Human_vs_Zombies.GameElements;
 
 namespace Human_vs_Zombies.HvZClasses.Mobs
 {
-    class Explosion : Mob
+    class Explosion : Entity
     {
         private float m_BlastSpeed;
         private float m_MaxRadius;
-        public Explosion(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, Vector2 velocity, float maxVelocity, float blastSpeed, float maxRadius)
-            : base(hvzWorld, position, rotation, radius, velocity, maxVelocity)
+        public Explosion(HvZWorld hvzWorld, Vector2 position, Vector2 rotation, float radius, float blastSpeed, float maxRadius)
+            : base(hvzWorld, position, rotation, radius)
         {
             m_BlastSpeed = blastSpeed;
             m_MaxRadius = maxRadius;
@@ -28,8 +28,6 @@ namespace Human_vs_Zombies.HvZClasses.Mobs
                 this.SetDead(true);
             }
             this.SetRadius(newRadius);
-
-            base.Update(dTime);
         }
 
         public override void Draw()
