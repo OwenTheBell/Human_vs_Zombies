@@ -31,15 +31,6 @@ namespace Human_vs_Zombies.HvZClasses.Items
             {
                 this.SetDead(true);
             }     
-            List<Entity> cols = GetHvZWorld().Collisions(this);
-            foreach (Entity butWho in cols)
-            {
-                if (butWho is Player) // ?????
-                {
-                    this.SetDead(true);
-                    this.OnPickup( (Player)butWho);
-                }
-            }
         }
 
         public abstract void OnPickup(Player player);

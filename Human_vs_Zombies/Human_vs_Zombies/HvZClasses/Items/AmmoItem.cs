@@ -23,6 +23,7 @@ namespace Human_vs_Zombies.HvZClasses.Items
 
         public override void OnPickup( Player player)
         {
+            this.SetDead(true);
             player.AddAmmo(m_Ammo);
         }
     }
