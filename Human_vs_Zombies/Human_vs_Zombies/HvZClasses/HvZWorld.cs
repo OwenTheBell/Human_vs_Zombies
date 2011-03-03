@@ -161,6 +161,11 @@ namespace Human_vs_Zombies.HvZClasses
                         //this.zombieTimer *= 0.5f;
                         this.numZombies--;
                     }
+                    else if (e is Player)
+                    {
+                        GameWorld.audio.SongPlay("death", false);
+                        GameWorld.screens.GameOver();
+                    }
                     dieNow.Add(e);
                 }
             }
